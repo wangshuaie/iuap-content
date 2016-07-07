@@ -1,18 +1,4 @@
 
-
-
-有助于Azure的文件
-
-谢谢你对iUAP技术文件感兴趣！
-
-贡献的方式
-你蔚蓝的贡献内容
-库的组织
-使用GitHub，git，这个库
-如何使用Markdown格式你的话题
-反馈，评论，和支持
-更多的资源
-所有投稿指南文章索引（打开新页面）
 贡献的方式
 
 你可以有助于Azure的文件在几个不同的方式：
@@ -98,7 +84,7 @@
 
 
 
-iUAP技术文档投稿指南
+
 
 # iUAP技术文档投稿指南
 
@@ -106,22 +92,23 @@ iUAP技术文档投稿指南
 
 该库还包含指导来帮助你贡献给我们的技术文件。
 
-## Contribute to Azure documentation
+## 投稿到iUAP的文档
 
-Thank you for your interest in Azure documentation!
+感谢您对蔚蓝的文档感兴趣！
 
-* [Ways to contribute](#ways-to-contribute)
-* [About your contributions to Azure content](#about-your-contributions-to-azure-content)
-* [Repository organization](#repository-organization)
-* [Use GitHub, Git, and this repository](#use-github-git-and-this-repository)
-* [How to use markdown to format your topic](#how-to-use-markdown-to-format-your-topic)
-* [Feedback, comments, and support](./contributor-guide/feedback-and-comments.md)
-* [More resources](#more-resources)
-* [Index of all contributors' guide articles](./contributor-guide/contributor-guide-index.md) (opens new page)
+* [贡献的方式]（贡献#方式）
+* [你]蔚蓝的内容贡献（#你蔚蓝的贡献内容的）
+* [组织]（#库库的组织）
+* [使用GitHub，git，这个库]（#使用GitHub的Git和这个库）
+* [如何使用Markdown格式主题]（#如何使用Markdown格式你的话题）
+* [反馈，评论，和支持]（投稿指南/反馈意见和评论）
+* [资源]（#更多资源）
+* [索引的所有贡献者指南文章]（投稿指南/投稿指南索引）（打开新页面）
 
-## Ways to contribute 
 
-You can contribute to [Azure documentation](http://azure.microsoft.com/documentation/) in a few different ways:
+## 贡献的方式
+
+你可以借助于iUAP的文件在几个不同的方式:
 
 * Contribute to a [forum discussion](http://social.msdn.microsoft.com/Forums/windowsazure/home).
 * Submit Disqus comments at the bottom of articles.
