@@ -18,7 +18,7 @@
           * [前端配置简介](articles/iuap-develop/4-快速入门/part3/qian_duan_pei_zhi_jian_jie.md)
           * [页面结构与交互](articles/iuap-develop/4-快速入门/part3/ye_mian_jie_gou_yu_jiao_hu.md)
        * [服务端开发](articles/iuap-develop/4-快速入门/part4/README.md)
-       * [控制层介绍](articles/iuap-develop/4-快速入门/part4/kong_zhi_ceng_jie_shao.md)
+          * [控制层介绍](articles/iuap-develop/4-快速入门/part4/kong_zhi_ceng_jie_shao.md)
           * [实体层介绍](articles/iuap-develop/4-快速入门/part4/shi_ti_ceng_jie_shao.md)
           * [业务层说明](articles/iuap-develop/4-快速入门/part4/fu_wu_ceng_shuo_ming.md)
           * [数据层介绍](articles/iuap-develop/4-快速入门/part4/shu_ju_ku_cao_zuo_ceng_jian_jie.md)
