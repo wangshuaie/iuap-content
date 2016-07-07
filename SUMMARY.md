@@ -9,7 +9,7 @@
   * [工具及规范](articles/iuap-develop/5-工具及规范/README.md)
   * [服务端详解](articles/iuap-develop/7-服务端详解/README.md)
   * [技术组件详解](articles/iuap-develop/9-技术组件详解/README.md)
-  * [应用组件详解]()
+  * [应用组件详解](articles/iuap-develop/10-应用组建详解/README.md)
   * [产品使用问题]()
   * [视频专区]()
 
