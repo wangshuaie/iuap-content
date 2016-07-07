@@ -1,9 +1,5 @@
-# 技术文档投稿指南
 
 
-你找到的这个GitHub库发布到iUAP文件中心在线技术文档的源http://iuap.yonyou.com文件。
-
-该库还包含指导来帮助你贡献给我们的技术文件。一列在作者的引导文章，看该指数。
 
 有助于Azure的文件
 
@@ -102,13 +98,13 @@
 
 
 
+iUAP技术文档投稿指南
 
+# iUAP技术文档投稿指南
 
-# Azure Technical Documentation Contributor Guide
+你找到的这个GitHub库发布到iUAP文件中心在线技术文档的源 [http://iuap.yonyou.com](http://iuap.yonyou.com)文件。
 
-You've found the GitHub repository that houses the source for the technical documentation that is published to the Azure Documentation Center at [http://azure.microsoft.com/documentation](http://azure.microsoft.com/documentation).
-
-This repository also contains guidance to help you contribute to our technical documentation.  For a list of the articles in the contributors' guide, see [the index](https://github.com/Azure/azure-content/blob/master/contributor-guide/contributor-guide-index.md).
+该库还包含指导来帮助你贡献给我们的技术文件。
 
 ## Contribute to Azure documentation
 
