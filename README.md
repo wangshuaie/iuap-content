@@ -1,7 +1,7 @@
 # 技术文档投稿指南
 
 
-你找到那栋，GitHub库发布到iUAP文件中心在线技术文档的源http://iuap.yonyou.com文件。
+你找到的这个GitHub库发布到iUAP文件中心在线技术文档的源http://iuap.yonyou.com文件。
 
 该库还包含指导来帮助你贡献给我们的技术文件。一列在作者的引导文章，看该指数。
 
