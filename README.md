@@ -115,14 +115,14 @@
 * You can easily contribute to technical articles in the GitHub user interface. Either find the article in this repository, or visit the article on [http://azure.microsoft.com/documentation](http://azure.microsoft.com/documentation) and click the link in the article that goes to the GitHub source for the article.
 * If you are making substantial changes to an existing article, adding or changing images, or contributing a new article, you need to fork this repository, install Git Bash, Markdown Pad, and learn some git commands.
 
-##About your contributions to Azure content
+## 关于你对蔚蓝内容的贡献
 
-###Minor corrections
+### 轻微的修正
 
 Minor corrections or clarifications you submit for documentation and code examples in this repo are covered by the [Azure Website Terms of Use (ToU)](http://azure.microsoft.com/support/legal/website-terms-of-use/).
 
 
-###Larger submissions
+### 大的意见
 
 If you submit a pull request with new or significant changes to documentation and code examples, we'll send a comment in GitHub asking you to submit an online Contribution License Agreement (CLA) if you are in one of these groups:
 
@@ -133,7 +133,7 @@ We need you to complete the online form before we can accept your pull request.
 
 Full details are available at [http://azure.github.io/guidelines/#cla](http://azure.github.io/guidelines/#cla).
 
-## Repository organization
+## 库的组织
 
 The content in the azure-content repository follows the organization of documentation on [Azure.Microsoft.com](http://azure.microsoft.com). This repository contains two root folders:
 
