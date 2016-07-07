@@ -3,7 +3,7 @@
 * [Introduction](README.md)
 * [iUAP开发平台](articles/iuap-develop/REAEME.md)
   * [产品简介]()
-  * [获取指南]()
+  * [获取指南](articles/iuap-develop/2-获取指南/README.md)
   * [安装盘说明]()
   * [快速入门]()
   * [工具及规范]()
