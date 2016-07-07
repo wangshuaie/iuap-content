@@ -5,7 +5,7 @@
   * [产品简介]()
   * [获取指南](articles/iuap-develop/2-获取指南/README.md)
   * [安装盘说明](articles/iuap-develop/3-安装盘说明/README.md)
-  * [快速入门]()
+  * [快速入门](articles/iuap-develop/4-快速入门/README.md)
   * [工具及规范]()
   * [服务端详解]()
   * [技术组件详解]()
