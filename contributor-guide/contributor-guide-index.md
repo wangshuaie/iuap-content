@@ -1,4 +1,4 @@
-﻿Azure technical content contributors' guide index
+Azure technical content contributors' guide index
 General guidance
 
 Contribute to Azure documentation
