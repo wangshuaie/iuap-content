@@ -39,7 +39,7 @@
            * [基于iUAP的系统架构](articles/iuap-develop/7-/part1/ji_yu_iuap_de_xi_tong_jia_gou.md)
        * [Spring框架集成](articles/iuap-develop/7-/part2/README.md)
            * [Spring 框架的整合](articles/iuap-develop/7-/part2/spring_kuang_jia_de_zheng_he.md)
-           * Spring MVC集成
+           * [Spring MVC集成](articles/iuap-develop/7-/part2/spring_mvcji_cheng.md)
        * 持久层简介
            * JPA方式持久化
            * MyBatis方式持久化
