@@ -1,4 +1,4 @@
-# iUAP Design 快速开发（中文版）#
+﻿# iUAP Design 快速开发（中文版）#
 
 v 0.01
 
@@ -69,5 +69,3 @@ v 0.01
 
 微信：![微信](./img/image888.jpg) 
 支付宝：![支付宝](./img/image880.jpg)
-
-

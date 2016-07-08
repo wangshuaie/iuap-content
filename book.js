@@ -1,4 +1,4 @@
-{
+﻿{
     "title" : "iUAP 使用说明",
     "description" : "iUAP的配置和功能的使用",
     "author" : "车先泽",
