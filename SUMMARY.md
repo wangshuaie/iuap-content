@@ -1,7 +1,7 @@
 # Summary
 
 * [iUAP文档中心](README.md)
-* [开发平台](articles/iuap-develop/REAEME.md)
+* [开发平台](articles/iuap-develop/README.md)
    * [产品简介](articles/iuap-develop/1-/README.md)
    * [获取指南](articles/iuap-develop/2-/README.md)
    * [安装盘说明](articles/iuap-develop/3-/README.md)
