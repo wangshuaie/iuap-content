@@ -34,7 +34,7 @@
    * [工具及规范](articles/iuap-develop/5-/README.md)
    * [场景开发](articles/iuap-develop/6-/README.md)
    * [服务端详解](articles/iuap-develop/7-/README.md)
-       * [基于iUAP的系统架构](articles/iuap-develop/7-/part1/ji_yu_iuap_de_xi_tong_jia_gou.md)
+       * [iUAP的系统框架](articles/iuap-develop/7-/part1/ji_yu_iuap_de_xi_tong_jia_gou.md)
            * [iUAP功能架构](articles/iuap-develop/7-/part1/iuapgong_neng_jia_gou.md)
            * 基于iUAP的系统架构
        * Spring框架集成
