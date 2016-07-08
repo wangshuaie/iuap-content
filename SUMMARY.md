@@ -42,7 +42,7 @@
            * [Spring MVC集成](articles/iuap-develop/7-/part2/spring_mvcji_cheng.md)
        * [持久层简介](articles/iuap-develop/7-/part3/README.md)
            * [JPA方式持久化](articles/iuap-develop/7-/part3/jpafang_shi_chi_jiu_hua.md)
-           * MyBatis方式持久化
+           * [MyBatis方式持久化](articles/iuap-develop/7-/part3/mybatisfang_shi_chi_jiu_hua.md)
            * iUAP JDBC方式持久化
        * 事务控制与连接池
            * 事务操作基本规范
