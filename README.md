@@ -27,7 +27,7 @@
 * You can easily contribute to technical articles in the GitHub user interface. Either find the article in this repository, or visit the article on [http://azure.microsoft.com/documentation](http://azure.microsoft.com/documentation) and click the link in the article that goes to the GitHub source for the article.
 * If you are making substantial changes to an existing article, adding or changing images, or contributing a new article, you need to fork this repository, install Git Bash, Markdown Pad, and learn some git commands.
 
-## 关于你对蔚蓝内容的贡献
+## 关于你对文档内容的贡献
 
 ### 轻微的修正
 
@@ -51,7 +51,7 @@ The content in the azure-content repository follows the organization of document
 
 ### \articles
 
-The *\articles* folder contains the documentation articles formatted as markdown files with an *.md* extension.
+在 *\articles* folder contains the documentation articles formatted as markdown files with an *.md* extension.
 
 Articles in the root directory are published to Azure.Microsoft.com in the path *http://azure.microsoft.com/documentation/articles/{article-name-without-md}/*.
 
