@@ -46,7 +46,7 @@
            * [iUAP JDBC方式持久化](articles/iuap-develop/7-/part3/iuap_jdbcfang_shi_chi_jiu_hua.md)
        * [事务控制与连接池](articles/iuap-develop/7-/part4/README.md)
            * [事务操作基本规范](articles/iuap-develop/7-/part4/shi_wu_cao_zuo_ji_ben_gui_fan.md)
-           * 数据库连接池
+           * [数据库连接池](articles/iuap-develop/7-/part4/shu_ju_ku_lian_jie_chi.md)
        * 日志规范与异常处理
            * 异常处理
            * 日志规范
