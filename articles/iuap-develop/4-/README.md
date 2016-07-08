@@ -55,13 +55,13 @@ v 0.01
 
 ### 关注我们
 
--   [新浪微博](http://weibo.com/tinylaborg)
+-   [新浪微博](http://weibo.com/)
 
-   [<img src="pic/tinylab-sina.jpg" width="150"/>](http://weibo.com/tinylaborg)
+   [<img src="pic/sina.jpg" width="150"/>](http://weibo.com/)
 
 -   微信公众号
 
-   <img src="pic/tinylab-weixin.jpg" width="150"/>
+   <img src="pic/weixin.jpg" width="150"/>
 
 
 ### 贡献者
