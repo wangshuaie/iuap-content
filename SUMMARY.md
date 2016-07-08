@@ -52,7 +52,7 @@
            * [日志规范](articles/iuap-develop/7-/part5/ri_zhi_gui_fan.md)
        * [组件的集成](articles/iuap-develop/7-/part6/README.md)
        * [分布式服务](articles/iuap-develop/7-/part7/README.md)
-           * Restful服务开发
+           * [Restful服务开发](articles/iuap-develop/7-/part7/restfulfu_wu_kai_fa.md)
            * WebService服务开发
            * Dubbo服务开发
    * [前端教程](articles/iuap-develop/8-/README.md)
