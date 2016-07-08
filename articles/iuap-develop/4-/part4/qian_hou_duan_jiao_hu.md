@@ -4,15 +4,15 @@
 服务的声明如下：  
 
 
-![](/img/image025.jpg)
+![](../img/image025.jpg)
 
 
 获取数据详细信息的示例如下图，前端通过ajax的方式获取后端数据，渲染页面。  
 
-![](/img/image026.jpg)
+![](../img/image026.jpg)
 
 
 后端开发可以对上述的数据库操作类或者是服务类和Controller类进行单元测试，也可以采用浏览器访问的方式，调用GET类型的Rest服务进行测试。  
 
-![](/img/image027.jpg)
+![](../img/image027.jpg)
  
