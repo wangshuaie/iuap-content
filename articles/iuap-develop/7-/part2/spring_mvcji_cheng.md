@@ -4,17 +4,20 @@ MVC全名是Model View Controller，是模型(model)－视图(view)－控制器(
 
 ## 2.2.1 spring MVC控制器简介
 Spring Web MVC是一种基于Java的实现了Web MVC设计模式的请求驱动类型的轻量级Web框架，即使用了MVC架构模式的思想，将web层进行职责解耦，基于请求驱动指的就是使用请求-响应模型，帮助我们简化开发。
+
 Spring MVC有以下优势：
-	简单快速的设计出Web层
-	与Spring框架默认集成
-	提供强大的约定大于配置的契约式编程支持
-	支持简单的进行Web层的单元测试
-	支持灵活的URL到页面控制器的映射
-	容易与其他视图技术集成，如Velocity、FreeMarker等
-	灵活的数据验证、格式化和数据绑定机制
-	提供强大的JSP标签库，简化JSP开发
-	对静态资源的支持
-	支持Restful风格
+
+  * 简单快速的设计出Web层 
+  * 与Spring框架默认集成
+  * 提供强大的约定大于配置的契约式编程支持
+  * 支持简单的进行Web层的单元测试
+  * 支持灵活的URL到页面控制器的映射
+  * 容易与其他视图技术集成，如Velocity、FreeMarker等
+  * 灵活的数据验证、格式化和数据绑定机制
+  * 提供强大的JSP标签库，简化JSP开发
+  * 对静态资源的支持
+  * 支持Restful风格
+
 
 ## 2.2.2 spring MVC配置
 （1）Maven配置如下，其中spring-webmvc模块的版本和Spring的版本统一。
