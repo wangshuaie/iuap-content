@@ -40,7 +40,7 @@
        * [Spring框架集成](articles/iuap-develop/7-/part2/README.md)
            * [Spring 框架的整合](articles/iuap-develop/7-/part2/spring_kuang_jia_de_zheng_he.md)
            * [Spring MVC集成](articles/iuap-develop/7-/part2/spring_mvcji_cheng.md)
-       * 持久层简介
+       * [持久层简介](articles/iuap-develop/7-/part3/README.md)
            * JPA方式持久化
            * MyBatis方式持久化
            * iUAP JDBC方式持久化
