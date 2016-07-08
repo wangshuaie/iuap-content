@@ -14,14 +14,14 @@
 如果需要打包进war包的配置文件，可以参考示例放置在`src/main/resources`中，也可以自行制定目录。  
 
 
-![](/img/image033.jpg)
+![](../img/image033.jpg)
 
 
 
 `pom.xml`中对其的依赖位置为：
 
 
-![](/img/image034.jpg)
+![](../img/image034.jpg)
 
 
 
@@ -29,5 +29,5 @@
 数据库连接信息默认存储在`application.properties`中，此配置文件也是后续技术组件中使用的默认的属性文件。开发者可以在此文件中配合spring的配置文件，指定数据库连接信息、缓存连接url等。
 
 
-![](/img/image035.jpg)
+![](../img/image035.jpg)
   
