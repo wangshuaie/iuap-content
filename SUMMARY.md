@@ -36,7 +36,7 @@
    * [服务端详解](articles/iuap-develop/7-/README.md)
        * [iUAP的系统框架](articles/iuap-develop/7-/part1/README.md)
            * [iUAP功能架构](articles/iuap-develop/7-/part1/iuapgong_neng_jia_gou.md)
-           * 基于iUAP的系统架构
+           * [基于iUAP的系统架构](articles/iuap-develop/7-/part1/ji_yu_iuap_de_xi_tong_jia_gou.md)
        * Spring框架集成
            * Spring 框架的整合
            * Spring MVC集成
