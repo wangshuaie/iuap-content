@@ -47,7 +47,7 @@
        * [事务控制与连接池](articles/iuap-develop/7-/part4/README.md)
            * [事务操作基本规范](articles/iuap-develop/7-/part4/shi_wu_cao_zuo_ji_ben_gui_fan.md)
            * [数据库连接池](articles/iuap-develop/7-/part4/shu_ju_ku_lian_jie_chi.md)
-       * 日志规范与异常处理
+       * [日志规范与异常处理](articles/iuap-develop/7-/part5/README.md)
            * 异常处理
            * 日志规范
        * 组件的集成
