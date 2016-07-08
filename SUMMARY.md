@@ -50,7 +50,7 @@
        * [日志规范与异常处理](articles/iuap-develop/7-/part5/README.md)
            * [异常处理](articles/iuap-develop/7-/part5/yi_chang_chu_li.md)
            * [日志规范](articles/iuap-develop/7-/part5/ri_zhi_gui_fan.md)
-       * 组件的集成
+       * [组件的集成](articles/iuap-develop/7-/part6/README.md)
        * 分布式服务
            * Restful服务开发
            * WebService服务开发
