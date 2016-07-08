@@ -34,7 +34,7 @@
    * [工具及规范](articles/iuap-develop/5-/README.md)
    * [场景开发](articles/iuap-develop/6-/README.md)
    * [服务端详解](articles/iuap-develop/7-/README.md)
-       * [基于iUAP的系统架构](articles/iuap-develop/7-)
+       * [基于iUAP的系统架构]()
    * [前端教程](articles/iuap-develop/8-/README.md)
    * [技术组件详解](articles/iuap-develop/9-/README.md)
    * [应用组件详解](articles/iuap-develop/10-/README.md)
