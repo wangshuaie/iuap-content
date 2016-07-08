@@ -44,7 +44,7 @@
            * [JPA方式持久化](articles/iuap-develop/7-/part3/jpafang_shi_chi_jiu_hua.md)
            * [MyBatis方式持久化](articles/iuap-develop/7-/part3/mybatisfang_shi_chi_jiu_hua.md)
            * [iUAP JDBC方式持久化](articles/iuap-develop/7-/part3/iuap_jdbcfang_shi_chi_jiu_hua.md)
-       * 事务控制与连接池
+       * [事务控制与连接池](articles/iuap-develop/7-/part4/README.md)
            * 事务操作基本规范
            * 数据库连接池
        * 日志规范与异常处理
