@@ -54,7 +54,7 @@
        * [分布式服务](articles/iuap-develop/7-/part7/README.md)
            * [Restful服务开发](articles/iuap-develop/7-/part7/restfulfu_wu_kai_fa.md)
            * [WebService服务开发](articles/iuap-develop/7-/part7/webservicefu_wu_kai_fa.md)
-           * Dubbo服务开发
+           * [Dubbo服务开发](articles/iuap-develop/7-/part7/dubbofu_wu_kai_fa.md)
    * [前端教程](articles/iuap-develop/8-/README.md)
    * [技术组件详解](articles/iuap-develop/9-/README.md)
    * [应用组件详解](articles/iuap-develop/10-/README.md)
