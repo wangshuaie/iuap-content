@@ -32,18 +32,27 @@
 ### 轻微的修正
 
 Minor corrections or clarifications you submit for documentation and code examples in this repo are covered by the [Azure Website Terms of Use (ToU)](http://azure.microsoft.com/support/legal/website-terms-of-use/).
-
+小的更正或澄清你提交的文档和代码在这个回购的例子是被使用的[ Azure网站条款（头）]
 
 ### 大的意见
 
 If you submit a pull request with new or significant changes to documentation and code examples, we'll send a comment in GitHub asking you to submit an online Contribution License Agreement (CLA) if you are in one of these groups:
 
+如果你提交pull请求与新的或重大变化的文档和示例代码，我们会在GitHub发送评论要求你提交一个在线投稿许可协议（CLA）如果你是其中的一个组：
+
 * Members of the Microsoft Open Technologies group.
 * Contributors who don't work for Microsoft.
 
+*微软开放技术组的成员。
+*贡献谁不为微软工作。
+
 We need you to complete the online form before we can accept your pull request.
 
+我们需要你完成的在线形式之前，我们可以接受你的拉要求。
+
 Full details are available at [http://azure.github.io/guidelines/#cla](http://azure.github.io/guidelines/#cla).
+
+完整的细节是可用的
 
 ## 库的组织
 
