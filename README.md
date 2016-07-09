@@ -38,7 +38,7 @@ Minor corrections or clarifications you submit for documentation and code exampl
 
 If you submit a pull request with new or significant changes to documentation and code examples, we'll send a comment in GitHub asking you to submit an online Contribution License Agreement (CLA) if you are in one of these groups:
 
-如果你提交pull请求与新增加的或重大变化的文档和示例代码，我们会在GitHub发送评论要求你提交一个在线投稿许可协议（CLA）如果你是其中的一个组：
+如果你提交pull请求与新增的或重大变化的文档和示例代码，我们会在GitHub发送评论要求你提交一个在线投稿许可协议（CLA）如果你是其中的一个组：
 
 * Members of the Microsoft Open Technologies group.
 * Contributors who don't work for Microsoft.
