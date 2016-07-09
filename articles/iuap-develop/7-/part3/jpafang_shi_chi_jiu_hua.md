@@ -17,7 +17,7 @@ iUAP平台引入Spring Data JPA框架，底层采用Hibernate实现，与Spring�
 ## 3.1.1 JPA配置
 （1）maven配置
 maven的依赖配置如下图，其中版本号iuap.modules.version为指定的日志组件的版本，可以从maven仓库总获取适当的版本，例如2.0.1-SNAPSHOT、3.0.0-RC001等。
- ![](../image/image27.png)
+ 
 iUAP平台提供的持久层组件已经将spring data jpa和hibernate需要的依赖包进行管理，引用的依赖如下：
  
 注意：数据库驱动的maven依赖根据业务需要自行引入。
