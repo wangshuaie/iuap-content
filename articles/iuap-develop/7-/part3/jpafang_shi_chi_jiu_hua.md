@@ -1,14 +1,17 @@
 # JPA方式持久化
 
-Spring Data是一个用于简化数据库访问，并支持云服务的开源框架。Spring Data JPA是由Spring Data提供的一个用于简化JPA开发的框架。、
+Spring Data是一个用于简化数据库访问，并支持云服务的开源框架。Spring Data JPA是由Spring Data提供的一个用于简化JPA开发的框架。
 使用Spring DataJPA可以极大的简化JPA的写法，可以在几乎不用写实现类的情况下，实现对数据的访问和操作。除了CRUD外，还包括如分页、排序等一些常用的功能。
+
 Spring Data JPA提供的主要接口：
-	1：Repository：顶层的接口，统一所有Repository的类型，让组件扫描的时候自动识别。
-	2：CrudRepository ：Repository的子接口，提供CRUD的功能。
-	3：PagingAndSortingRepository：CrudRepository的子接口，添加分页和排序的功能
-	4：JpaRepository：是PagingAndSortingRepository的子接口，增加了一些实用的功能，比如：批量操作等。
-	5：JpaSpecificationExecutor：负责查询的接口
-	6：Specification：Spring Data JPA提供的一个查询规范，要做复杂的查询，需围绕这个规范来设置查询条件。
+
+	1：Repository：顶层的接口，统一所有Repository的类型，让组件扫描的时候自动识别。
+	2：CrudRepository ：Repository的子接口，提供CRUD的功能。
+	3：PagingAndSortingRepository：CrudRepository的子接口，添加分页和排序的功能
+	4：JpaRepository：是PagingAndSortingRepository的子接口，增加了一些实用的功能，比如：批量操作等。
+	5：JpaSpecificationExecutor：负责查询的接口
+	6：Specification：Spring Data JPA提供的一个查询规范，要做复杂的查询，需围绕这个规范来设置查询条件。
+    
 iUAP平台引入Spring Data JPA框架，底层采用Hibernate实现，与Spring集成，配合事务管理器等完成简单业务的持久化与查询操作。
 
 ## 3.1.1 JPA配置
