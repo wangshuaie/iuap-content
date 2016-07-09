@@ -28,7 +28,8 @@ UAP JDBC是基于JDBC的持久层框架，遵循基本的JPA规范，提供对�
 （4）持久化接口的使用
 
  ![](../image/image69.png)
- 
+ ![](../image/image70.png)
+
 （5）主子表持久化
   1）实体必须为BaseEntity的子类，并且设置了status。status相关常量
  
