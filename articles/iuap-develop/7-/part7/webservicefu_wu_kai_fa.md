@@ -5,33 +5,33 @@ Apache CXF 是一个开源的 Services 框架，CXF 利用 Frontend 编程 API �
 	iUAP平台采用cxf支持对WebService的开发，使可以方便的定义和发布soap 协议的webservice，也可以发布类似RestFul服务方式的webservice。
 ## 7.2.2 WebService配置
 （1）maven配置
- 
+ ![](../image/image109.png)
 （2）配置cxf，修改web.xml，加入cxf相关配置。
- 
+ ![](../image/image110.png)
 （3）引入spring和cxf集成的配置文件
- 
+ ![](../image/image111.png)
 ## 7.2.3 WebService使用
 （1）soap协议的webservice
 编写webservice的接口类和实现，使用@WebService、@WebMethod注解声明接口和方法，示例如下：
- 
+ ![](../image/image112.png)
 编写实现类，实现方法：
- 
+ ![](../image/image113.png)
 配置applicationContext-soap-server.xml：
- 
+![](../image/image114.png) 
 启动工程后，可以在浏览器中查看WebService的描述：
 http://localhost:8080/example_iuap_webservice/cxf/soap/SoapWebServiceDemo?wsdl
-
+![](../image/image115.png)
  
 	编写测试用例，测试方法和返回结果如下格式：
- 
- 
+ ![](../image/image116.png)
+ ![](../image/image117.png)
 （2）restful格式的webservice
 编写服务类，使用@Path注解声明服务和指定地址映射，使用@Produces注解设置内容返回的格式。
- 
+![](../image/image118.png) 
     配置applicationContext-jaxrs-server.xml，指定相关配置：
- 
+![](../image/image119.png) 
 
 启动工程后，在浏览器中可以查看服务的描述文件，描述文件对应的浏览器地址为：http://localhost:8080/example_iuap_webservice/cxf/jaxrs?_wadl
- 
+ ![](../image/image120.png)
 编写测试用例，如下：
- 
+![](../image/image121.png) 
