@@ -89,7 +89,11 @@ This folder contains articles that are part of our contributors' guide.
 
 For information about how to contribute, how to use the GitHub UI to contribute small changes, and how to fork and clone the repository for more significant contributions, see [Install and set up tools for authoring in GitHub](./contributor-guide/tools-and-setup.md).
 
+有关如何贡献，如何使用GitHub的UI贡献小的变化，以及如何叉和克隆更多的重大贡献的仓库，看到[安装和设置在GitHub ]创作工具（/投稿指南/工具和安装。MD）。
+
 If you install GitBash and choose to work locally, the steps for creating a new local working branch, making changes, and submitting the changes back to the main branch are listed in [Git commands for creating a new article or updating an existing article](./contributor-guide/git-commands-for-master.md)
+
+如果你安装gitbash选择在本地工作的步骤，创建一个新的地方工作科，做出改变，并将改变回到主分支被列入[ Git命令创建一个新的文章或更新现有的文章]（。/投稿指南/ git命令的主人。MD）。
 
 ### 分支
 
