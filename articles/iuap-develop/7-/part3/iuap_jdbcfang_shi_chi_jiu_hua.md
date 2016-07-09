@@ -12,10 +12,10 @@ UAP JDBC是基于JDBC的持久层框架，遵循基本的JPA规范，提供对�
 ![](../image/image63.png)
 
 （4）如果配置使用元数据，需要在resources目录下增加配置文件jdbc.properties
- 
+ ![](../image/image64.png)
 ## 3.3.3 UAP JDBC使用
 （1）配置maven依赖
- 
+ ![](../image/image65.png)
 其中版本号iuap.modules.version为指定的日志组件的版本，可以从maven仓库总获取适当的版本，例如2.0.1-SNAPSHOT。
 （2）BaseDAO的API如下：
  
