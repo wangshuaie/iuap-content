@@ -76,15 +76,16 @@ Articles within their own service folder are published to Azure.Microsoft.com in
 ### \includes
 
 You can create reusable content sections to be included in one or more articles. See [Custom extensions used in our technical content](./contributor-guide/custom-markdown-extensions.md).
+您可以创建可重复使用的内容部分，将包含在一个或多个文章中。看到[用于我们的技术内容]自定义扩展（）。
 
 ### \markdown templates
 
 This folder contains our standard markdown template with the basic markdown formatting you need for an article.
-
+此文件夹包含标准减价模板与基本的Markdown格式你的文章需要。
 ### \contributor-guide
 
 This folder contains articles that are part of our contributors' guide.  
-
+此文件夹包含的文章是我们贡献者指南的一部分。
 ## Use GitHub, Git, and this repository
 
 For information about how to contribute, how to use the GitHub UI to contribute small changes, and how to fork and clone the repository for more significant contributions, see [Install and set up tools for authoring in GitHub](./contributor-guide/tools-and-setup.md).
