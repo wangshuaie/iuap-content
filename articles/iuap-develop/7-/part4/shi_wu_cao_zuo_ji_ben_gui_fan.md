@@ -109,9 +109,9 @@ iUAP平台建议使用声明式的方式使用Spring管理事务，声明式事�
 如果接口上标注@Transactional注解，会留隐患：因为注解不能被继承，所以业务接口中标注的@Transactional注解不会被业务实现类继承。所以可能会出现不启动事务的情况。所以，Spring建议将@Transaction注解在实现类上。
 在方法上的@Transactional注解会覆盖掉类上的@Transactional。
 简单示例如下：
- 
- 
- 
+ ![](../image/image76.png)
+ ![](../image/image77.png)
+ ![](../image/image78.png)
 @Transactional的具体配置项的含义如下：
 <table>
    <tr>
