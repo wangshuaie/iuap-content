@@ -26,5 +26,5 @@ maven的依赖配置参考如下，其中版本号dubbo.version、zkclient.versi
  ![](../image/image129.png)
     消费端服务声明，参考配置中的信息，其中接口名和服务提供者接口相同。
     从spring容器中直接获取bean即可调用
- 
+ ![](../image/image130.png)
 
