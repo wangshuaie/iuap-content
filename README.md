@@ -38,7 +38,7 @@ Minor corrections or clarifications you submit for documentation and code exampl
 
 If you submit a pull request with new or significant changes to documentation and code examples, we'll send a comment in GitHub asking you to submit an online Contribution License Agreement (CLA) if you are in one of these groups:
 
-如果你提交pull请求与新的或重大变化的文档和示例代码，我们会在GitHub发送评论要求你提交一个在线投稿许可协议（CLA）如果你是其中的一个组：
+如果你提交pull请求与新增加的或重大变化的文档和示例代码，我们会在GitHub发送评论要求你提交一个在线投稿许可协议（CLA）如果你是其中的一个组：
 
 * Members of the Microsoft Open Technologies group.
 * Contributors who don't work for Microsoft.
@@ -57,6 +57,8 @@ Full details are available at [http://azure.github.io/guidelines/#cla](http://az
 ## 库的组织
 
 The content in the azure-content repository follows the organization of documentation on [Azure.Microsoft.com](http://azure.microsoft.com). This repository contains two root folders:
+
+在Azure的内容库的内容包括文档的组织[蔚蓝。微软。COM ]（http：/ /蔚蓝。微软。COM）。此存储库包含两个根文件夹：
 
 ### \articles
 
@@ -89,28 +91,34 @@ For information about how to contribute, how to use the GitHub UI to contribute 
 
 If you install GitBash and choose to work locally, the steps for creating a new local working branch, making changes, and submitting the changes back to the main branch are listed in [Git commands for creating a new article or updating an existing article](./contributor-guide/git-commands-for-master.md)
 
-### Branches
+### 分支
 
-We recommend that you create local working branches that target a specific scope of change. Each branch should be limited to a single concept/article both to streamline work flow and reduce the possibility of merge conflicts.  The following efforts are of the appropriate scope for a new branch:
+我们建议您创建针对特定范围的更改的本地工作分支。每一个分支应仅限于一个单一的概念/文章，以简化工作流程，减少合并冲突的可能性。下面的努力是一个新的分支适当的范围：
 
 * A new article (and associated images)
 * Spelling and grammar edits on an article.
 * Applying a single formatting change across a large set of articles (e.g. new copyright footer).
 
-## How to use markdown to format your topic
+*一个新的文章（和相关的图像）
+*在一篇文章的拼写和语法编辑。
+*将一个单一的格式更改应用在一个大的文章（例如，新的版权脚注）。
+
+## 如何使用Markdown格式你的话题
 
 All the articles in this repository use GitHub flavored markdown.  Here's a list of resources.
-
+        这里有一个资源列表。
+        
 - [Markdown basics](https://help.github.com/articles/markdown-basics/)
 
 - [Printable markdown cheatsheet](./contributor-guide/media/documents/markdown-cheatsheet.pdf?raw=true)
 
 - For our list of markdown editors, see the [tools and setup topic](./contributor-guide/tools-and-setup.md#install-a-markdown-editor).
 
-## Article metadata
+## 文章的元数据
 
 Article metadata enables certain functionalities on the azure.microsoft.com web site, such as author attribution, contributor attribution, breadcrumbs, article descriptions, and SEO optimizations as well as reporting Microsoft uses to evaluate the performance of the content. So, the metadata is important! [Here's the guidance for making sure your metadata is done right](./contributor-guide/article-metadata.md).
 
-## More resources
+文章的元数据使某些功能在azure.microsoft.com网站，如作者归属，原因归因、面包糠、文章的描述，和SEO优化以及微软使用评价报告内容的表现。因此，元数据是重要的！[这里的指导，确保您的元数据做正确的]（/投稿指南/文章元数据）。
+## 更多的资源
 
-See the [index of our contributor's guide](./contributor-guide/contributor-guide-index.md) for all our guidance topics.
+请查看[产品官方网站](http://iuap.yonyou.com)。
