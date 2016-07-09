@@ -23,8 +23,8 @@
 你可以借助于iUAP的文件在几个不同的方式:
 
 * 贡献可以到[论坛讨论](http://iuap.yonyou.com/blog/).
-* Submit Disqus comments at the bottom of articles.
-* You can easily contribute to technical articles in the GitHub user interface. Either find the article in this repository, or visit the article on [http://azure.microsoft.com/documentation](http://azure.microsoft.com/documentation) and click the link in the article that goes to the GitHub source for the article.
+* 在文章的底部提交评论.
+* 你可以很容易的在GitHub的用户界面技术文章投稿。要么找到该知识库中的文章，或访问[http://iuap.yonyou.com](http://iuap.yonyou.com)和点击的文章中的文章GitHub源链接.
 * If you are making substantial changes to an existing article, adding or changing images, or contributing a new article, you need to fork this repository, install Git Bash, Markdown Pad, and learn some git commands.
 
 ## 关于你对文档内容的贡献
