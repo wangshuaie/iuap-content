@@ -63,15 +63,25 @@ The content in the azure-content repository follows the organization of document
 ### \articles
 
 在 *\articles* folder contains the documentation articles formatted as markdown files with an *.md* extension.
+在第* * \文件夹包含文件的文章有markdown formatted the队列以及年.md * *扩展。
 
 Articles in the root directory are published to Azure.Microsoft.com in the path *http://azure.microsoft.com/documentation/articles/{article-name-without-md}/*.
 
+在根目录中的文章发布到azure.microsoft.com路径中的HTTP：/ / *蔚蓝。微软。COM /文件/物品/ {第名没有MD } /*。
+
 * **Article filenames:** See [our file naming guidance](./contributor-guide/file-names-and-locations.md).
+
+***第文件名：* *参见[我们]（文件命名指导。/投稿指南/文件的名字和位置，MD）。
 
 Articles within their own service folder are published to Azure.Microsoft.com in the path
 *http://azure.microsoft.com/documentation/articles/service-folder/{article-name-without-md}/*
 
+在自己的工作文件夹中的文章发布到azure.microsoft.com路径中
+* HTTP：/ /蔚蓝。微软。COM /文件/物品/服务文件夹/ {第名没有MD } /*
+
 * **Media subfolders:** The *\articles* folder contains the *\media* folder for root directory article media files, inside which are subfolders with the images for each article.  The service folders contain a separate media folder for the articles within each service folder. The article image folders are named identically to the article file, minus the *.md* file extension.
+
+***媒体文件夹：* * \文章*文件夹包含根目录第媒体文件* \媒体文件夹，里面的每一篇文章都有图片文件夹。服务文件夹包含在每个服务文件夹中的文章的单独的媒体文件夹。文章图像文件夹被命名为相同的文章文件，减去*。
 
 ### \includes
 
