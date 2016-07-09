@@ -4,11 +4,13 @@ UAP JDBC简介
 UAP JDBC是基于JDBC的持久层框架，遵循基本的JPA规范，提供对数据的增删改查，分页等功能。提供了基础sql功能，sql基于SQLServer语法，能够提供对多数据库的支持，目前支持的数据库包括：SQLServer,MySQL,Oracle,DB2,Postgresql。
 ## 3.3.2 UAP JDBC配置
 （1）数据源配置如下：
- 
+ ![](../image/image61.png)
 （2）配置Spring事务
- 
+ ![](../image/image62.png)
 （3）配置BaseDAO
- 
+
+![](../image/image63.png)
+
 （4）如果配置使用元数据，需要在resources目录下增加配置文件jdbc.properties
  
 ## 3.3.3 UAP JDBC使用
