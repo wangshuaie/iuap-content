@@ -92,11 +92,11 @@ iUAP平台持久化使用Spring管理事务，Spring事务的隔离级别如下�
 iUAP平台建议使用声明式的方式使用Spring管理事务，声明式事务的配置方式如下：
 （1）spring配置文件中配置事务管理器
 如果是Spring JDBC和Mybatis，配置DataSourceTransactionManager：
- 
-	如果使用Spring Data Jpa，配置JpaTransactionManager：
- 
+ ![](../image/image73.png)
+如果使用Spring Data Jpa，配置JpaTransactionManager：
+ ![](../image/image46.png)
 （2）配置事务注解特性
- 
+ ![](../image/image47.png)
 <tx:annotation-driven>常用属性如下，
 	mode：指定Spring事务管理框架创建通知bean的方式。可用的值有proxy和aspectj。前者是默认值，表示通知对象是个JDK代理；后者表示Spring AOP会使用AspectJ创建代理。
 	proxy-target-class：如果为true，Spring将创建子类来代理业务类；如果为false，则使用基于接口的代理。（如果使用子类代理，需要在类路径中添加CGLib.jar类库）
