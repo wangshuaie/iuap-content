@@ -25,7 +25,7 @@
 * 贡献可以到[论坛讨论](http://iuap.yonyou.com/blog/).
 * 在文章的底部提交评论.
 * 你可以很容易的在GitHub的用户界面技术文章投稿。要么找到该知识库中的文章，或访问[http://iuap.yonyou.com](http://iuap.yonyou.com)和点击的文章中的文章GitHub源链接.
-* If you are making substantial changes to an existing article, adding or changing images, or contributing a new article, you need to fork this repository, install Git Bash, Markdown Pad, and learn some git commands.
+* 如果你是一个现有的文章作出实质性的改变，增加或改变的图像，或者贡献一个新的文章，你需要Fork这个库，安装Git Bash批处理，并学习一些Git命令.
 
 ## 关于你对文档内容的贡献
 
