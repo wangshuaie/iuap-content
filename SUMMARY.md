@@ -5,7 +5,7 @@
    * [产品简介](articles/iuap-develop/1-/README.md)
    * [获取指南](articles/iuap-develop/2-/README.md)
        * [免费试用](articles/iuap-develop/2-/mian_fei_shi_yong.md)
-       * 商务渠道
+       * [商务渠道](articles/iuap-develop/2-/shang_wu_qu_dao.md)
    * [安装盘说明](articles/iuap-develop/3-/README.md)
        * [介质说明](articles/iuap-develop/3-/jie_zhi_shuo_ming.md)
    * [快速入门](articles/iuap-develop/4-/README.md)
