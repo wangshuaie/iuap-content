@@ -2,6 +2,28 @@
 
 > 参考介质说明解压安装盘，本节说明安装盘的初始化使用
 
+首次运行指导:
+	1:运行开发环境前请先右键以管理员身份运行开发根目录下的initDevTool.bat。
+	2:强烈建议解压到D盘根目录，如果没有处在D盘根目录，请运行DevTool目录下的startDevTool.bat开启开发环境IDE，自行设置maven环境到DevTool下的maven库。
+	3:运行bin目录下的startpgsql.bat，并在开发环境的IDE中以jetty的方式调试示例工程。
+	4:如果打开postgresql数据库发生闪退，需要对DevTool\DB\pgsql文件夹赋予完全控制权限。对文件夹点击右键选择属性--选择安全标签--点击编辑--为当前用户添加完全控制权限。
+	5:运行postgresql数据库需要安装vc2010运行库，DevTool\DB\pgsql文件夹下vcredist_x86.exe为安装包。
 
+提示:  
+    解压后放到d盘根目录，若之前运行过老版本的本开发环境，删除时候注意备份对应的workspace下的工程，以免误删除！
+    建议运行环境win7 64位 4g内存 具有vc2010运行库。
+    如有更多问题可访问http://iuap.yonyou.com/获取支持。
+
+快速浏览：
+    按照上述要求，启动数据库和IDE，在默认的示例工程上，右键选择调试Maven build...,在目标上输入jetty:run,在源码中加入本工程，应用和调试即可。
+    如果是默认工程，也可以直接运行历史记录中的调试任务。
+
+开发模式：
+    按照需求启动bin目录下的startpgsql.bat、startredis.bat、startsolr.bat、startzookeeper.bat 完成开发启动准备，启动根目录下的startDevTool.bat可以打开默认的开发工具，examples下内置了工程的示例代码，开发人员可以直接调试和查看代码，根据官网文档的指导快速介入。
+
+注意：
+    1：此类启动方式仅供快速浏览和开发模式熟悉，正式开发环境搭建请参考官网。
+    2：批处理启动时候使用了8080和5432端口，请保证对应端口未被占用，对应的服务可以启动。
+	
 
 
