@@ -2,6 +2,7 @@
 
 > 参考介质说明解压安装盘，本节说明安装盘的初始化使用
 
+开发环境解压完成就可以可以使用，但是需要配置开发工具的相应用位
 首次运行指导:
 	1:运行开发环境前请先右键以管理员身份运行开发根目录下的initDevTool.bat。
 	2:强烈建议解压到D盘根目录，如果没有处在D盘根目录，请运行DevTool目录下的startDevTool.bat开启开发环境IDE，自行设置maven环境到DevTool下的maven库。
@@ -20,11 +21,6 @@
 3.     如有更多问题可访问http://iuap.yonyou.com/获取支持。
 
 ---
-
-
-快速浏览：
-    按照上述要求，启动数据库和IDE，在默认的示例工程上，右键选择调试Maven build...,在目标上输入jetty:run,在源码中加入本工程，应用和调试即可。
-    如果是默认工程，也可以直接运行历史记录中的调试任务。
 
 开发模式：
     按照需求启动bin目录下的startpgsql.bat、startredis.bat、startsolr.bat、startzookeeper.bat 完成开发启动准备，启动根目录下的startDevTool.bat可以打开默认的开发工具，examples下内置了工程的示例代码，开发人员可以直接调试和查看代码，根据官网文档的指导快速介入。
