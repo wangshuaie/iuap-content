@@ -11,7 +11,6 @@
 	4:如果打开postgresql数据库发生闪退，需要对DevTool\DB\pgsql文件夹赋予完全控制权限。对文件夹点击右键选择属性--选择安全标签--点击编辑--为当前用户添加完全控制权限。
 	5:运行postgresql数据库需要安装vc2010运行库，DevTool\DB\pgsql文件夹下vcredist_x86.exe为安装包。
 
-
 ---
 
 升级提示:  
