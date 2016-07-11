@@ -5,7 +5,7 @@
    * [产品简介](articles/iuap-develop/1-/README.md)
    * [获取指南](articles/iuap-develop/2-/README.md)
    * [安装盘说明](articles/iuap-develop/3-/README.md)
-       * 界质说明
+       * [界质说明](articles/iuap-develop/3-/jie_zhi_shuo_ming.md)
    * [快速入门](articles/iuap-develop/4-/README.md)
        * [开发配置与预览](articles/iuap-develop/4-/part1/README.md)
            * [开发工具说明](articles/iuap-develop/4-/part1/writing.md)
