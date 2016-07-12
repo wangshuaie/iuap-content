@@ -8,9 +8,9 @@
 
 感谢您对iUAP3.0产品的文档感兴趣！
 
-* [贡献的方式]（#贡献的方式）
-* [你]蔚蓝的内容贡献（#你蔚蓝的贡献内容的）
-* [组织]（#库的组织）
+* [贡献的方式](#贡献的方式)
+* [关于您对文档内容的贡献](#关于您对文档内容的贡献)
+* [库的组织](#库的组织)
 * [使用GitHub，git，这个库]（#使用GitHub的Git和这个库）
 * [如何使用Markdown格式主题]（#如何使用Markdown格式你的话题）
 * [反馈，评论，和支持]（投稿指南/反馈意见和评论）
@@ -20,45 +20,31 @@
 
 ## 贡献的方式
 
-你可以借助于iUAP的文件在几个不同的方式:
+你可以借助几个不同的方式:
 
 * 贡献可以到[论坛讨论](http://iuap.yonyou.com/blog/).
 * 在文章的底部提交评论.
-* 你可以很容易的在GitHub的用户界面技术文章投稿。要么找到该知识库中的文章，或访问[文章官网](http://iuap.yonyou.com)并点击的文章中的文章GitHub源链接.
-* 如果你是一个现有的文章作出实质性的改变，增加或改变的图像，或者贡献一个新的文章，你需要Fork这个库，安装Git Bash批处理，并学习一些Git命令.
+* 你可以很容易的在GitHub的用户界面技术文章投稿。要么找到该知识库中的文章，或访问[文章官网](http://iuap.yonyou.com)并点击的文章中的GitHub源链接.
+* 如果你是对一个现有的文章作出实质性的改变，增加或改变图像，或者贡献一个新的文章，你需要Fork这个库，安装Git Bash批处理，并学习一些Git命令来发送“Pull requests”.
 
-## 关于你对文档内容的贡献
+## 关于您对文档内容的贡献
 
 ### 轻微的修正
 
-Minor corrections or clarifications you submit for documentation and code examples in this repo are covered by the [Azure Website Terms of Use (ToU)](http://azure.microsoft.com/support/legal/website-terms-of-use/).
 小的更正或澄清你提交的文档和代码在这个回购的例子是被使用的[ Azure网站条款（头）]
 
 ### 大的意见
 
-If you submit a pull request with new or significant changes to documentation and code examples, we'll send a comment in GitHub asking you to submit an online Contribution License Agreement (CLA) if you are in one of these groups:
-
 如果你提交pull请求与新增的或重大变化的文档和示例代码，我们会在GitHub发送评论要求你提交一个在线投稿许可协议（CLA）如果你是其中的一个组：
-
-* Members of the Microsoft Open Technologies group.
-* Contributors who don't work for Microsoft.
 
 *微软开放技术组的成员。
 *贡献谁不为微软工作。
 
-We need you to complete the online form before we can accept your pull request.
-
-我们需要你完成的在线形式之前，我们可以接受你的拉要求。
-
-Full details are available at [http://azure.github.io/guidelines/#cla](http://azure.github.io/guidelines/#cla).
-
-完整的细节是可用的
+我们需要对你完成的文档以在线形式确认贡献协议后，我们可以接受你的合并请求。
 
 ## 库的组织
 
-The content in the azure-content repository follows the organization of documentation on [Azure.Microsoft.com](http://azure.microsoft.com). This repository contains two root folders:
-
-在Azure的内容库的内容包括文档的组织[蔚蓝。微软。COM ]（http：/ /蔚蓝。微软。COM）。此存储库包含两个根文件夹：
+此存储库包含两个根文件夹：
 
 ### \articles
 
