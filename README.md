@@ -56,8 +56,7 @@
 
 ### \includes
 
-You can create reusable content sections to be included in one or more articles. See [Custom extensions used in our technical content](./contributor-guide/custom-markdown-extensions.md).
-您可以创建可重复使用的内容部分，将包含在一个或多个文章中。看到[用于我们的技术内容]自定义扩展（）。
+您可以创建可重复使用的内容部分，将包含在一个或多个文章中。[用于我们的技术内容]自定义扩展。
 
 ### \markdown templates
 
