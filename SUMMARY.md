@@ -38,7 +38,7 @@
 * [工具及规范](articles/iuap-develop/5-/README.md)
    * [工具说明](articles/iuap-develop/5-/part1/README.md)
    * [代码规范](articles/iuap-develop/5-/part2/README.md)
-       * 后端目录规范
+       * [后端目录规范](articles/iuap-develop/5-/part2/hou_duan_mu_lu_gui_fan.md)
        * [前端目录规范](articles/iuap-develop/5-/part2/qian_duan_mu_lu_gui_fan.md)
        * [命名规范](articles/iuap-develop/5-/part2/ming_ming_gui_fan.md)
        * [编程规范](articles/iuap-develop/5-/part2/bian_cheng_gui_fan.md)
