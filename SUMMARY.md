@@ -61,6 +61,8 @@
            * [Dubbo服务开发](articles/iuap-develop/7-/part7/dubbofu_wu_kai_fa.md)
    * [前端教程](articles/iuap-develop/8-/README.md)
    * [技术组件详解](articles/iuap-develop/9-/README.md)
-       *[认证组件](articles/iuap-develop/9-/iuap-auth/2.0.1-SNAPSHOT/manual.md) 
+       * [认证组件](articles/iuap-develop/9-/iuap-auth/2.0.1-SNAPSHOT/manual.md) 
+       * [iuap-cache](articles/iuap-develop/9-/iuap-cache/2.0.1-SNAPSHOT/manual.md) 
+       * [认证组件](articles/iuap-develop/9-/iuap-auth/2.0.1-SNAPSHOT/manual.md) 
    * [应用组件详解](articles/iuap-develop/10-/README.md)
 
