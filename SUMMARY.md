@@ -55,7 +55,6 @@
 
 
 * [工具及规范](articles/iuap-develop/5-/README.md)
-* \[代码规范\]\([articles\/iuap-develop\/5-\/dai\_ma\_gui\_fan.md\)](/articles/iuap-develop/5-/dai_ma_gui_fan.md)
 * [场景开发](articles/iuap-develop/6-/README.md)
 * [服务端详解](articles/iuap-develop/7-/README.md)
 
@@ -88,6 +87,7 @@
   * [组件的集成](articles/iuap-develop/7-/part6/README.md)
 
   * [分布式服务](articles/iuap-develop/7-/part7/README.md)
+
     * [Restful服务开发](articles/iuap-develop/7-/part7/restfulfu_wu_kai_fa.md)
     * [WebService服务开发](articles/iuap-develop/7-/part7/webservicefu_wu_kai_fa.md)
     * [Dubbo服务开发](articles/iuap-develop/7-/part7/dubbofu_wu_kai_fa.md)
