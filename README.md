@@ -56,7 +56,7 @@
 
 ### \includes
 
-您可以创建可重复使用的内容部分，将包含在一个或多个文章中。
+您可以创建可重复使用的内容部分，将包含在一个或多个文章中。 
 
 ### \markdown templates
 
@@ -66,13 +66,9 @@
 
 此文件夹包含的文章是我们贡献者指南的一部分。
 
-## Use GitHub, Git, and this repository
+## 使用 GitHub, Git
 
-For information about how to contribute, how to use the GitHub UI to contribute small changes, and how to fork and clone the repository for more significant contributions, see [Install and set up tools for authoring in GitHub](./contributor-guide/tools-and-setup.md).
-
-有关如何贡献，如何使用GitHub的UI贡献小的变化，以及如何叉和克隆更多的重大贡献的仓库，看到[安装和设置在GitHub ]创作工具（/投稿指南/工具和安装。MD）。
-
-If you install GitBash and choose to work locally, the steps for creating a new local working branch, making changes, and submitting the changes back to the main branch are listed in [Git commands for creating a new article or updating an existing article](./contributor-guide/git-commands-for-master.md)
+有关如何提交文档，如何使用GitHub的UI提交小的变化，以及如何叉和克隆更多的重大贡献的仓库，看到[安装和设置在GitHub ]（/contributor-guide/工具安装.MD）。
 
 如果你安装gitbash选择在本地工作的步骤，创建一个新的地方工作科，做出改变，并将改变回到主分支被列入[ Git命令创建一个新的文章或更新现有的文章]（。/投稿指南/ git命令的主人。MD）。
 
@@ -80,18 +76,14 @@ If you install GitBash and choose to work locally, the steps for creating a new 
 
 我们建议您创建针对特定范围的更改的本地工作分支。每一个分支应仅限于一个单一的概念/文章，以简化工作流程，减少合并冲突的可能性。下面的努力是一个新的分支适当的范围：
 
-* A new article (and associated images)
-* Spelling and grammar edits on an article.
-* Applying a single formatting change across a large set of articles (e.g. new copyright footer).
-
 *一个新的文章（和相关的图像）
 *在一篇文章的拼写和语法编辑。
 *将一个单一的格式更改应用在一个大的文章（例如，新的版权脚注）。
 
-## 如何使用Markdown格式你的话题
+## 如何使用Markdown格式编写话题
 
-All the articles in this repository use GitHub flavored markdown.  Here's a list of resources.
-        这里有一个资源列表。
+
+ 这里有一个资源列表。
         
 - [Markdown basics](https://help.github.com/articles/markdown-basics/)
 
@@ -101,9 +93,8 @@ All the articles in this repository use GitHub flavored markdown.  Here's a list
 
 ## 文章的元数据
 
-Article metadata enables certain functionalities on the azure.microsoft.com web site, such as author attribution, contributor attribution, breadcrumbs, article descriptions, and SEO optimizations as well as reporting Microsoft uses to evaluate the performance of the content. So, the metadata is important! [Here's the guidance for making sure your metadata is done right](./contributor-guide/article-metadata.md).
+文章的元数据使某些功能在iuap.yonyou.com网站，如作者归属，原因归因、面包糠、文章的描述，和SEO优化以及微软使用评价报告内容的表现。因此，元数据是重要的！[这里的指导，确保您的元数据做正确的]（/投稿指南/文章元数据）。
 
-文章的元数据使某些功能在azure.microsoft.com网站，如作者归属，原因归因、面包糠、文章的描述，和SEO优化以及微软使用评价报告内容的表现。因此，元数据是重要的！[这里的指导，确保您的元数据做正确的]（/投稿指南/文章元数据）。
 ## 更多的资源
 
 请查看[产品官方网站](http://iuap.yonyou.com)。
