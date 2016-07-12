@@ -3,100 +3,65 @@
 * [开发平台](articles/iuap-develop/README.md)
 * [产品简介](articles/iuap-develop/1-/README.md)
 * [获取指南](articles/iuap-develop/2-/README.md)
-
   * [免费试用](articles/iuap-develop/2-/mian_fei_shi_yong.md)
   * [商务渠道](articles/iuap-develop/2-/shang_wu_qu_dao.md)
-
 * [安装盘说明](articles/iuap-develop/3-/README.md)
-
   * [介质说明](articles/iuap-develop/3-/jie_zhi_shuo_ming.md)
   * [安装使用](articles/iuap-develop/3-/an_zhuang_shi_yong.md)
-
 * [快速入门](articles/iuap-develop/4-/README.md)
-
   * [开发配置与预览](articles/iuap-develop/4-/part1/README.md)
-
     * [开发工具说明](articles/iuap-develop/4-/part1/writing.md)
     * [工具初始化](articles/iuap-develop/4-/part1/gitbook.md)
     * [Maven配置](articles/iuap-develop/4-/part1/mavenpei_zhi.md)
     * [示例工程说明](articles/iuap-develop/4-/part1/shiligongchengmd.md)
     * [启动调试](articles/iuap-develop/4-/part1/qi_dong_diao_shi.md)
-
   * [基础工程创建](articles/iuap-develop/4-/part2/README.md)
-
     * [创建iUAP工程](articles/iuap-develop/4-/part2/chuang_jian_iuap_gong_cheng.md)
     * [工程结构说明](articles/iuap-develop/4-/part2/gong_cheng_jie_gou_shuo_ming.md)
-
   * [前端开发](articles/iuap-develop/4-/part3/README.md)
-
     * [前端配置简介](articles/iuap-develop/4-/part3/qian_duan_pei_zhi_jian_jie.md)
     * [页面结构与交互](articles/iuap-develop/4-/part3/ye_mian_jie_gou_yu_jiao_hu.md)
-
   * [服务端开发](articles/iuap-develop/4-/part4/README.md)
-
     * [控制层介绍](articles/iuap-develop/4-/part4/kong_zhi_ceng_jie_shao.md)
     * [实体层介绍](articles/iuap-develop/4-/part4/shi_ti_ceng_jie_shao.md)
     * [业务层说明](articles/iuap-develop/4-/part4/fu_wu_ceng_shuo_ming.md)
     * [数据层介绍](articles/iuap-develop/4-/part4/shu_ju_ku_cao_zuo_ceng_jian_jie.md)
     * [前后端交互](articles/iuap-develop/4-/part4/qian_hou_duan_jiao_hu.md)
-
   * [组件集成](articles/iuap-develop/4-/part5/README.md)
-
   * [调试运行](articles/iuap-develop/4-/part6/README.md)
-
     * [调试环境说明](articles/iuap-develop/4-/part6/diao_shi_huan_jing_shuo_ming.md)
     * [调试运行与问题查找](articles/iuap-develop/4-/part6/diao_shi_yun_xing_yu_wen_ti_cha_zhao.md)
-
   * [工程打包与部署](articles/iuap-develop/4-/part7/README.md)
-
     * [清理与打包](articles/iuap-develop/4-/part7/gong_cheng_qing_li_yu_da_bao.md)
     * [部署说明](articles/iuap-develop/4-/part7/bu_shu_shuo_ming.md)
-
-
-
 * [工具及规范](articles/iuap-develop/5-/README.md)
+    * [工具说明]()
+    * 代码规范
 * [场景开发](articles/iuap-develop/6-/README.md)
 * [服务端详解](articles/iuap-develop/7-/README.md)
-
   * [iUAP的系统框架](articles/iuap-develop/7-/part1/README.md)
-
     * [iUAP功能架构](articles/iuap-develop/7-/part1/iuapgong_neng_jia_gou.md)
     * [基于iUAP的系统架构](articles/iuap-develop/7-/part1/ji_yu_iuap_de_xi_tong_jia_gou.md)
-
   * [Spring框架集成](articles/iuap-develop/7-/part2/README.md)
-
     * [Spring 框架的整合](articles/iuap-develop/7-/part2/spring_kuang_jia_de_zheng_he.md)
     * [Spring MVC集成](articles/iuap-develop/7-/part2/spring_mvcji_cheng.md)
-
   * [持久层简介](articles/iuap-develop/7-/part3/README.md)
-
     * [JPA方式持久化](articles/iuap-develop/7-/part3/jpafang_shi_chi_jiu_hua.md)
     * [MyBatis方式持久化](articles/iuap-develop/7-/part3/mybatisfang_shi_chi_jiu_hua.md)
     * [iUAP JDBC方式持久化](articles/iuap-develop/7-/part3/iuap_jdbcfang_shi_chi_jiu_hua.md)
-
   * [事务控制与连接池](articles/iuap-develop/7-/part4/README.md)
-
     * [事务操作基本规范](articles/iuap-develop/7-/part4/shi_wu_cao_zuo_ji_ben_gui_fan.md)
     * [数据库连接池](articles/iuap-develop/7-/part4/shu_ju_ku_lian_jie_chi.md)
-
   * [日志规范与异常处理](articles/iuap-develop/7-/part5/README.md)
-
     * [异常处理](articles/iuap-develop/7-/part5/yi_chang_chu_li.md)
     * [日志规范](articles/iuap-develop/7-/part5/ri_zhi_gui_fan.md)
-
   * [组件的集成](articles/iuap-develop/7-/part6/README.md)
-
   * [分布式服务](articles/iuap-develop/7-/part7/README.md)
-
     * [Restful服务开发](articles/iuap-develop/7-/part7/restfulfu_wu_kai_fa.md)
     * [WebService服务开发](articles/iuap-develop/7-/part7/webservicefu_wu_kai_fa.md)
     * [Dubbo服务开发](articles/iuap-develop/7-/part7/dubbofu_wu_kai_fa.md)
-
-
-
 * [前端教程](articles/iuap-develop/8-/README.md)
 * [技术组件详解](articles/iuap-develop/9-/README.md)
-
   * [认证组件](articles/iuap-develop/9-/iuap-auth/2.0.1-SNAPSHOT/manual.md)
   * [分布式缓存组件](articles/iuap-develop/9-/iuap-cache/2.0.1-SNAPSHOT/manual.md)
   * [Dubbox扩展组件](articles/iuap-develop/9-/iuap-dubbox/2.0.1-SNAPSHOT/manual.md)
@@ -113,9 +78,7 @@
   * [搜索组件](articles/iuap-develop/9-/iuap-search/2.0.1-SNAPSHOT/manual.md)
   * [安全组件](articles/iuap-develop/9-/iuap-security/2.0.1-SNAPSHOT/manual.md)
   * [工具包组件](articles/iuap-develop/9-/iuap-utils/2.0.1-SNAPSHOT/manual.md)
-
 * [应用组件详解](articles/iuap-develop/10-/README.md)
-
   * [登录及权限](articles/iuap-develop/10-/iuap-authrbac-core/1.0.1-SNAPSHOT/manual.md)
   * [编码规则](articles/iuap-develop/10-/iuap-billcode/1.0.1-SNAPSHOT/manual.md)
   * [业务日志](articles/iuap-develop/10-/iuap-busilog/1.0.1-SNAPSHOT/manual.md)
