@@ -37,7 +37,7 @@
        * [部署说明](articles/iuap-develop/4-/part7/bu_shu_shuo_ming.md)
 * [工具及规范](articles/iuap-develop/5-/README.md)
    * [工具说明](articles/iuap-develop/5-/gong_ju_shuo_ming.md)
-   * 代码规范
+   * [代码规范](articles/iuap-develop/5-/dai_ma_gui_fan.md)
 * [场景开发](articles/iuap-develop/6-/README.md)
 * [服务端详解](articles/iuap-develop/7-/README.md)
    * [iUAP的系统框架](articles/iuap-develop/7-/part1/README.md)
