@@ -38,10 +38,10 @@
 * [工具及规范](articles/iuap-develop/5-/README.md)
    * [工具说明](articles/iuap-develop/5-/part1/README.md)
    * [代码规范](articles/iuap-develop/5-/part2/README.md)
-       * [后端目录规范]()
-       * [前端目录规范]()
-       * [命名规范]()
-       * [编程规范]()
+       * 后端目录规范
+       * 前端目录规范
+       * 命名规范
+       * [编程规范](articles/iuap-develop/5-/part2/bian_cheng_gui_fan.md)
 * [场景开发](articles/iuap-develop/6-/README.md)
 * [服务端详解](articles/iuap-develop/7-/README.md)
    * [iUAP的系统框架](articles/iuap-develop/7-/part1/README.md)
