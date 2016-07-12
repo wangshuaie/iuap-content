@@ -85,11 +85,6 @@
 
  这里有一个资源列表。
         
-- [Markdown basics](https://help.github.com/articles/markdown-basics/)
-
-- [Printable markdown cheatsheet](./contributor-guide/media/documents/markdown-cheatsheet.pdf?raw=true)
-
-- For our list of markdown editors, see the [tools and setup topic](./contributor-guide/tools-and-setup.md#install-a-markdown-editor).
 
 ## 文章的元数据
 
