@@ -51,7 +51,7 @@ Redis本身支持多种语言的客户端来连接，iuap-cache组件利用java�
 
 Redis中间件通常是配合哨兵进行集群部署，一主多从的部署结构和连接的示意图如下： 
 
-<img src="/images/redis_sentinel.png"/>
+<img src="./images/redis_sentinel.png"/>
 
 # 使用说明 #
 
@@ -145,7 +145,7 @@ iuap-cache组件利用jedis客户端，在springside提供的对jedis的封装�
 		</listener>
 
 - 属性文件中配置的redis应该是服务器的redis地址，如果本机调试，可以启动DevTool中默认携带的redis，启动脚本位于DevTool->bin->startRedis.bat,双击运行，效果如下：
-<img style="margin-left:25px;" src="/images/cache_redis.jpg"/>
+<img style="margin-left:25px;" src="./images/cache_redis.jpg"/>
 
 - 注入在applicationContext-cache.xml中声明的bean cacheManager，如果应用中只有一个此类型的bean，则可以使用@Autowired注入，如果存在多个，则按照名称注入。业务开发时候，可以为不同的业务模块声明不同的cache区域，注册多份CacheManager和redisPool即可。
 
