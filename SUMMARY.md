@@ -38,7 +38,7 @@
 * [工具及规范](articles/iuap-develop/5-/README.md)
    * [工具说明](articles/iuap-develop/5-/part1/README.md)
        * [工具概述](articles/iuap-develop/5-/part1/gong_ju_gai_shu.md)
-       * 开发环境搭建
+       * [开发环境搭建](articles/iuap-develop/5-/part1/kai_fa_huan_jing_da_jian.md)
        * 开发工具使用
    * [代码规范](articles/iuap-develop/5-/part2/README.md)
        * [后端目录规范](articles/iuap-develop/5-/part2/hou_duan_mu_lu_gui_fan.md)
