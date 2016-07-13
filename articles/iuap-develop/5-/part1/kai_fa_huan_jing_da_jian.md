@@ -26,7 +26,7 @@ ieop开发工具包为开发人员提供了IDE、开发工具、互联网中间�
 * 2、如果打开pgsql数据库发生闪退，需要对devtool\DB\pgsql文件夹赋予完全控制权限。对文件夹点击右键选择属性--选择安全标签--点击编辑--为USER用户添加完全控制权限。如下图  
 <center>
 ![](./image/pgAuthor1.jpg)  
-![](image/pgAuthor1.jpg)
+![](./image/pgAuthor1.jpg)
 
 </center> 
 
@@ -36,9 +36,9 @@ ieop开发工具包为开发人员提供了IDE、开发工具、互联网中间�
 示例网站效果如下  
 
 <center>
-![](image/sample1.jpg)  
+![](./image/sample1.jpg)  
 
-![](image/sample2.jpg)
+![](./image/sample2.jpg)
 
 </center> 
 
@@ -53,9 +53,9 @@ ieop开发工具包为开发人员提供了IDE、开发工具、互联网中间�
 maven环境变量配置好以后，我们要在IDE中配置maven的配置文件的路径，首先按照2.示例快速预览的方法修改maven配置文件中本地库的地址，然后在IDE的windows菜单栏中选择preference，再弹出的窗口中选择Maven——User Settings，将标签页的Global Settings和User Settings改为开发工具包内maven的配置文件的地址，如下图：
 
 <center>
-![](image/ide1.jpg)  
+![](./image/ide1.jpg)  
 
-![](image/ide2.jpg)
+![](./image/ide2.jpg)
 
 </center> 
 
@@ -90,19 +90,19 @@ bin目录包含对示例工程进行测试、打包等操作的脚本。
 开发环境初始包含以下几个工程
 
 <center>
-![](image/work1.jpg)  
+![](./image/work1.jpg)  
 
 </center> 
 
 其中ecmgr为示例网站的后台管理，ecomplatformpreview是示例的前台商城网站。ecapi工程则是ec项目的功能接口，webexample是平台基本开发功能的演示示例。
 在调试运行工程之前，先运行DevTool\bin目录下的startpgsql.bat、startredis.bat、startzookeeper.bat启动PostgreSQL、Redis和Zookeeper。示例工程通过jetty的方式进行运行调试，再ecomplatformpreview、ecmgr、webexample三个工程项目的\src\test\java\uap\web\XXX文件夹下都有对应的QuickStartXXX类，运行该类就能启动项目进行调试。webexample项目调试效果如下图：
 <center>
-![](image/sample3.jpg)  
+![](./image/sample3.jpg)  
 
 </center> 
 
 此外通过修改工程/src/main/resources/applicationContext.xml中的propertyConfigurer配置能够设置工程是使用calsspath下的application.properties配置文件或者是外部的application.properties配置文件。如图所示：
 <center>
-![](image/setting1.jpg)  
+![](./image/setting1.jpg)  
 
 </center> 
