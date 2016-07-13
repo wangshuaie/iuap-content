@@ -25,7 +25,7 @@ ieop开发工具包为开发人员提供了IDE、开发工具、互联网中间�
 * 1、需要将devtool\repository\Maven\Maven3.2.2\conf\settings.xml 文件中的localRepository一项的路径改为\devtool\repository\Maven\Maven3.2.2\local\repo的绝对路径,并在eclipse中设置maven配置为settings.xml文件。 `<localRepository>此处改为maven本地库的地址</localRepository>`  
 * 2、如果打开pgsql数据库发生闪退，需要对devtool\DB\pgsql文件夹赋予完全控制权限。对文件夹点击右键选择属性--选择安全标签--点击编辑--为USER用户添加完全控制权限。如下图  
 <center>
-![](image/pgAuthor1.jpg)  
+![](./image/pgAuthor1.jpg)  
 ![](image/pgAuthor1.jpg)
 
 </center> 
