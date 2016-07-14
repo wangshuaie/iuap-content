@@ -40,7 +40,7 @@ iuap_quickstart工程是iUAP开发平台的实例工程，该工程基于iUAP开
 
 
 
-![]((./image/Jdk.png)
+![](./image/Jdk.png)
 
 
 
