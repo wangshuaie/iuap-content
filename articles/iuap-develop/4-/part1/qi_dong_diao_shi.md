@@ -26,7 +26,7 @@
 在浏览器中输入[<http://localhost:8080/iuap-quickstart>](http://localhost:8080/iuap-quickstart)，访问示例应用，界面如下：  
 
 
-![](/..img/image009.jpg)
+![](../img/image009.jpg)
  
 
 示例为商品基本的(CRUD)增删改查功能，开发人员可以在工程中查找到对应的源码，在其它功能的开发中参考。  
