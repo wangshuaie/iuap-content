@@ -1,39 +1,72 @@
-# 后台调度任务SDK #
+# 后台任务客户端SDK组件概述 #
+
+## 业务需求 ##
+应用程序中经常会用到跑定时任务的需求，比如定时垃圾回收。有关任务调度需求有时候很复杂，如每隔多长时间重复执行，一个任务在不同时间段执行等。
+
+##解决方案##
+
+任务调度是基于Quartz开发的，具有简单却强大的机制，能依据事件间隔来调度任务，也可以按照cron表达式来操作。任务调度引擎和组件客户端SDK分离，可减小应用服务器的负荷。
+
+iuap-dispatch-sdk是任务调度客户端SDK组件，该组件可通过客户端接口调用服务端的添加、删除、暂停、启动定时任务等功能。
 
 
+# 整体设计 #
 
-** 1. 功能简介 **
+## 依赖环境 ##
+组件采用Maven进行编译和打包发布，依赖Quartz框架,其对外提供的依赖方式如下：
+
+	<dependency>
+	  <groupId>com.yonyou.iuap</groupId>
+	  <artifactId>iuap-dispatch-sdk</artifactId>
+	  <version>${iuap.modules.version}</version>
+	</dependency>
+
+${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 
 
-该组件是基于Quartz开发的，具有简单却强大的机制，能依据事件间隔来调度任务，也可以按照cron表达式来操作。任务调度引擎和组件客户端SDK分离，可减小应用服务器的负荷。
+## 功能结构 ##
 
+<img src="images/sdk.jpg"/>
 
-** 2. 集成说明 **
+## 流程说明 ##
+- 1、用户通过DispatchRemoteManager接口调度任务。
+- 2、DispatchRemoteManager接口向服务端发送调度任务请求。
+- 3、服务端实现任务调度。
+- 4、客户端通过DispatchClientServlet回调任务。
 
- (1) 依赖引入
-在项目中引入iuap-dispatch-client -1.0.1-SNAPSHOT.jar
+# 使用说明 #
 
+## 组件包说明 ##
 
+iuap-dispatch-sdk是任务调度客户端SDK组件，该组件可通过客户端接口调用服务端的添加、删除、暂停、启动定时任务等功能。
 
-** 3. 配置说明** 
+##组件配置##
 
-  (1)	配置监听Servlet
-  如果当前应用需要执行任务，请在web.xml中配置监听servlet类地址
+**1:配置监听Servlet**
 
-  <servlet>
-  	<servlet-name>DispatchClientServlet</servlet-name>
- 	<servlet-class>com.yonyou.iuap.dispatch.client.controller.DispatchClientServlet</servlet-class>
-  </servlet>
+  任务调度客户端的配置文件web.xml中配置监听任务调度客户端SDK提供的servlet类地址，用于执行回调任务。
+    <servlet>
+          <servlet-name>DispatchClientServlet</servlet-name>
+       	<servlet-class>com.yonyou.iuap.dispatch.client.controller.DispatchClientServlet</servlet-class>
+    </servlet>
 
-  <servlet-mapping>
-  	<servlet-name>DispatchClientServlet</servlet-name>
-  	<url-pattern>/dispatchClientServlet</url-pattern>
-  </servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>DispatchClientServlet</servlet-name>
+		<url-pattern>/dispatchClientServlet</url-pattern>
+	</servlet-mapping>
 
-  (2) 服务配置
-	在dispatch-client.properties中需要依据实际环境修改” dispatch.server.http.url”和” dispatch.recall.http.url”的值。
+**2:服务配置**
 
-** 4 使用示例 **
+dispatch-client.properties配置文件字段说明
+
+	dispatch.send.type：任务发送方式，默认HTTP,同时支持SOCKET
+	dispatch.server.http.url：服务器地址
+	dispatch.recall.type ：任务默认回调方式，默认HTTP,同时支持SOCKET
+	dispatch.recall.http.url：任务回调地址
+
+## 工程样例 ##
+
+工程样例可从maven库上下载。例子说明如下：
 
 *(1) 新建任务处理类，需要实现ITask接口*
 
@@ -90,3 +123,72 @@
 		}
 	}
  
+
+## 开发步骤 ##
+
+- 加入依赖
+	<dependency>
+	  <groupId>com.yonyou.iuap</groupId>
+	  <artifactId>iuap-dispatch-sdk</artifactId>
+	  <version>${iuap.modules.version}</version>
+	</dependency>
+
+${iuap.modules.version} 为平台在maven私服上发布的组件的version。
+
+- 组件配置
+  任务调度客户端的配置文件web.xml中需要配置任务调度客户端SDK提供的servlet类地址，用于执行回调任务。
+    <servlet>
+          <servlet-name>DispatchClientServlet</servlet-name>
+       	<servlet-class>com.yonyou.iuap.dispatch.client.controller.DispatchClientServlet</servlet-class>
+    </servlet>
+
+	<servlet-mapping>
+		<servlet-name>DispatchClientServlet</servlet-name>
+		<url-pattern>/dispatchClientServlet</url-pattern>
+	</servlet-mapping>
+
+dispatch-client.properties配置文件配置
+
+	dispatch.send.type：任务发送方式，默认HTTP,同时支持SOCKET
+	dispatch.server.http.url：服务器地址
+	dispatch.recall.type ：任务默认回调方式，默认HTTP,同时支持SOCKET
+	dispatch.recall.http.url：任务回调地址，客户端所配置的DispatchClientServlet地址
+
+
+
+- 编写任务代码
+  
+该类需要实现ITask接口
+
+- 添加任务
+
+使用SDK提供的DispatchRemoteManager类的add方法添加任务。
+
+## 常用接口 ##
+
+- DispatchRemoteManager
+
+<table style="border-collapse:collapse">
+	<thead>
+		<tr>
+			<th>方法名</th>
+			<th>参数</th>
+			<th>返回值</th>
+			<th>说明</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>add(SimpleTaskConfig simpleTaskConfig,Class<? extends ITask> taskName, boolean replace)</td>
+			<td>simpleTaskConfig简单类型相关参数，taskName任务执行类，replace是否覆盖</td>
+			<td>boolean 添加任务是否成功</td>
+			<td>添加一个简单类型的任务</td>
+		</tr>
+		<tr>
+			<td>add(CronTaskConfig cronTaskConfig, RecallConfig recallConfig, boolean replace)</td>
+			<td>cronTaskConfig 	Cron表达式及相关参数 ，recallConfig回调相关参数，replace是否覆盖</td>
+			<td>boolean 添加任务是否成功</td>
+			<td>添加一个Cron表达式复杂任务</td>
+		</tr>
+	</tbody>
+</table>

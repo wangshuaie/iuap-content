@@ -1,42 +1,56 @@
-# 打印 #
 
-## 功能简介 ##
+#打印组件概述#
 
-组件主要提供打印功能。  
-可以分为两种方式：  
+## 业务需求 ##
+业务系统通过WEB方式提供应用时，由于各个浏览器厂商正在屏蔽插件，所以不能通过传统的浏览器插件调用客户端实现打印功能。这就要求我们实现能在浏览器上实现打印功能。
+
+##解决方案##
+iuap-output组件提供了界面直接打印和HTML模板打印两种方式。
 
 * 界面直接打印（即调用js函数完成指定区域的打印）   
 
-* HTML模板方式打印（即通过定义html的模板通过后台接口得到对应的json对象，将json数据导入到html模板中，形成打印界面）  
+* HTML模板方式打印（即通过定义html的模板通过后台接口得到对应的json对象，将json数据导入到html模板中，形成打印界面）
 
+# 使用说明 #
 
-## 工作流程 ##
+## 依赖环境 ##
 
-1. 界面直接打印时，调用相应的js函数，直接传入打印区域的ID或样式，即可打印指定的区域    
- 
-2. HTML模板方式打印时，设置html模板页面，在js中实现实现函数getStyle(返回css样式定义字符串)、getTemplate(返回模板定义字符串)、getJsonData(返回模板需要的json对象)方法，完成html界面的打印。
+	<dependency>
+	  <groupId>com.yonyou.iuap</groupId>
+	  <artifactId>iuap-output</artifactId>
+	  <version>3.0.0-RC001</version>
+	</dependency>
 
-## API接口 
+##组件配置##
+**1:在工程中加入打印组件iuap-output依赖**
 
+	<dependency>
+	  <groupId>com.yonyou.iuap</groupId>
+	  <artifactId>iuap-output</artifactId>
+	  <version>3.0.0-RC001</version>
+	</dependency>
 
-### 界面打印 ###
+**2:在工程中要打印的jsp文件中引入打印的PrintModel.js**
 
-调用响应的js函数即可
-Js函数说明：  
+	 <!-- 需要jQuery支持 -->
+	 <script type="text/javascript" src="resources/js/jquery-2.1.4.min.js"></script>
+	 <!-- 界面直接打印组件JS -->
+	 <script type="text/javascript" src="resources/js/PrintModel.js"></script>
+    
+    Js函数说明：  
+	    printByElementId(e_id)；// 打印e_id元素的区域
+	    printByElementIds（e_ids）// 打印e_ids元素的区域，e_ids为一个数组
+	    printByElementCss（e_css）// 打印css样式为e_css元素区域
+	    printByElementCsses（e_csses）；// 打印css样式为e_csses元素区域，e_csses为数组 
+	
 
-	printByElementId(e_id)；// 打印e_id元素的区域
-	printByElementIds（e_ids）// 打印e_ids元素的区域，e_ids为一个数组
-	printByElementCss（e_css）// 打印css样式为e_css元素区域
-	printByElementCsses（e_csses）；// 打印css样式为e_csses元素区域，e_csses为数组  
-
-
-## 开发步骤 ##
+## 工程样例 ##
 
 ### 界面直接打印 ###
 
 1. 前台页面引入组件*PrintModel.js*  
 
-		<!-- 需要jQuery支持 -->
+		    <!-- 需要jQuery支持 -->
 			<script type="text/javascript" src="resources/js/jquery-2.1.4.min.js"></script>
 			<!-- 界面直接打印组件JS -->
 			<script type="text/javascript" src="resources/js/PrintModel.js"></script>

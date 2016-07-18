@@ -1,12 +1,46 @@
-# 公式使用说明
+#公式组件概述#
 
-## 一、简介
-
-
-本文档主要是对公式组件的基本使用进行简要说明，对公式函数中的一些特殊情况加以说明，并对公式函数自定义扩展功能予以介绍
+公式组件是以接口的方式提供算数、字符串运算能力的组件。使用者定义公式和变量，公式组件根据公式和变量值进行运算并返回运算结果。
 
 
-## 二、公式组件调用说明
+# 整体设计 #
+
+
+## 依赖环境 ##
+
+组件采用Maven进行编译和打包发布，其对外提供的依赖方式如下：
+
+	<dependency>
+	  <groupId>com.yonyou.iuap</groupId>
+	  <artifactId>iuap-formula</artifactId>
+	  <version>${iuap.modules.version}</version>
+	</dependency>
+
+${iuap.modules.version} 为平台在maven私服上发布的组件的version。
+
+
+
+# 使用说明 #
+
+## 说明简介
+
+
+下文主要是对公式组件的基本使用进行简要说明，对公式函数中的一些特殊情况加以说明，并对公式函数自定义扩展功能予以介绍
+
+
+##组件配置##
+
+
+**工程中引入对iuap-formula组件的依赖**
+
+	<dependency>
+	  <groupId>com.yonyou.iuap</groupId>
+	  <artifactId>iuap-formula</artifactId>
+	  <version>3.0.0-RC001</version>
+	</dependency>
+
+##调用说明##
+
 通过FormulaParseFather执行公式。
 
 	示例：
@@ -20,7 +54,7 @@
 		assertEquals("应该相等", 2, result[0][1]);
 		assertEquals("应该相等", 0, result[0][2]);
 
-##  三、公式函数介绍 
+##函数介绍 
 
 ###1.字符串函数
 
@@ -73,22 +107,22 @@
    <tr>
       <td>java.lang.String</td>
       <td>java.lang.String</td>
-      <td>nc.vo.pub.lang.UFBoolean,与Java中String类方法endsWith返回结果相同，只不过返回UFBoolean</td>
+      <td>java.lang.Double,与Java中String类方法endsWith返回结果相同，只不过返回Boolean</td>
    </tr>
    <tr>
       <td>null</td>
       <td>除null以外任何对象</td>
-      <td>UFBoolean.FALSE</td>
+      <td>Boolean.FALSE</td>
    </tr>
    <tr>
       <td>除null以外任何对象</td>
       <td>null</td>
-      <td>UFBoolean.FALSE</td>
+      <td>Boolean.FALSE</td>
    </tr>
    <tr>
       <td>null</td>
       <td>null</td>
-      <td>UFBoolean.TRUE</td>
+      <td>Boolean.TRUE</td>
    </tr>
   
 </table>
@@ -167,15 +201,15 @@
    </tr>
    <tr>
       <td>java.lang.String</td>
-      <td>UFBoolean；如果str为””,返回UFBoolean.TRUE,否则返回UFBoolean.FALSE</td>
+      <td>Boolean；如果str为””,返回Boolean.TRUE,否则返回Boolean.FALSE</td>
    </tr>
    <tr>
       <td>null</td>
-      <td>UFBoolean.TRUE</td>
+      <td>Boolean.TRUE</td>
    </tr>
    <tr>
       <td>其他任何对象</td>
-      <td>UFBoolean.FALSE</td>
+      <td>Boolean.FALSE</td>
    </tr>
   
 </table>
@@ -361,22 +395,22 @@
    <tr>
       <td>java.lang.String</td>
       <td>java.lang.String</td>
-      <td>nc.vo.pub.lang.UFBoolean,与Java中String类方法startsWith返回结果相同，只不过返回UFBoolean</td>
+      <td>java.lang.Double,与Java中String类方法startsWith返回结果相同，只不过返回Boolean</td>
    </tr>
    <tr>
       <td>null</td>
       <td>除null以外任何对象</td>
-      <td>UFBoolean.FALSE</td>
+      <td>Boolean.FALSE</td>
    </tr>
    <tr>
       <td>除null以外任何对象</td>
       <td>null</td>
-      <td>UFBoolean.FALSE</td>
+      <td>Boolean.FALSE</td>
    </tr>
    <tr>
       <td>null</td>
       <td>null</td>
-      <td>UFBoolean.TRUE</td>
+      <td>Boolean.TRUE</td>
    </tr>
   
 </table>
@@ -1187,7 +1221,7 @@ e的x次方
 
 公式含义
 
-	acosh(z)  =  log(z + sqrt(z*z - 1))
+acosh(z)  =  log(z + sqrt(z*z - 1))
 
 对应类：nc.vo.pub.formulaset.function.ArcCosineH
 
@@ -1213,6 +1247,8 @@ e的x次方
 
 公式含义
 
+  以弧度为单位计算并返回点y/x的角度。
+
 对应类：nc.vo.pub.formulaset.function.Angle
 
 类型返回值表
@@ -1234,7 +1270,7 @@ e的x次方
 
 公式含义
 
-	asinh(z)  =  log(z + sqrt(z*z + 1))
+asinh(z)  =  log(z + sqrt(z*z + 1))
 
 对应类：nc.vo.pub.formulaset.function.ArcSineH
 
@@ -1260,7 +1296,7 @@ e的x次方
 
 公式含义
 
-	asinh(z)  =  log(z + sqrt(z*z + 1))
+asinh(z)  =  log(z + sqrt(z*z + 1))
 
 对应类：nc.vo.pub.formulaset.function.ArcTanH
 
@@ -1286,7 +1322,7 @@ e的x次方
 
 公式含义
 
-	cosh(z)  =  ( exp(z) + exp(-z) ) / 2
+cosh(z)  =  ( exp(z) + exp(-z) ) / 2
 
 对应类：nc.vo.pub.formulaset.function.CosineH
 
@@ -1430,7 +1466,7 @@ tanh(z)  =  sinh(z) / cosh(z)
 </table>
 
 
-## 四、自定义公式扩展说明
+## 自定义公式扩展说明
 
 公式提供自定义函数功能。自定义函数配置文件目录如下：
 
@@ -1438,13 +1474,13 @@ WEB-INF\classes\formulaconfig
 
 配置文件格式如下：
 
-<?xml version="1.0" encoding="utf-8"?>
-<formula-array>
-<formula>
-  <customType>0</customType>
-  <functionName>FORMATADDRESS</functionName>
-  <functionClass>nc.ui.bd.pubinfo.address.FormatAddress</functionClass>
-</formula>
-</formula-array>
+	<?xml version="1.0" encoding="utf-8"?>
+	<formula-array>
+	<formula>
+	  <customType>0</customType>
+	  <functionName>FORMATADDRESS</functionName>
+	  <functionClass>nc.ui.bd.pubinfo.address.FormatAddress</functionClass>
+	</formula>
+	</formula-array>
 
 自定义公式的实现方法可以参见nc.vo.pub.formulaset.function.Max这个类

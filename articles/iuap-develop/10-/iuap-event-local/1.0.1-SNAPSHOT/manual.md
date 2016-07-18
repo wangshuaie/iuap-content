@@ -1,14 +1,29 @@
-#本地事件通知#
+#本地事件通知组件概述#
 
-##1，功能简介
+##功能简介
 
-1.1，基于插件扩展的同一系统内部的事件通知机制；
+基于插件扩展的同一系统内部的事件通知机制；
 
-1.2，可以注册多个监听，按注册指定的顺序依次执行；
+可以注册多个监听，按注册指定的顺序依次执行；
 
-##2,数据库表
+
+# 整体设计 #
+
+## 依赖环境 ##
+
+组件采用Maven进行编译和打包发布，其对外提供的依赖方式如下：
+
+	<dependency>
+	  <groupId>com.yonyou.iuap</groupId>
+	  <artifactId>iuap-organization</artifactId>
+	  <version>${iuap.modules.version}</version>
+	</dependency>
+
+${iuap.modules.version} 为平台在maven私服上发布的组件的version。
+
+##数据库表
 目前未提供界面需要通过数据库注册的方式。
-### 2.1，事件类型pub_eventtype 
+### 事件类型pub_eventtype 
 <table>
    <tr>
       <td>名称</td>
@@ -68,7 +83,7 @@
 </table>
 	
 
-### 2.2，事件通知业务插件表pub_eventlistener
+### 事件通知业务插件表pub_eventlistener
 
 <table>
    <tr>
@@ -129,9 +144,11 @@
 </table>
 
 
-##3,集成说明
+# 使用说明 #
 
-3.1，依赖引入，在项目中引入iuap-event-local -1.0.1-SNAPSHOT.jar，POM中配置为
+##集成说明
+
+1、依赖引入，在项目中引入iuap-event-local -1.0.1-SNAPSHOT.jar，POM中配置为
 <pre>
   &lt;dependency>
 	&lt;groupId>com.yonyou.iuap&lt;/groupId>
@@ -139,18 +156,18 @@
 	&lt;version>1.0.1-SNAPSHOT&lt;/version>
 &lt;/dependency> 
 </pre>
-3.2，	服务启动，Spring初始化配置文件路径中添加classpath:eventLocal-applicationContext.xml,请参考示例工程。
+2、服务启动，Spring初始化配置文件路径中添加classpath:eventLocal-applicationContext.xml,请参考示例工程。
 
-3.3，	执行建表脚本
-	脚本文件在
+3、执行建表脚本
+	
 
-##4，	配置说明
+##配置说明
 
-4.1，组件需要访问数据库，eventLocal-applicationContext.xml文件定义了一个依赖id为dataSource数据源的bean，请在主配置文件中提供id为dataSource的数据源，或者修改配置文件eventlocal-applicationContext.properties，具体配置参数请参考示例工程。
+组件需要访问数据库，eventLocal-applicationContext.xml文件定义了一个依赖id为dataSource数据源的bean，请在主配置文件中提供id为dataSource的数据源，或者修改配置文件eventlocal-applicationContext.properties，具体配置参数请参考示例工程。
 
-##5，	使用示例
+##使用示例
 
-5.1，假定一个事件用户新增前事件：
+假定一个事件用户新增前事件：
 
 #####(1)	新增处理插件
 需要实现IBussinessListener，如图所示，新增一个处理插件：

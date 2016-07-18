@@ -1,23 +1,39 @@
-#组织组件使用说明
+#组织组件概述 
 
-##一，简要说明
+## 业务需求 ##
+企业系统开发中，经常需要维护企业的组织结构，业务会根据企业的组织进行管理，因此我们提供基本的组织组件，业务可以根据自己的需要进行扩张使用。
+
+
+# 整体设计 #
+## 依赖环境 ##
+
+组件采用Maven进行编译和打包发布，其对外提供的依赖方式如下：
+
+	<dependency>
+      <groupId>com.yonyou.iuap</groupId>
+      <artifactId>iuap-organization</artifactId>
+      <version>${iuap.modules.version}</version>
+    </dependency>
+
+${iuap.modules.version} 为平台在maven私服上发布的组件的version。
+## 功能说明 ##
 组织组件主要是提供组织的核心模型和基本服务，支持通过组织职能的方式对组织进行扩展。
 
-
-##二，使用方法
+# 使用说明 #
+## 使用方法
 
 1，	引入组织组件jar包：
 
     <dependency>
         <groupId>com.yonyou.iuap</groupId>
         <artifactId>iuap-organization</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0.1-SNAPSHOT</version>
     </dependency>
 
 2，	配置spring文件，参考示例工程：organization-applicationContext.xml
 
 3，字段结构如下：
-#####（1）组织表
+#####（1）组织表org_orgs
 <table>
    <tr>
       <td>名称</td>
@@ -116,7 +132,7 @@
    </tr>
 </table>
  
-#####（2）组织类型表
+#####（2）组织类型表org_type
 <table>
    <tr>
       <td>名称</td>
@@ -164,6 +180,7 @@
       <td>每个组织类型的实体类，若是组织类型为公司，就是公司的实体类</td>
    </tr>
 </table>
+
 注：基本数据库表见jar包中resource目录下的sql>mysql。
 
 4，服务接口类
@@ -247,8 +264,36 @@
 		public boolean isTypeOfByOrgId(String orgId, String orgtypeId);
 	
     }
-# 扩展开发说明
-## 1.扩展组织基本信息：
-## 2.组织职能扩展:
+## 扩展开发说明
+#### 1，扩展组织基本信息
+例如，我们想要增加描述组织信息的字段，可以扩展组织表org_orgs，修改服务IOrgService的默认实现，在spring中配置即可。
 
+也可在具体的组织类型上增加相应组织类型特有的字段，对应的服务类和实体类自己实现，参照组织职能扩展，对应的pk_org存为该数据同步到组织表中的主键。
+
+#### 2，组织职能扩展
+例如，我们想要增加公司这一主职职能，应在org_type中注册一条组织职能的相关信息,注册组织类型对应的服务类与实体类，并进行相应的实现。
+<table>
+    <tr>
+        <td>组织类型id（id）</td>
+        <td>组织类型编码（code)</td>
+        <td>组织类型名称(name)</td>
+		<td>租户id(tenantid)</td>
+		<td>应用系统id(sysid)</td>
+		<td>组织类型的字段名(fieldname)</td>
+		<td>组织类型的服务类(serviceclass)</td>
+		<td>组织类型的实体类(entityclassname)</td>
+    </tr>
+    <tr>
+        <td>00229d33-2807-4ee9-9aca-ef9e4311ef46</td>
+        <td>corp</td>
+        <td>公司(name)</td>
+		<td></td>
+		<td></td>
+		<td>orgtype1</td>
+		<td>com.yonyou.iuap.org.service.ICorpService</td>
+		<td>com.yonyou.iuap.org.entity.CorpEntity</td>
+    </tr>
+</table>
+
+最后，要将扩展的组织数据同步到org_orgs中，pk相同，组织表中的orgtype1字段存为'Y'
 

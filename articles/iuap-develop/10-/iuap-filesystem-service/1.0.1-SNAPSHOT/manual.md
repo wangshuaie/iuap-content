@@ -1,25 +1,44 @@
 
-<style>
-   p {
-   color:#fff;
-   background-color: #999999; 
-   padding: 20px;}
-   code {
-  		 color:#00688B;
-   }
-   ul li{
-   		color:#00688B;
-   		
-   }
-   li{
-   		color:#00688B;
-   		
-   }
-</style>
- **附件系统服务说明文档**
+#附件系统服务组件概述
 
-***
-一 提供的功能说明： 
+## 业务需求 ##
+	独立的附件服务系统，支持基本的增删改查直传等等，可以和其他组件集成。
+	支持多种格式的附件上传、支持一次选择多个附件、支持跨域应用、支持后台校验信息的包装返回、
+	支持直传回调、支持回调自定义参数的扩展、支持oss和FastDFS、支持缩略图调节、
+	支持较短的uuid  19位字符（为了适用千万级数据的优化、支持动态数据源
+
+
+##解决方案##
+	 1.我们提供了jar包和2个war包多种形式，方便集成的挑选
+	 2.我们采用了springmvc 的附件上传方式，和纯数据流相比速度大概提升几倍，提供了2中封装好的上传方式
+	 3.我们采用CROS 框架保证跨域应用
+	 4.采用hibernate-validator后台校验框架快捷方便的设置各种校验组合
+	 5.采用参数控制缩略图大小
+	 6.采用uuid 的优化算法生成19位的id
+	 7.支持可选择性数据源形式。
+
+#整体设计#
+    
+##依赖环境
+	<dependency>
+	  <groupId>com.yonyou.iuap</groupId>
+	  <artifactId>iuap-filesystem-service</artifactId>
+	  <version>3.0.0-RC001</version>
+	  <type>war</type>
+	</dependency>
+
+${iuap.modules.version} 为平台在maven私服上发布的组件的version。
+ 
+##功能结构
+     本组件依赖于文件组件，通过文件组件可适配不同的文件服务器，目前支持FastDFS，阿里的OSS服务。
+     本组件主要用于业务系统的附件管理功能，提供具体业务单据于单据下多个附件的分组管理功能。通过附件管理表建立业务单据与具体文件的关系，支持业务单据对文件的管理功能。同时屏蔽了不同文件服务器不同接口调用。
+ 
+
+
+
+# 使用说明 #
+ 
+##功能说明 
 
 	1 提供附件的增、删、改、查、覆盖等基本功能。
 	2 提供两种附件存储方式-阿里云、FastDFS。
@@ -28,8 +47,8 @@
 	5 提供图片链接直接预览功能。
 	6 提供CORS跨域访问能力
 	7 提供基本js
-***
-二 配置说明：
+
+##配置说明：
 
 1.application.properties：用户中心、阿里云、FastDFS 配置文件
 
@@ -338,7 +357,7 @@
 
 
 ***
-三.示例工程说明：
+##示例工程说明：
        
  1.文件说明：
  
@@ -407,7 +426,7 @@
 		</dependency>
 	  
 		
-四.代码示例说明：
+##代码示例说明：
 
    	第一步：导入js文件
 		<script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/ossupload.js"></script>
