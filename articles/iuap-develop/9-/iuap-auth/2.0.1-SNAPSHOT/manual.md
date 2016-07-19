@@ -29,7 +29,7 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 
 ## 功能结构 ##
 
-<img src="./images/shiro_auth.jpg"/>
+![](./images/shiro_auth.jpg)
 
 **基本概念**
 
