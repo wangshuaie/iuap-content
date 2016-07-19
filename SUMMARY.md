@@ -79,7 +79,6 @@
    * [JDBC持久化组件](articles/iuap-develop/9-/iuap-jdbc/2.0.1-SNAPSHOT/manual.md)
    * [分布式锁组件](articles/iuap-develop/9-/iuap-lock/2.0.1-SNAPSHOT/manual.md)
    * [日志组件](articles/iuap-develop/9-/iuap-log/2.0.1-SNAPSHOT/manual.md)
-   * [元数据服务组件](articles/iuap-develop/9-/iuap-metadata/2.0.1-SNAPSHOT/manual.md)
    * [消息组件](articles/iuap-develop/9-/iuap-mq/2.0.1-SNAPSHOT/manual.md)
    * [Mybatis持久化组件](articles/iuap-develop/9-/iuap-mybatis/2.0.1-SNAPSHOT/manual.md)
    * [对象OID组件](articles/iuap-develop/9-/iuap-oid/2.0.1-SNAPSHOT/manual.md)

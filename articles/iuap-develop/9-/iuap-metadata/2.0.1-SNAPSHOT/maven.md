@@ -1,0 +1,10 @@
+<dependency>
+  	<groupId>com.yonyou.metadata</groupId>
+  	<artifactId>com.yonyou.metadata.spi</artifactId>
+  	<version>0.0.3-SNAPSHOT</version>
+</dependency>
+<dependency>
+  	<groupId>com.yonyou.metadata</groupId>
+  	<artifactId>com.yonyou.metadata.impl.mybatis</artifactId>
+  	<version>0.0.3-SNAPSHOT</version>
+</dependency>
