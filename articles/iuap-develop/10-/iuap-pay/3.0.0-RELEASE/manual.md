@@ -1,4 +1,4 @@
-# 支付集成 #
+# 支付集成组件概述 #
 ## 功能简介 ##
 通过此组件提供的REST服务，用户可以通过支付宝即时转账、扫码支付、网银支付，微信扫码，畅捷支付渠道来完成支付。   
 支持的支付渠道如下:  
@@ -16,6 +16,20 @@
 付款方选择畅捷支付方式之后，由畅捷支付引导用户完成支付。
   
 <font size=2>注：以上服务，需要商家购买对应支付平台的支付业务服务</font>
+
+# 整体设计 #
+
+## 依赖环境 ##
+
+组件采用Maven进行编译和打包发布，其对外提供的依赖方式如下：
+
+	<dependency>
+    	<groupId>com.yonyou.iuap</groupId>
+    	<artifactId>iuap-pay</artifactId>
+    	<version>${iuap.modules.version}</version>
+    </dependency>
+
+${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 
 ## 工作流程 ##
 ### 支付宝支付的数据交互流程 ###
@@ -52,7 +66,9 @@
 在JSP中，将构造好的数据提交到对应的Action。
 3. 返回处理的结果数据
 畅捷支付服务器，会将支付数据发送到在(1)中设置好的notifyUrl中，用户可对返回结果进行响应
-	
+
+# 使用说明 	#
+
 ## API接口 ##
 ### 支付宝快捷支付接口 ###
 **描述**  
@@ -611,16 +627,8 @@ md5签名的方式为：
 bgUrl=&notifyUrl=&businessId=&platIdtfy=&merchantId=&orderId=&orderDate=&bankType=&payeeBankAccount=&payeeBankType=&payeeBankName=&payeeName=&deviceId=&payerName=&payerCardType=&payerContactMbl=&payerContactMal=&orderAmount=&amtType=&orderTime=&expireTime=&goodsId=&productName=&productNum=&productDesc=&redoFlag=&merPriv=&expand=&expand2=&key=商户密钥
 
 ## 开发步骤 ##
-1. 引入支付组件Jar包，
-如果是maven工程，可以直接使用如下依赖:
 
-		<dependency>
-    		<groupId>com.yonyou.iuap</groupId>
-    		<artifactId>iuap-pay</artifactId>
-    		<version>1.0.0-RELEASE</version>
-	    </dependency>
-	    
-2. 将配置文件和相应JSP文件放到指定目录  
+1. 将配置文件和相应JSP文件放到指定目录  
 ![img002](img/image002.jpg)  
 ![img003](img/image003.jpg)  
 配置文件说明：  
@@ -629,12 +637,12 @@ ReceiverAccountInfo.properties：收款方账户信息，需要将组件支持�
 aliPay.jsp、chanjetPay.jsp、wxscanPay.jsp：分别是支付宝、微信扫码、畅捷支付对应的支付引导JSP，一般存放在系统的WEB-INF目录下，为了便于管理和层次清晰，建议统一放在pay\_page文件夹中，JSP内容不需要修改  
 notify\_url.jsp、return\_url.jsp：这两个页面分别对应支付参数中的notify\_url和return\_url，页面内容可以作为参考  
 pay\_fail.jsp、pay\_success.jsp：分别对应支付成功和支付失败之后的逻辑处理页面，仅供参考  
-3. 配置扫描路径，确保com.yonyou.uap.ieop.pay 路径下的controller被扫描到  
+2. 配置扫描路径，确保com.yonyou.uap.ieop.pay 路径下的controller被扫描到  
 
 		<context:component-scan base-package=" com.yonyou.uap.ieop.pay">
 			<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 			<context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/></context:component-scan>
-4. 发送HTTP请求到RESTful服务接口
+3. 发送HTTP请求到RESTful服务接口
 在前端页面可以通过aJax请求或者提交form表单等方式，通过POST请求，把数据发送到pay/bill，参数格式参见**5.3 API接口**，组件将会引导用户完成支付。  
 一个简单的前台发起支付请求的例子：  
  
@@ -656,7 +664,7 @@ pay\_fail.jsp、pay\_success.jsp：分别对应支付成功和支付失败之后
 			}
 		</script>
 其中，payOrderForm是一个支付表单，内容为各支付渠道的参数，具体各支付渠道需要传入哪些参数，请参考**5.3 API接口**
-5. 处理支付结果  
+4. 处理支付结果  
 接口com.yonyou.uap.ieop.pay.service.PayService提供了getPayResult(HttpServletRequest request)方法，用户可以通过实现此接口来完成对支付结果的获取，然后对支付结果进行下一步的业务逻辑处理。
 
 ## 扩展机制 ##

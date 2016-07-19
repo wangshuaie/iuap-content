@@ -54,10 +54,11 @@ new MessageSend(msgReceivers, msgContent).send();
 如果是maven工程，可以直接使用如下依赖：  
 
 		<dependency>
-				<groupId>com.yonyou</groupId>
-				<artifactId>youyou-message-ieop</artifactId>
-				<version>0.0.6-SNAPSHOT</version>
+			<groupId>com.yonyou.iuap</groupId>
+    		<artifactId>iuap-message</artifactId>
+    		<version>1.0.0-RELEASE</version>
 		</dependency>
+		
 2. 将配置文件放到指定目录  
 ![img001](img/image001.jpg)  
  - msconfig.xml用来配置消息发送者和服务器的信息，需要自行补充参数，某些服务需要跟服务商家联系开通  

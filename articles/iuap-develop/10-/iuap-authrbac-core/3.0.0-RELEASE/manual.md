@@ -1,14 +1,33 @@
+# 登录及权限组件概述 #
+
+# 一、登录组件概述 #
 
 
-# 登录认证 #
+## 业务需求 ##
 
-## 功能简介 ##
+业务系统需要通用的**身份验证**框架来解决身份认证的问题。  
+
+
+##解决方案##
 
 本认证组件基于[Apache Shiro](http://shiro.apache.org/)。
-
-解决的核心问题是，**身份验证**。  
-
+  
 在shiro中，用户需要提供**principals**（身份）和**credentials**（证明）给shiro，从而应用能验证用户身份。而用户身份**Token**可能不仅仅是用户名/密码，也可能还有其他的，如登录时允许用户名/邮箱/手机号同时登录。
+
+
+# 整体设计 #
+
+## 依赖环境 ##
+
+组件采用Maven进行编译和打包发布，其对外提供的依赖方式如下：
+
+	<dependency>
+	  <groupId>com.yonyou.iuap</groupId>
+	  <artifactId>iuap-authrbac-core</artifactId>
+	  <version>${iuap.modules.version}</version>
+	</dependency>
+
+${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 
 
 ## 工作流程 ##
@@ -26,7 +45,7 @@
 **Session Manager：**会话管理，即用户登录后就是一次会话，在没有退出之前，它的所有信息都在会话中；会话可以是普通JavaSE环境的，也可以是如Web环境的。  
 
 **SecurityManager：**安全管理器，即所有与安全有关的操作都会与SecurityManager交互。所有Subject都绑定到SecurityManager，所有交互都会委托给SecurityManager；可以把Subject认为是一个门面，SecurityManager才是实际的执行者。  
-
+  
 ### 具体流程 ###
 
 ![](img/image001.jpg)  
@@ -42,74 +61,9 @@
 
 5. `Authenticator`会把相应的`token`传入`Realm`，`Realm`将调用`getAuthenticationInfo(token)`（此方法就是实际认证处理，我们需要覆盖`Realm`的`doGetAuthenticationInfo`方法来编写自己的认证处理），从`Realm`获取身份验证信息，如果返回`false`或者抛出异常，则表示身份验证失败了。
 
-## API接口 ##
 
-### 登录相关 ###
+# 使用说明 #
 
-**描述**  
-用于实现用户登录。  
-**请求方法**  
-`/login`  
-**请求方式**  
-`URL POST`  
-**请求参数说明**  
-
-<table>
-  <tr>
-    <th><br>  参数字段<br>  </th>
-    <th><br>  必选<br>  </th>
-    <th><br>  类型<br>  </th>
-    <th><br>  长度限制<br>  </th>
-    <th><br>  说明<br>  </th>
-  </tr>
-  <tr>
-    <td><br>  username<br>  </td>
-    <td><br>  True<br>  </td>
-    <td><br>  String<br>  </td>
-    <td><br>  20<br>  </td>
-    <td><br>  用户名<br>  </td>
-  </tr>
-  <tr>
-    <td><br>  password<br>  </td>
-    <td><br>  True<br>  </td>
-    <td><br>  String<br>  </td>
-    <td><br>  20<br>  </td>
-    <td><br>  用户密码<br>  </td>
-  </tr>
-</table>  
-
-**返回参数说明**  
-无  
-
-### 登出相关 ###
-
-**描述**  
-用于实现用户登出。  
-**请求方法**  
-`/logout`  
-**请求方式**  
-`URL POST`  
-**请求参数说明**  
-
-<table>
-  <tr>
-    <th><br>  参数字段<br>  </th>
-    <th><br>  必选<br>  </th>
-    <th><br>  类型<br>  </th>
-    <th><br>  长度限制<br>  </th>
-    <th><br>  说明<br>  </th>
-  </tr>
-  <tr>
-    <td><br>  username<br>  </td>
-    <td><br>  True<br>  </td>
-    <td><br>  String<br>  </td>
-    <td><br>  20<br>  </td>
-    <td><br>  用户名<br>  </td>
-  </tr>
-</table>  
-
-**返回参数说明**  
-无
 
 
 ## 开发步骤 ##
@@ -142,14 +96,14 @@ Realm：域，框架从Realm获取安全数据（如用户、角色、权限）�
 		String encryptedPassWord = new String(token.getPassword());
         encryptedPassWord = encryptedPassWord.replace("_encrypted", "");
         String passWord = RSAUtils.decryptStringByJs(encryptedPassWord);
-
+        
 		User user = accountService.findUserByLoginName(token.getUsername());
 		if (user != null) {
 			byte[] hashPassword = Digests.sha1(passWord.getBytes(), Encodes.decodeHex(user.getSalt()), HASH_INTERATIONS);
             String checkPwd = Encodes.encodeHex(hashPassword);
             // 将密码按照加密算法进行加密之后，存储到token
             token.setPassword(checkPwd.toCharArray());
-
+            
 			byte[] salt = Encodes.decodeHex(user.getSalt());
 			return new SimpleAuthenticationInfo(new ShiroUser(user.getId(), user.getLoginName(), user.getName()),
 					user.getPassword(), ByteSource.Util.bytes(salt), getName());
@@ -215,16 +169,6 @@ Shiro定义了3中认证策略的实现：
 
 
 ### 与Spring整合 ###
-
-**引入组件**  
-
-如果是maven项目的话，可以直接在pom文件里加入如下依赖：
-
-	<dependency>
-    	<groupId>com.yonyou.iuap</groupId>
-    	<artifactId>iuap-authrbac-core</artifactId>
-    	<version>1.0.0-RELEASE</version>
-	</dependency>
 
 
 **web.xml配置**  
@@ -312,7 +256,7 @@ applicationContext-shiro.xml中添加shiro配置
 
 
 配置文件说明：  
-
+ 
 1. 配置shiroFilter，此处id需要与2.4.3.2中web.xml的filter-name一致。
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">  
 
@@ -361,7 +305,7 @@ applicationContext-shiro.xml中添加shiro配置
 					/js/** = anon
 				</value>
 			</property>
-
+ 
 
 shiro提供其他的过滤链定义：  
 
@@ -425,7 +369,7 @@ shiro提供其他的过滤链定义：
 
 		@RequestMapping(method = RequestMethod.POST, value = "formLogin")
 		public String formlogin(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
-
+	
 			String userName = request.getParameter("username");
 			String encryptedPassWord = request.getParameter("password");
 			String captcha = request.getParameter("captcha");
@@ -433,24 +377,24 @@ shiro提供其他的过滤链定义：
 			// 构造登录token
 			CaptchaUsernamePasswordToken token = new CaptchaUsernamePasswordToken(userName, encryptedPassWord.toCharArray(),
 					new Boolean(rememberMe), "", captcha);
-
+	
 			// 从Shiro组件中获取当前登录主体Subject
 			Subject subject = SecurityUtils.getSubject();
-
+			
 			try {
 				// 验证码校验
 				captchaFilter.doCaptchaValidate(request, token);
-
+				
 			} catch (IncorrectCaptchaException e) {//当验证码不正确的时候会出现此异常
 				initPubKeyParams(model);
 				model.addAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME , e);
 				return "login";
 			}
-
+			
 			try {
 				// 登录
 				subject.login(token);
-
+				
 			} catch (UnknownAccountException uae) {//username不存在
 				model.addAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME,uae);
 				return reLogin(model);
@@ -464,15 +408,15 @@ shiro提供其他的过滤链定义：
 				model.addAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME,ae);
 				return reLogin(model);
 			}
-
+			
 			if(subject.isAuthenticated()){//登录成功
-
+				
 				// TODO 添加其他的业务逻辑，例如将用户信息存入session...
 				model.addAttribute(accountService.findUserByLoginName(userName));
 				return "loginSuccess";
-
+				
 			}else{//登录失败
-
+				
 				model.addAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME,"未通过验证");
 				return reLogin(model);
 			}
@@ -487,10 +431,81 @@ shiro提供其他的过滤链定义：
 
 **登出**  
 登出操作比较简单，核心代码就是一行：  
-
+	
 	SecurityUtils.getSubject().logout();  
 
 当调用此行代码时，任何现有的Session都会失效，而且任何身份都将会失去关联。  
+
+
+
+## API接口 ##
+
+### 登录相关 ###
+
+**描述**  
+用于实现用户登录。  
+**请求方法**  
+`/login`  
+**请求方式**  
+`URL POST`  
+**请求参数说明**  
+
+<table>
+  <tr>
+    <th><br>  参数字段<br>  </th>
+    <th><br>  必选<br>  </th>
+    <th><br>  类型<br>  </th>
+    <th><br>  长度限制<br>  </th>
+    <th><br>  说明<br>  </th>
+  </tr>
+  <tr>
+    <td><br>  username<br>  </td>
+    <td><br>  True<br>  </td>
+    <td><br>  String<br>  </td>
+    <td><br>  20<br>  </td>
+    <td><br>  用户名<br>  </td>
+  </tr>
+  <tr>
+    <td><br>  password<br>  </td>
+    <td><br>  True<br>  </td>
+    <td><br>  String<br>  </td>
+    <td><br>  20<br>  </td>
+    <td><br>  用户密码<br>  </td>
+  </tr>
+</table>  
+
+**返回参数说明**  
+无  
+
+### 登出相关 ###
+
+**描述**  
+用于实现用户登出。  
+**请求方法**  
+`/logout`  
+**请求方式**  
+`URL POST`  
+**请求参数说明**  
+  
+<table>
+  <tr>
+    <th><br>  参数字段<br>  </th>
+    <th><br>  必选<br>  </th>
+    <th><br>  类型<br>  </th>
+    <th><br>  长度限制<br>  </th>
+    <th><br>  说明<br>  </th>
+  </tr>
+  <tr>
+    <td><br>  username<br>  </td>
+    <td><br>  True<br>  </td>
+    <td><br>  String<br>  </td>
+    <td><br>  20<br>  </td>
+    <td><br>  用户名<br>  </td>
+  </tr>
+</table>  
+
+**返回参数说明**  
+无
 
 ## 扩展机制 ##
 
@@ -518,10 +533,10 @@ shiro提供其他的过滤链定义：
 		protected String getCaptcha(ServletRequest request){
 			return WebUtils.getCleanParam(request, getCaptchaParam());
 		}
-
+		
 		//创建Token
 		protected CaptchaUsernamePasswordToken createToken(ServletRequest request , ServletResponse response) {
-
+			
 			String userName = getUsername(request);
 			String password = getPassword(request);
 			String captcha = getCaptcha(request);
@@ -529,13 +544,13 @@ shiro提供其他的过滤链定义：
 			String host = getHost(request);
 			return new CaptchaUsernamePasswordToken(userName, password.toCharArray(), rememberMe, host, captcha);
 		}
-
+		
 		//验证码校验
 		public void doCaptchaValidate(HttpServletRequest request , CaptchaUsernamePasswordToken token) {
-
+			
 			// 获取session中的图形码字符串
 			String captcha = (String) request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
-
+			
 			if (captcha != null && !captcha.equalsIgnoreCase(token.getCaptcha())) {
 				throw new IncorrectCaptchaException("验证码错误！");
 			}
@@ -559,14 +574,14 @@ shiro提供其他的过滤链定义：
 			// 构造登录token
 			CaptchaUsernamePasswordToken token = new CaptchaUsernamePasswordToken(userName, encryptedPassWord.toCharArray(),
 					new Boolean(rememberMe), "", captcha);
-
+	
 			// 从Shiro组件中获取当前登录主体Subject
 			Subject subject = SecurityUtils.getSubject();
-
+			
 			try {
 				// 验证码校验
 				captchaFilter.doCaptchaValidate(request, token);
-
+				
 			} catch (IncorrectCaptchaException e) {//当验证码不正确的时候会出现此异常
 				initPubKeyParams(model);
 				model.addAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME , e);
@@ -591,19 +606,34 @@ shiro提供其他的过滤链定义：
 
 
 
+# 二、权限框架组件概述 #
 
 
+## 业务需求 ##
 
+业务系统需要通用授权框架来解决用户、角色或功能等的授权问题。
+ 
+##解决方案 
 
-
-
-
-# 权限框架 #
-## 功能简介 ##
-本认证组件基于[Apache Shiro](http://shiro.apache.org/)。  
-解决的核心问题是：授权。  
+本权限框架基于[Apache Shiro](http://shiro.apache.org/)。  
 框架提供了用户、角色、功能、数据权限、用户角色关联，角色权限关联模型及维护Api。另外提供认证、授权、加密、会话管理、与Web集成、缓存等功能。  
 权限结构基于RBAC模型，用户关联角色，角色关联功能。功能根据自定义策略可自行扩展。
+
+
+# 整体设计 #
+
+## 依赖环境 ##
+组件采用Maven进行编译和打包发布，其对外提供的依赖方式如下：
+
+	<dependency>
+	  <groupId>com.yonyou.iuap</groupId>
+	  <artifactId>iuap-authrbac-core</artifactId>
+	  <version>${iuap.modules.version}</version>
+	</dependency>
+
+${iuap.modules.version} 为平台在maven私服上发布的组件的version。
+
+
 
 ## 工作流程 ##
 ### 几个概念 ###
@@ -621,7 +651,8 @@ shiro提供其他的过滤链定义：
 1. 首先调用Subject.isPermitted\*/hasRole\*接口，其会委托给SecurityManager，而SecurityManager接着会委托给Authorizer；  
 2. Authorizer是真正的授权者，如果我们调用如isPermitted("user:view")，其首先会通过PermissionResolver把字符串转换成相应的Permission实例；  
 3. 在进行授权之前，其会调用相应的Realm获取Subject相应的角色/权限用于匹配传入的角色/权限；  
-4. Authorizer会判断Realm的角色/权限是否和传入的匹配，如果有多个Realm，会委托给ModularRealmAuthorizer进行循环判断，如果匹配如isPermitted\*/hasRole\*会返回true，否则返回false表示授权失败。  
+4. Authorizer会判断Realm的角色/权限是否和传入的匹配，如果有多个Realm，会委托给ModularRealmAuthorizer进行循环判断，如果匹配如isPermitted\*/hasRole\*会返回true，否则返回false表示授权失败。
+   
 
 ## 关键功能 ##
 ### 授权 ###
@@ -629,12 +660,12 @@ shiro提供其他的过滤链定义：
 
 ### 授权认证 ###
 基于角色的访问控制（隐式角色）  
-
+ 
 Shiro提供了hasRole/hasRole用于判断用户是否拥有某个角色/某些权限；但是没有提供如hashAnyRole用于判断是否有某些权限中的某一个。   
 Shiro提供的checkRole/checkRoles和hasRole/hasAllRoles不同的地方是它在判断为假的情况下会抛出UnauthorizedException异常。  
-
+ 
 这种方式的缺点就是如果很多地方进行了角色判断，但是有一天不需要了那么就需要修改相应代码把所有相关的地方进行删除；这就是粗粒度造成的问题。  
-
+ 
 **基于资源的访问控制（显示角色）**  
 Shiro提供了isPermitted/isPermittedAll用于判断用户是否拥有某个权限或所有权限，也没有提供如isPermittedAny用于判断拥有某一个权限的接口。  
 但是失败的情况下会抛出UnauthorizedException异常。  
@@ -659,7 +690,7 @@ Shiro提供了isPermitted/isPermittedAll用于判断用户是否拥有某个权�
 	1.	subject().checkPermissions("user:view");  
 用户拥有所有资源的“view”所有权限。  
 5. 实例级别的权限
-
+   
  - 单个实例单个权限  
 通过如下代码判断  
 
@@ -679,9 +710,9 @@ Shiro提供了isPermitted/isPermittedAll用于判断用户是否拥有某个权�
 		1.	subject().checkPermissions("user:auth:1", "user:auth:2");  
  - 所有实例所有权限  
 通过如下代码判断  
-
+  
 		1.	subject().checkPermissions("user:view:1", "user:auth:2");  
-
+ 
 6 Shiro对权限字符串缺失部分的处理  
 如“user:view”等价于“user:view:\*”；而“organization”等价于“organization:*”或者“organization:\*:\*”。可以这么理解，这种方式实现了前缀匹配。  
 另外如“user:\*”可以匹配如“user:delete”、“user:delete”可以匹配如“user:delete:1”、“user:\*:1”可以匹配如“user:view:1”、“user”可以匹配“user:view”或“user:view:1”等。即\*可以匹配所有，不加\*可以进行前缀匹配；但是如“\*:view”不能匹配“system:user:view”，需要使用“\*:\*:view”，即后缀匹配必须指定前缀（多个冒号就需要多个\*来匹配）。  
@@ -789,7 +820,7 @@ Shiro内置了很多默认的拦截器，比如身份验证、授权等相关的
 ### 缓存机制 ###
 Shiro提供了类似于Spring的Cache抽象，即Shiro本身不实现Cache，但是对Cache进行了抽象，方便更换不同的底层Cache实现。  
 
-Shiro提供的Cache接口：
+Shiro提供的Cache接口： 
 
 	public interface Cache<K, V> {  
 	    //根据Key获取缓存中的值  
@@ -820,7 +851,7 @@ Shiro还提供了CacheManagerAware用于注入CacheManager：
 	    void setCacheManager(CacheManager cacheManager);  
 	}  
 Shiro内部相应的组件（DefaultSecurityManager）会自动检测相应的对象（如Realm）是否实现了CacheManagerAware并自动注入相应的CacheManager。  
-
+  
 #### Realm缓存 ####
 提供了CachingRealm，其实现了CacheManagerAware接口，提供了缓存的一些基础实现；另外AuthenticatingRealm及AuthorizingRealm分别提供了对AuthenticationInfo 和AuthorizationInfo信息的缓存。  
 
@@ -830,7 +861,120 @@ Shiro内部相应的组件（DefaultSecurityManager）会自动检测相应的�
 	</bean>
 默认使用*EhCacheManager*  
 首先登录成功（此时会缓存相应的AuthenticationInfo），然后修改密码,此时密码就变了。  
-接着需要调用Realm的clearCachedAuthenticationInfo方法清空之前缓存的AuthenticationInfo，否则下次登录时还会获取到修改密码之前的那个AuthenticationInfo。  
+接着需要调用Realm的clearCachedAuthenticationInfo方法清空之前缓存的AuthenticationInfo，否则下次登录时还会获取到修改密码之前的那个AuthenticationInfo。
+  
+
+# 使用说明 #
+	
+## 开发步骤 ##
+### 与Spring集成 ###
+		
+${iuap.modules.version} 为平台在maven私服上发布的组件的version。
+	
+1. 配置扫描路径  
+扫描路径加入com.yonyou.uap.ieop.security包括bean路径和Jpa扫描路径  
+
+		<context:component-scan base-package=" com.yonyou.uap.ieop.security.web.controller">
+				<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+				<context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/></context:component-scan>
+2. web.xml中添加shiro filter  
+
+		<filter>
+			<filter-name>shiroFilter</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+			<init-param>
+				<param-name>targetFilterLifecycle</param-name>
+				<param-value>true</param-value>
+			</init-param>
+		</filter>
+		<filter-mapping>
+			<filter-name>shiroFilter</filter-name>
+			<url-pattern>/*</url-pattern>
+		</filter-mapping>  
+DelegatingFilterProxy作用是：自动到Spring容器查找名字为shiroFilter（filter-name）的bean并把所有Filter的操作委托给它。然后将ShiroFilter配置到spring容器即可：  
+
+		<!-- Shiro Filter -->
+		<beanid="shiroFilter"class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+			<propertyname="securityManager"ref="securityManager"/>
+			<propertyname="loginUrl"value="/login"/>
+			<propertyname="successUrl"value="/"/>
+			<propertyname="filterChainDefinitions">
+				<value>
+					/logout = logout
+					/static/** = anon
+					/extlogin/**=anon
+					/api/** = anon
+					/cxf/** = anon
+					/** = authc 
+				</value>
+			</property>
+		</bean>
+最后不要忘了使用  org.springframework.web.context.ContextLoaderListener加载这个spring配置文件即可。  
+其中：   
+loginUrl即为登录地址，  
+successUrl为登录成功跳转地址。  
+3. 配置applicationContext-shiro.xml权限相关属性  
+securityManager中的realm，可以配置为多个，此处为单个组件预置realm  
+
+		<beanid="securityManager"class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<!--配置Realm-->
+			<property name="realms">
+				<list>		   						<beanid="ExtShiroDbRealm"class="com.yonyou.uap.ieop.security.realm.ExtShiroDbRealm"></bean>
+				</list>
+			</property>
+		<!--配置相关认证策略-->
+			<property name="authenticator"ref="authenticator"/>	
+			<beanid="authenticator"class="org.apache.shiro.authc.pam.ModularRealmAuthenticator">
+		<propertyname="authenticationStrategy">
+			<beanclass="org.apache.shiro.authc.pam.AtLeastOneSuccessfulStrategy"/>
+			</property>
+		</bean>
+
+### 配置用户对应服务 ###
+继承com.yonyou.uap.ieop.security.service.ISecurityUserService接口。  
+
+	public interface ISecurityUserService  {
+		/**
+		 * 根据登陆名查询用户，并返回ID、name、code
+		 * 
+		 * @param loginName
+		 * @return
+		 */
+		public abstract SecurityUser findUserByLoginName(String loginName) throws Exception;
+	}
+一个具体的例子：  
+
+	@Service
+	public class SecurityUserServiceImpl implements ISecurityUserService{
+		
+		@Autowired
+		AccountService userService;
+		
+		public SecurityUser findUserByLoginName(String loginName) throws Exception {
+			
+			User user = userService.findUserByLoginName(loginName);
+			
+			SecurityUser shiroUser=new SecurityUser(user.getId().toString(), user.getLoginName(), user.getName());
+			
+			return shiroUser;
+		}
+	}
+
+### 读取权限 ###
+发送HTTP GET请求到/security/function/rootmenu 此rest服务可以查询用户所有菜单权限。不需要传入参数，组件会自动记录当前登录用户的信息，根据用户ID查询数据库中存储的用户  
+
+### 权限控制 ###
+权限控制可通过加入filter控制url访问  
+Controller层加入@RequiresPermissions("User:save")控制整个controller或具体方法，前台可调用auth.js中btnAuth将按钮传入返回有权限按钮  
+
+### 权限配置 ###
+可自行创建脚本插入数据库或通过自行开发界面调用组件提供的API接口完成数据插入  
+顺序为：创建用户（系统自有） ---> 创建角色 ---> 创建功能（function或按钮） ---> 
+为用户分配角色 ---> 为角色分配功能。  
+注：默认认为注入功能菜单的url及按钮都为权限控制  
+
+
+
 ## API接口 ##
 ### 基础服务接口 ###
 **服务接口**  
@@ -861,7 +1005,7 @@ com.yonyou.uap.ieop.security.service.impl.BaseServiceImpl<T, ID>
     <td></td>
     <td><br>  实体对象<br>  </td>
   </tr>
-</table>
+</table>	
 **返回参数说明**  
 <table>
   <tr>
@@ -1368,7 +1512,7 @@ com.yonyou.uap.ieop.security.service.impl.FunctionService
 com.yonyou.uap.ieop.security.service.impl.BaseServiceImpl  
 delete, deleteByEntity, findAll, findAll, get, save, save, update  
 **描述**  
-提供功能服务相关接口的实现，包括增删改查（继承自IBaseService），分页查询，动态条件查询，查询有效角色。
+提供功能服务相关接口的实现，包括增删改查（继承自IBaseService），分页查询，动态条件查询，查询有效角色。 
 
 #### 根据ID查询功能 ####
 **描述**  
@@ -1586,118 +1730,9 @@ delete, deleteByEntity, findAll, findAll, get, save, save, update
   </tr>
 </table>  
 
-## 开发步骤 ##
-### 与Spring集成 ###
-1. 引入yonyou-security-core.jar到开发环境
-如果是maven工程，可以直接在pom文件里添加如下依赖：  
-
-		<dependency>
-			<groupId>com.yonyou.iuap</groupId>
-			<artifactId>iuap-authrbac-core</artifactId>
-			<version>1.0.0-RELEASE</version>
-		</dependency>
-2. 配置扫描路径  
-扫描路径加入com.yonyou.uap.ieop.security包括bean路径和Jpa扫描路径  
-
-		<context:component-scan base-package=" com.yonyou.uap.ieop.security.web.controller">
-				<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-				<context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/></context:component-scan>
-3. web.xml中添加shiro filter  
-
-		<filter>
-			<filter-name>shiroFilter</filter-name>
-		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-			<init-param>
-				<param-name>targetFilterLifecycle</param-name>
-				<param-value>true</param-value>
-			</init-param>
-		</filter>
-		<filter-mapping>
-			<filter-name>shiroFilter</filter-name>
-			<url-pattern>/*</url-pattern>
-		</filter-mapping>  
-DelegatingFilterProxy作用是：自动到Spring容器查找名字为shiroFilter（filter-name）的bean并把所有Filter的操作委托给它。然后将ShiroFilter配置到spring容器即可：  
-
-		<!-- Shiro Filter -->
-		<beanid="shiroFilter"class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
-			<propertyname="securityManager"ref="securityManager"/>
-			<propertyname="loginUrl"value="/login"/>
-			<propertyname="successUrl"value="/"/>
-			<propertyname="filterChainDefinitions">
-				<value>
-					/logout = logout
-					/static/** = anon
-					/extlogin/**=anon
-					/api/** = anon
-					/cxf/** = anon
-					/** = authc
-				</value>
-			</property>
-		</bean>
-最后不要忘了使用  org.springframework.web.context.ContextLoaderListener加载这个spring配置文件即可。  
-其中：   
-loginUrl即为登录地址，  
-successUrl为登录成功跳转地址。  
-4. 配置applicationContext-shiro.xml权限相关属性  
-securityManager中的realm，可以配置为多个，此处为单个组件预置realm  
-
-		<beanid="securityManager"class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
-		<!--配置Realm-->
-			<property name="realms">
-				<list>		   						<beanid="ExtShiroDbRealm"class="com.yonyou.uap.ieop.security.realm.ExtShiroDbRealm"></bean>
-				</list>
-			</property>
-		<!--配置相关认证策略-->
-			<property name="authenticator"ref="authenticator"/>
-			<beanid="authenticator"class="org.apache.shiro.authc.pam.ModularRealmAuthenticator">
-		<propertyname="authenticationStrategy">
-			<beanclass="org.apache.shiro.authc.pam.AtLeastOneSuccessfulStrategy"/>
-			</property>
-		</bean>
-
-### 配置用户对应服务 ###
-继承com.yonyou.uap.ieop.security.service.ISecurityUserService接口。  
-
-	public interface ISecurityUserService  {
-		/**
-		 * 根据登陆名查询用户，并返回ID、name、code
-		 *
-		 * @param loginName
-		 * @return
-		 */
-		public abstract SecurityUser findUserByLoginName(String loginName) throws Exception;
-	}
-一个具体的例子：  
-
-	@Service
-	public class SecurityUserServiceImpl implements ISecurityUserService{
-
-		@Autowired
-		AccountService userService;
-
-		public SecurityUser findUserByLoginName(String loginName) throws Exception {
-
-			User user = userService.findUserByLoginName(loginName);
-
-			SecurityUser shiroUser=new SecurityUser(user.getId().toString(), user.getLoginName(), user.getName());
-
-			return shiroUser;
-		}
-	}
-
-### 读取权限 ###
-发送HTTP GET请求到/security/function/rootmenu 此rest服务可以查询用户所有菜单权限。不需要传入参数，组件会自动记录当前登录用户的信息，根据用户ID查询数据库中存储的用户  
-
-### 权限控制 ###
-权限控制可通过加入filter控制url访问  
-Controller层加入@RequiresPermissions("User:save")控制整个controller或具体方法，前台可调用auth.js中btnAuth将按钮传入返回有权限按钮  
-
-### 权限配置 ###
-可自行创建脚本插入数据库或通过自行开发界面调用组件提供的API接口完成数据插入  
-顺序为：创建用户（系统自有） ---> 创建角色 ---> 创建功能（function或按钮） --->
-为用户分配角色 ---> 为角色分配功能。  
-注：默认认为注入功能菜单的url及按钮都为权限控制  
 
 ## 扩展机制 ##
 权限模型接口可通过集成模型实体及默认实现扩展；  
 权限扩展可通过继承permission，定义权限策略并注册，权限认证时会根据定义自己的权限策略进行权限解析。  
+
+
