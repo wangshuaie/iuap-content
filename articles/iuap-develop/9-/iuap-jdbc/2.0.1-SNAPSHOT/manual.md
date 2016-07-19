@@ -1,19 +1,44 @@
-# 多数据库持久化组件介绍 #
+# 多数据库持久化组件 #
+
+## 简介 ##
 
 iUAP平台采用iuap-jdbc作为数据持久化中间件，实现对对业务数据的持久化服务。
 
 本组件对jdbc做了轻量封装，采用基于注解的ORM映射机制，简化代码配置。
 使用简单，面向对象的方式编程，直接操作POJO，少量代码完成持久化操作。
-组件能够自动识别数据源，提供不同数据库的基本语法转换的能力，做到一套语法，多种数据库兼容执行，目前支持MySQL，Oracle,PostgreSQL。
+组件能够自动识别数据源，提供不同数据库的基本语法转换的能力，做到一套语法，多种数据库兼容执行，目前支持MySQL，Oracle，PostgreSQL。
+
+## 多数据库持久化组件特征 ##
+
+-  多数据库语法适配
+
+目前组件适配了`mysql`,`oracle`和`postgresql`的通用语法。
+
+- 数据源
+
+多数据库持久化组件使用CrossdbDataSource装饰外部数据源，应用的数据源可以自由配置，组件在完成数据源的适配的同时，为多数据库的语法适配能力做铺垫。
+
+- 自动分页
+
+组件提供分页API，应用只需要传入查询条件sql，不必关心分页逻辑，组件自动帮您完成分页。
+
+- 主子表组合保存，修改
+
+组件提供主子表组合操作。
+
+# 使用说明 #
 
 ## Maven依赖 ##
 	<dependency>
 	  <groupId>com.yonyou.iuap</groupId>
 	  <artifactId>iuap-jdbc</artifactId>
-	  <version>2.0.1-SNAPSHOT</version>
+	  <version>${iuap.modules.version}</version>
 	</dependency>
 
-## 第一个例子
+${iuap.modules.version} 为平台在maven私服上发布的组件的version。
+
+## 简单示例 ##
+
 使用iuap-jdbc完成单表的增删改查。示例包括实体类、DAO类、Service类。其中dao类通过注入BaseDao类，并使用它对数据进行操作。
 
 - user数据库表
@@ -58,6 +83,15 @@ iUAP平台采用iuap-jdbc作为数据持久化中间件，实现对对业务数�
 		        return "your.package.name";
 		    }
 		}
+
+注意:
+
+实体类需要集成BaseEntity。
+
+@Id，@coloumn等注解是iuap-jdbc中的注解，请开发者注意和javax包下的注解进行区分，不要混淆。 @GeneratedValue(strategy = Stragegy.UUID, moudle = "users")注解中的ID生成策略可以参考Stragegy中的枚举值，和iuap-oid中的生成策略保持一致。
+
+getMetaDefinedName和getNamespace方法是为了后期的元数据操作时候预留，如果不需要元数据，开发人员手动重写即可。
+
 
 -  在Spring中声明数据源和BaseDAO
 
@@ -188,41 +222,26 @@ iUAP平台采用iuap-jdbc作为数据持久化中间件，实现对对业务数�
 	   		}
 		}
 
-
-## 多数据库持久化组件特征 ##
-
-### 多数据库语法适配
-目前组件适配了`mysql`,`oracle`和`postgresql`的通用语法。
-
-### 数据源 ###
-
-多数据库持久化组件使用CrossdbDataSource装饰外部数据源，应用的数据源可以自由配置，组件在完成数据源的适配的同时，为多数据库的语法适配能力做铺垫。
-
-### 自动修改时间戳 ###
-
-细心的朋友可能发现了，在代码中并没有操作`User`对象的`ts`属性，但是每次修改操作ts属性都会变成服务器的当前时间。
-组件的**sql增强功能**会自动在增加或修改的时候，在`sql`上增加`ts`字段，使得应用更加专注于业务相关的逻辑。
-
-### 自动分页 ###
+业务代码中不需要操作操作`User`对象的`ts`属性，但是每次修改操作ts属性都会变成服务器的当前时间。组件的**sql增强功能**会自动在增加或修改的时候，在`sql`上增加`ts`字段，使得应用更加专注于业务相关的逻辑。
 
 组件提供分页API，应用只需要传入查询条件sql，不必关心分页逻辑，组件自动帮您完成分页。详见`BaseDAO`的API `queryPage()`
-
-### 主子表组合保存，修改 ###
 
 组件提供主子表组合操作。API对应`BaseDAO`的`save()`,入参为一主多子。
 **注意**
 使用这个方法的时候，Entity的status属性必须设置。
 
-status说明如下：
-
-
-	status值        说明 
-	0               本条记录未变更|
-	1               本条记录被修改|
-	2               本条记录为新增数据|
-	3               本条记录被删除(主表数据状态不能为删除状态)
+**status说明如下：**
+<table style="border-collapse:collapse">
+	<tr><th>status值</th><th>说明</th></tr>
+    <tr><td>0</td><td>本条记录未变更</td></tr>
+	<tr><td>1</td><td>本条记录被修改</td></tr>
+	<tr><td>2</td><td>本条记录为新增数据</td></tr>
+	<tr><td>3</td><td>本条记录被删除(主表数据状态不能为删除状态)</td></tr>
+</table>
 
   
+## 其他相关说明 ##
+
 ### 查询结果解析器 ###
 
 组件提供了多种查询结果解析器。解析器类名以及说明如下：
@@ -667,3 +686,221 @@ status说明如下：
 </table>
 
 **更多详细的使用方法，请参考示例工程(DevTool/examples/example-iuap-jdbc)**
+
+
+#iuap-jdbc相关API#
+
+- BaseDAO
+
+<table style="border-collapse:collapse">
+	<tr>
+		<th>方法名</th>
+		<th>参数</th>
+		<th>返回值</th>
+		<th>功能说明</th>
+	</tr>
+
+	<tr>
+		<td>queryByPK</td>
+		<td>Class&lt;T&gt; className（查询实体类类型）, ID pk（需要查询的实体类的主键键值）</td>
+		<td> T（查询到的实体类）</td>
+		<td>通过主键查询实体</td>
+	</tr>
+
+	<tr>
+		<td>queryByPK</td>
+		<td>Class&lt;T&gt; className（查询实体类类型）, ID pk（需要查询的实体类的主键键值），String[] selectedFields（指定实体的返回列）</td>
+		<td> T（查询到的实体类）</td>
+		<td>通过主键查询实体（指定实体的返回列）</td>
+	</tr>
+
+	<tr>
+		<td>queryByClause</td>
+		<td>Class&lt;T&gt; className（查询实体类类型）,  String sql（查询的sql语句）</td>
+		<td>List&lt;T&gt;（查询到的实体列表）</td>
+		<td>通过sql语句查询实体</td>
+	</tr>
+
+	<tr>
+		<td>queryByClause</td>
+		<td>Class&lt;T&gt; className（查询实体类类型）,  String sql（查询的sql语句），SQLParameter parameter（sql语句拼接的参数）</td>
+		<td>List&lt;T&gt;（查询到的实体列表）</td>
+		<td>通过sql语句查询实体</td>
+	</tr>
+
+	<tr>
+		<td>queryAll</td>
+		<td>Class&lt;T&gt; className（查询实体类类型）</td>
+		<td>List&lt;T&gt;（查询到的实体列表）</td>
+		<td>查询该实体的所有记录</td>
+	</tr>
+
+	<tr>
+		<td>queryForList</td>
+		<td>String sql(查询sql语句), SQLParameter parameter（sql参数）, ResultSetProcessor processor(查询结果解析器)</td>
+		<td>List&lt;T&gt;（返回结果列表）</td>
+		<td>根据查询结果解析器返回相应的查询结果列表</td>
+	</tr>
+
+	<tr>
+		<td>queryForList</td>
+		<td>String sql(查询sql语句),ResultSetProcessor processor(查询结果解析器)</td>
+		<td>List&lt;T&gt;（返回结果列表）</td>
+		<td>根据查询结果解析器返回相应的查询结果列表</td>
+	</tr>
+
+	<tr>
+		<td>queryForObject</td>
+		<td>String sql(查询sql语句), SQLParameter parameter（sql参数）,ResultSetProcessor processor(查询结果解析器)</td>
+		<td>T（返回结果）</td>
+		<td>根据查询结果解析器返回相应的查询结果</td>
+	</tr>
+	
+	<tr>
+		<td>queryForObject</td>
+		<td>String sql(查询sql语句),ResultSetProcessor processor(查询结果解析器)</td>
+		<td>T（返回结果）</td>
+		<td>根据查询结果解析器返回相应的查询结果</td>
+	</tr>
+
+	<tr>
+		<td>queryPage</td>
+		<td>String sql(查询sql语句), SQLParameter parameter(查询sql参数), PageRequest pageRequest(分页请求参数), Class&lt;T&gt; type（查询实体类类型）</td>
+		<td>Page&lt;T&gt;（返回结果分页）</td>
+		<td>分页查询</td>
+	</tr>
+
+	<tr>
+		<td>insert</td>
+		<td>T t(待插入的实体)</td>
+		<td>ID(插入实体类的主键键值)</td>
+		<td>插入新实体</td>
+	</tr>
+
+	<tr>
+		<td>insert</td>
+		<td>List&lt;T&gt; vos(待插入的实体列表)</td>
+		<td>ID[](插入实体类的主键键值列表)</td>
+		<td>插入多个新实体</td>
+	</tr>
+
+	<tr>
+		<td>insertWithPK</td>
+		<td>T vo(待插入的实体)</td>
+		<td>ID(插入实体类的主键键值)</td>
+		<td>插入新实体（自带主键键值）</td>
+	</tr>
+	
+	<tr>
+		<td>insertWithPK</td>
+		<td>List&lt;T&gt; vos(待插入的实体列表)</td>
+		<td>ID[](插入实体类的主键键值列表)</td>
+		<td>插入多个新实体（自带主键键值）</td>
+	</tr>
+
+	<tr>
+		<td>insertOptional</td>
+		<td>BaseEntity vo（实体）</td>
+		<td>ID（实体主键）</td>
+		<td>存储实体数据（选择性保存字段）</td>
+	</tr>
+
+	<tr>
+		<td>insertOptional</td>
+		<td>List<? extends BaseEntity> list（实体列表）</td>
+		<td>ID[]（实体主键列表）</td>
+		<td>存储实体数据（选择性保存字段）</td>
+	</tr>
+
+	<tr>
+		<td>insertOptionalWithPK</td>
+		<td>BaseEntity vo（实体）</td>
+		<td>ID（实体主键）</td>
+		<td>存储实体数据自带主键键值（选择性保存字段）</td>
+	</tr>
+
+	<tr>
+		<td>insertOptionalWithPK</td>
+		<td>List<? extends BaseEntity> list（实体列表）</td>
+		<td>ID[]（实体主键列表）</td>
+		<td>存储实体数据自带主键键值（选择性保存字段）</td>
+	</tr>
+
+	<tr>
+		<td>update</td>
+		<td>T vo(更新实体)</td>
+		<td>int (更新的行数)</td>
+		<td>更新数据</td>
+	</tr>
+
+	<tr>
+		<td>update</td>
+		<td>List&lt;T&gt; vos(更新实体列表)</td>
+		<td>int (更新的行数)</td>
+		<td>更新数据</td>
+	</tr>
+
+	<tr>
+		<td>update</td>
+		<td>T vo(更新实体)，String... fieldNames（需要更新的实体字段）</td>
+		<td>int (更新的行数)</td>
+		<td>更新数据的特定字段</td>
+	</tr>
+
+	<tr>
+		<td>update</td>
+		<td>List&lt;T&gt; vos(更新实体列表)，String... fieldNames（需要更新的实体字段）</td>
+		<td>int (更新的行数)</td>
+		<td>更新多个数据的特定字段</td>
+	</tr>
+
+	<tr>
+		<td>update</td>
+		<td>String sql（sql语句）</td>
+		<td>int (更新的行数)</td>
+		<td>通过sql进行更新</td>
+	</tr>
+
+	<tr>
+		<td>update</td>
+		<td>String sql（sql语句）, SQLParameter parameter（sql函数）</td>
+		<td>int (更新的行数)</td>
+		<td>通过sql进行更新</td>
+	</tr>
+
+	<tr>
+		<td>updateOptional</td>
+		<td>BaseEntity vo(待更新实体类)</td>
+		<td>int (更新的行数)</td>
+		<td>更新实体数据（选择性保存字段）</td>
+	</tr>
+	
+	<tr>
+		<td>updateOptional</td>
+		<td>List<? extends BaseEntity> list（实体列表）</td>
+		<td>int (更新的行数)</td>
+		<td>更新多个实体数据（选择性保存字段）</td>
+	</tr>
+
+	<tr>
+		<td>remove</td>
+		<td>T vo(待删除的实体)</td>
+		<td>void</td>
+		<td>删除数据</td>
+	</tr>
+	
+	<tr>
+		<td>remove</td>
+		<td>List&lt;T&gt; vos(待删除的实体列表)</td>
+		<td>void</td>
+		<td>批量删除数据</td>
+	</tr>
+
+	<tr>
+		<td>save</td>
+		<td>BaseEntity parent(主实体), BaseEntity... children（子实体）</td>
+		<td>void</td>
+		<td>存储主子实体</td>
+	</tr>
+
+</table>

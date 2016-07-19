@@ -10,12 +10,13 @@ Datatable控制器是一个特殊的spring MVC 控制器，与普通的Spring MV
 - 输出类型必须是JSON，返回对象必须是EventResponse.
 
 ## 配置和使用方式 ##
+
 **1:maven工程的配置文件pom.xml中加入对iweb组件的依赖**
 
 	<dependency>
             <groupId>com.yonyou.iuap</groupId>
             <artifactId>iuap-iweb</artifactId>
-            <version>2.0.1-SNAPSHOT</version>
+            <version>${iuap.modules.version}</version>
             <exclusions>
                 <exclusion>
                     <artifactId>spring-webmvc</artifactId>
@@ -27,6 +28,8 @@ Datatable控制器是一个特殊的spring MVC 控制器，与普通的Spring MV
                 </exclusion>
             </exclusions>
         </dependency>
+
+${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 
 **2:在工程的web.xml中配置filter**
 
@@ -71,16 +74,23 @@ Datatable控制器是一个特殊的spring MVC 控制器，与普通的Spring MV
 			}
 			int pageSize = dataTable1.getPageSize();
 			pageNumber = dataTable1.getPageIndex();
+
+			// 构造查询条件等
 			Map<String, Object> searchParams = new HashMap<String, Object>();
-			searchParams = this.createSearchParamsStartingWith(dataTable1, "search_");
-			PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, "auto");
+			PageRequest pageRequest = ... ...
+
+
 			Page<GoodJdbcDemo> categoryPage = goodService.getDemoPage(searchParams, pageRequest);
+			
+			//设置返回数据
 			dataTable1.remove(dataTable1.getAllRow());
 			dataTable1.set(categoryPage.getContent().toArray(new GoodJdbcDemo[0]));
+
 			int totalPages = categoryPage.getTotalPages();
 			dataTable1.setPageIndex(pageNumber);
 			dataTable1.setTotalPages(totalPages);
-			dataTable1.setTotalRow(goodService.getAllCount());
+
+			... ... ... ... 
 		} catch (Exception e) {
 			logger.error("查询数据失败!", e);
 			throw new WebRuntimeException("查询数据失败!");
@@ -107,41 +117,6 @@ Datatable控制器是一个特殊的spring MVC 控制器，与普通的Spring MV
 
 - java示例
 
-		package com.yonyou.iuap.example.web;
-		
-		import java.text.SimpleDateFormat;
-		import java.util.Arrays;
-		import java.util.Date;
-		import java.util.HashMap;
-		import java.util.Iterator;
-		import java.util.Map;
-		import java.util.Map.Entry;
-		import java.util.Set;
-		
-		import net.sf.json.JSONObject;
-		
-		import org.apache.commons.beanutils.ConvertUtils;
-		import org.apache.commons.beanutils.locale.converters.DateLocaleConverter;
-		import org.slf4j.Logger;
-		import org.slf4j.LoggerFactory;
-		import org.springframework.beans.factory.annotation.Autowired;
-		import org.springframework.data.domain.Page;
-		import org.springframework.data.domain.PageRequest;
-		import org.springframework.data.domain.Sort;
-		import org.springframework.data.domain.Sort.Direction;
-		import org.springframework.web.bind.annotation.RequestMapping;
-		import org.springframework.web.bind.annotation.RequestMethod;
-		import org.springframework.web.bind.annotation.RestController;
-		
-		import com.yonyou.iuap.example.entity.GoodJdbcDemo;
-		import com.yonyou.iuap.example.service.GoodJdbcDemoService;
-		import com.yonyou.iuap.iweb.datatable.annotation.IWebParameter;
-		import com.yonyou.iuap.iweb.entity.DataTable;
-		import com.yonyou.iuap.iweb.entity.Field;
-		import com.yonyou.iuap.iweb.entity.Row;
-		import com.yonyou.iuap.iweb.event.EventResponse;
-		import com.yonyou.iuap.iweb.exception.WebRuntimeException;
-		import com.yonyou.iuap.iweb.icontext.IWebViewContext;
 		
 		/**
 		 * spring MVC控制类示例，开发者需要在此基础上进行修改，适应项目的需求
@@ -164,19 +139,24 @@ Datatable控制器是一个特殊的spring MVC 控制器，与普通的Spring MV
 						pageNumber = (Integer) parameters.get("pageIndex");
 					}
 					int pageSize = dataTable1.getPageSize();
-					
-					pageNumber=dataTable1.getPageIndex();
-					
+					pageNumber = dataTable1.getPageIndex();
+		
+					// 构造查询条件等
 					Map<String, Object> searchParams = new HashMap<String, Object>();
-					searchParams = this.createSearchParamsStartingWith(dataTable1,"search_");
-					PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, "auto");
+					PageRequest pageRequest = ...
+		
+		
 					Page<GoodJdbcDemo> categoryPage = goodService.getDemoPage(searchParams, pageRequest);
+					
+					//设置返回数据
 					dataTable1.remove(dataTable1.getAllRow());
-					dataTable1.set(categoryPage.getContent().toArray(new GoodJdbcDemo[0]));	
+					dataTable1.set(categoryPage.getContent().toArray(new GoodJdbcDemo[0]));
+		
 					int totalPages = categoryPage.getTotalPages();
 					dataTable1.setPageIndex(pageNumber);
 					dataTable1.setTotalPages(totalPages);
-					dataTable1.setTotalRow(goodService.getAllCount());
+		
+					... ... ... ... 
 				} catch (Exception e) {
 					logger.error("查询数据失败!", e);
 					throw new WebRuntimeException("查询数据失败!");
@@ -186,29 +166,19 @@ Datatable控制器是一个特殊的spring MVC 控制器，与普通的Spring MV
 			
 					
 		
-			@RequestMapping(value="/page/update", method= RequestMethod.POST)
+			@RequestMapping(value="/update", method= RequestMethod.POST)
 			public EventResponse update(@IWebParameter(id="dataTable1") DataTable<GoodJdbcDemo> dataTable1, @IWebParameter()
 			EventResponse response) {
 				dataTable1.setCls("com.yonyou.iuap.example.entity.GoodJdbcDemo");
 				try {
-					Row[] rowls = dataTable1.getAllRow();
-					//不应该循环保存，应该批量处理,待完善
-					for (Row r : rowls) {
-						if (this.isNeedSave(r)) {
-							Field dateFiled = r.getField("proDate");
-							String timestamp=(String)dateFiled.getValue();
-							long timestring= Long.parseLong(timestamp);
-							SimpleDateFormat format =  new SimpleDateFormat("yyyy-MM-dd");  
-							String newDatevalued=format.format(timestring); 
-							dateFiled.setValue(newDatevalued);
-							ConvertUtils.register(new DateLocaleConverter(), Date.class);	
-							GoodJdbcDemo demoEntity = dataTable1.toBean(r);
-							GoodJdbcDemo entity = goodService.saveEntity(demoEntity);
-							Field pkFiled = r.getField("productid");
-							pkFiled.setValue(entity.getProductid());
-						}
-					}
-					dataTable1.setSelect(new Integer[]{});
+					//查找出需要保存或者更新的行
+
+					... ... 
+
+					GoodJdbcDemo entity = goodService.saveEntity(demoEntity);
+					
+					... ...
+
 					JSONObject json = new JSONObject();
 					json.put("flag", "success");
 					json.put("msg", "保存成功!");
@@ -220,22 +190,22 @@ Datatable控制器是一个特殊的spring MVC 控制器，与普通的Spring MV
 				return response;
 			}
 			
-			@RequestMapping(value="/page/del", method= RequestMethod.POST)
+			@RequestMapping(value="/del", method= RequestMethod.POST)
 			public EventResponse del(@IWebParameter(id="dataTable1") DataTable<GoodJdbcDemo> dataTable1, @IWebParameter()
 			EventResponse response) {
 				try {
 					Row[] rows = dataTable1.getSelectRow();
-					  Iterator<Row> it = Arrays.asList(rows).iterator();
+					Iterator<Row> it = Arrays.asList(rows).iterator();
 					while (it.hasNext()) {
 						Row r = it.next();
 						
 						String productid = (String) r.getField("productid").getValue();
 						if (productid!=null) {
+							//此处只为示例，应该考虑批量删除
 							goodService.deleteById(productid);
 						}
 					}
 					dataTable1.remove(rows);
-					
 					
 					dataTable1.setSelect(new Integer[]{});
 					dataTable1.setTotalRow(goodService.getAllCount());
@@ -245,25 +215,6 @@ Datatable控制器是一个特殊的spring MVC 控制器，与普通的Spring MV
 				}
 				return response;
 			}
-			
-			
-			/**
-			 * 判断传入进来的 行，是否需要保存，新增的行 和 改变的行 都需要保存
-			 */
-			private boolean isNeedSave(Row r) {
-				String status = r.getStatus();
-				if (status.endsWith(Row.STATUS_NEW)||status.endsWith(Row.STATUS_UPD)) {// 新增加的需要保存
-					return true;
-				}
-				Map<String, Field> changefiled = r.getChangedFields();
-				if (changefiled != null && changefiled.size() > 0) {
-					return true; // 有字段发生变化，页需要保存
-				}
-				return false;
-			}	
-			
-			
-			
 			
 			private Map<String, Object> createSearchParamsStartingWith(DataTable dataTable1,String prefix) {
 				Map<String, Object> params = new HashMap<String, Object>();
@@ -291,10 +242,9 @@ Datatable控制器是一个特殊的spring MVC 控制器，与普通的Spring MV
 				}
 				return new PageRequest(pageNumber, pagzSize, sort);
 			}
-		
 		}
 
-- js示例
+- js示例,请根据具体业务需求修改
 
 		define(['jquery', 'knockout', 'text!pages/goods/page.html', 'uui'], function($, ko, template) {
 		

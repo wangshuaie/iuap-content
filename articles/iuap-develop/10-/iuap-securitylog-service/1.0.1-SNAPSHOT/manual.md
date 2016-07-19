@@ -67,7 +67,33 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 2.2，配置文件参考：参考war包中的springDispatcherServlet-servlet.xml和securitylog-applicationContext.xml
 
 
-2.3,对于异步调用的方式，需要的配置文件。
+2.3,对于同步调用的方式，需要将securitylogServer.properties中的usemq配置为
+
+		usemq=false
+
+还需在web.xml中删除mq的配置，最后只剩下：
+
+	<servlet>
+	    <servlet-name>spring</servlet-name>
+	    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	    <init-param>
+	      <param-name>contextConfigLocation</param-name>
+	      <param-value>classpath:springDispatcherServlet-servlet.xml,classpath:securitylog-applicationContext.xml</param-value>
+	    </init-param>
+	    <load-on-startup>1</load-on-startup>
+    </servlet>
+
+在securitylog-applicationContext.xml中去掉mq的配置文件securitylogMQConfig.properties，最后只保留：
+
+		<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:securitylog-application.properties</value>
+            </list>
+        </property>
+    </bean>
+
+2.4,对于异步调用的方式，需要的配置文件。
 
 （1），配置文件参考war包中的springDispatcherServlet-servlet.xml和securitylog-applicationContext.xml和securitylog-applicationContext-mq-consumer.xml
 

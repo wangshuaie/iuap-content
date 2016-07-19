@@ -42,12 +42,6 @@
 			<td>获取对应键值的缓存对象</td>
 		</tr>
 		<tr>
-			<td>get(final String key)</td>
-			<td>final String key（缓存key）</td>
-			<td>T extends Serializable（声明的返回类型对象）</td>
-			<td>获取对应键值的缓存对象</td>
-		</tr>
-		<tr>
 			<td>hget(final String key, final String fieldName)</td>
 			<td>final String key（缓存Map的key），final String fieldName（Map下某个属性的key）</td>
 			<td>T extends Serializable（声明的返回类型对象）</td>
