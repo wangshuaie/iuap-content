@@ -37,7 +37,4 @@
       <td>index.js</td>
       <td>首页面js</td>
    </tr>
-   <tr>
-      <td></td>
-   </tr>
 </table>
