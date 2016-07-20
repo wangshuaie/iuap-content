@@ -211,11 +211,11 @@ Js函数说明：
 如果是maven工程，可以直接使用如下依赖：  
 
 		<!-- 打印功能 -->
-			<dependency>
-				<groupId>iweb</groupId>
-				<artifactId>iweb_ieopoutput</artifactId>
-				<version>0.0.5-SNAPSHOT</version>
-			</dependency>  
+		<dependency>
+			<groupId>com.yonyou.iuap</groupId>
+    		<artifactId>iuap-output</artifactId>
+    		<version>1.0.0-RELEASE</version>
+		</dependency>  
 
 
 2. 设计模板文件放置到相应目录下，实现接口PDFPrintTemplate，如果实现类中需要HttpServletReuqet和HttpServletResponse对象可实现HttpRequestEventAware和HttpResponseEventAware   
