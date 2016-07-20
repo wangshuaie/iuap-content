@@ -91,7 +91,7 @@
    * [登录及权限](articles/iuap-develop/10-/iuap-authrbac-core/3.0.0-RELEASE/manual.md)
    * [编码规则](articles/iuap-develop/10-/iuap-billcode/3.0.0-RELEASE/manual.md)
    * [业务日志](articles/iuap-develop/10-/iuap-busilog/3.0.0-RELEASE/manual.md)
-   * [后台调度任务sdk](articles/iuap-develop/10-/iuap-dispatch-sdk/3.0.0-RELEASE/manual.md)
+   * [后台调度任务SDK](articles/iuap-develop/10-/iuap-dispatch-sdk/3.0.0-RELEASE/manual.md)
    * [后台调度任务](articles/iuap-develop/10-/iuap-dispatch-service/3.0.0-RELEASE/manual.md)
    * [规则引擎](articles/iuap-develop/10-/iuap-droolsrule/5.5.0.Final/manual.md)
    * [电商连接器](articles/iuap-develop/10-/iuap-ecadapter/3.0.0-RELEASE/manual.md)
