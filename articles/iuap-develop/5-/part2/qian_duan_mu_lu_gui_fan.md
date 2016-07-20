@@ -1,12 +1,43 @@
 # 前端目录规范
 
-目录  | 说明    
----| ---
-config|  配置文件目录
-pages|  功能页面
-static| 静态资源(图片、视频等)
-style | 样式文件目录
-vendor| 第三方库|
-WEB-INF | WEB应用的安全目录
-index.html | 首页文件
-index.js |首页面js
+<table>
+   <tr>
+      <td>目录</td>
+      <td>说明</td>
+   </tr>
+   <tr>
+      <td>config</td>
+      <td>配置文件目录</td>
+   </tr>
+   <tr>
+      <td>pages</td>
+      <td>功能页面</td>
+   </tr>
+   <tr>
+      <td>static</td>
+      <td>静态资源(图片、视频等)</td>
+   </tr>
+   <tr>
+      <td>style</td>
+      <td>样式文件目录</td>
+   </tr>
+   <tr>
+      <td>vendor</td>
+      <td>第三方库</td>
+   </tr>
+   <tr>
+      <td>WEB-INF</td>
+      <td>WEB应用的安全目录</td>
+   </tr>
+   <tr>
+      <td>index.html</td>
+      <td>首页文件</td>
+   </tr>
+   <tr>
+      <td>index.js</td>
+      <td>首页面js</td>
+   </tr>
+   <tr>
+      <td></td>
+   </tr>
+</table>
