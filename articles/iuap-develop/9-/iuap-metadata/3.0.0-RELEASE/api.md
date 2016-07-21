@@ -1,4 +1,4 @@
-# 元数据服务接口说明 #
+﻿# 元数据服务接口说明 #
 ##一、 调用方式 ##
   元数据服务通过com.yonyou.metadata.spi.service.ServiceFinder.findMetadataService(Class<E> clazz )调用各项服务接口。输入参数是各项服务的class对象。支持的服务类型有（均位于：com.yonyou.metadata.spi.service包下）：
 
