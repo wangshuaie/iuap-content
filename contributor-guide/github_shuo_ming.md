@@ -88,8 +88,10 @@ git merge 某人-master //
 
 还要记着一点，本地修改代码前一定要先pull一下看看，记得慎用github的在线编辑功能
 
-# GitHub中"watch" "star" "fork"三个按钮干什么用的#
+## GitHub中"watch" "star" "fork"三个按钮干什么用的 ##
 
 1.想拷贝别人项目到自己帐号下就fork一下。
-2.持续关注别人项目更新就star一下
+2.持续关注别人项目更新就star一下。
 3.watch是设置接收邮件提醒的。
+
+
