@@ -357,7 +357,7 @@ fdfs使用略缩图功能时 需要搭建nginx提供文件访问服务
 
 	touch /var/lock/nginx.lock
 
-	2：nginx配置和安装示例
+	2：nginx配置和安装关键步骤示例（仅供参考）
 
 	cd /usr/local
 
