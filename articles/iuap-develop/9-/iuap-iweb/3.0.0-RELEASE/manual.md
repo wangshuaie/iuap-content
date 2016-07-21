@@ -56,7 +56,7 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version,项�
             </bean>			
   		</mvc:message-converters>
   		<mvc:argument-resolvers>
-  			<bean class="com.yonyou.iuap.iweb.datatable.handler.IWebHandlerMethodArgumentResolver">
+  			<bean class="com.yonyou.iuap.iweb.datatable.handler.IWebHandlerMethodArgumentResolver"/>
   		</mvc:argument-resolvers>
 	</mvc:annotation-driven>
 
@@ -171,7 +171,9 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version,项�
 			EventResponse response) {
 				dataTable1.setCls("com.yonyou.iuap.example.entity.GoodJdbcDemo");
 				try {
-					//查找出需要保存或者更新的行
+                    /*
+					查找出需要保存或者更新的行,根据datatable的api，例如getCurrentRow或者getSelectedRow类似，获取到需要修改的行，使用toBean方法将Row对象转换成demoEntity。
+                    */
 
 					... ... 
 
