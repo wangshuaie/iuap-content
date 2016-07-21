@@ -103,7 +103,7 @@ dispatch_dbinfo.properties如下：
  " \"taskConfig\":{\"cronExpress\":\"* */1 * * * ?\",\"groupCode\":\"cronTaskGroup\",\"jobCode\":\"cronTask\",\"priority\":0,\"triggerType\":\"CronTrigger\"};
  
 ### 通过界面进行任务调度 ###
-将组件war包部署到服务器上访问首页http://IP:PORT/iuap-dispatch-service/server_index.html进行任务的添加，添加任务界面如下图所示：
+将组件war包部署到服务器上访问首页http://IP:PORT/iuap-dispatch-service进行任务的添加，添加任务界面如下图所示：
 
 <img src="images/addtask.jpg"/>
 
@@ -124,7 +124,7 @@ dispatch_dbinfo.properties如下：
 - 预置数据库表dispatch_taskway的信息，这张表是用户要执行任务的清单，需要用户预置进去，其中url是指你要执行的定时任务，通过HTTP的方式访问。如果不需要带界面的任务调度服务可以忽略此项。
 - Rest服务调用接口提供任务的增删等功能，具体调用方式参考工程样例章节。
 - 带界面的任务调度系统访问方式
-http://IP:PORT/iuap-dispatch-service/server_index.html
+http://IP:PORT/iuap-dispatch-service
  
 
 ## 常用接口 ##

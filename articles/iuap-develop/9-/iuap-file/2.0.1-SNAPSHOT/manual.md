@@ -13,8 +13,10 @@
 	<dependency>
 		<groupId>com.yonyou.iuap</groupId>
 		<artifactId>iuap-file</artifactId>
-		<version>2.0.1-SNAPSHOT</version>
+		<version>${iuap.modules.version}</version>
 	</dependency>
+
+${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 
 **2:在application.properties文件中配置工程所使用的文件存储系统**
 

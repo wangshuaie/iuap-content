@@ -190,5 +190,25 @@ dispatch-client.properties配置文件配置
 			<td>boolean 添加任务是否成功</td>
 			<td>添加一个Cron表达式复杂任务</td>
 		</tr>
+		<tr>
+			<td>deleteJob(String jobName, String groupName)</td>
+			<td>jobName 任务名称，groupName组名称</td>
+			<td>String 删除成功返回NULL，否则返回具体异常原因</td>
+			<td>删除任务</td>
+		</tr>
+		<tr>
+			<td>pauseJob(String jobName, String groupName)</td>
+			<td>jobName 任务名称，groupName组名称</td>
+			<td>String 暂停成功返回NULL，否则返回具体异常原因</td>
+			<td>暂停任务</td>
+		</tr>
+		<tr>
+			<td>resumeJob(String jobName, String groupName)</td>
+			<td>jobName 任务名称，groupName组名称</td>
+			<td>String 暂停成功返回NULL，否则返回具体异常原因</td>
+			<td>启动任务（将任务从暂停状态恢复为执行状态）</td>
+		</tr>
+
+
 	</tbody>
 </table>

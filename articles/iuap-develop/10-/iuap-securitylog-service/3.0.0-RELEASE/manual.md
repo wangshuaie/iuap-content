@@ -58,14 +58,18 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
     initPoolSize=10
     maxPoolSize=5
 
+
+
 2. 配置文件参考：参考war包中的springDispatcherServlet-servlet.xml和securitylog-applicationContext.xml
+
+
+参考war包中的springDispatcherServlet-servlet.xml和securitylog-applicationContext.xml
 
 
 3. 对于异步调用的方式，需要的配置文件。
 
 	（1）配置文件参考war包中的springDispatcherServlet-servlet.xml和securitylog-applicationContext.xml和securitylog-applicationContext-mq-consumer.xml 
 
-	（2）需要额外配置MQ服务的参数
 MQ服务器配置securitylogMQConfig.properties，需要放在classpath目录下：
 
     #集群地址配置，多个的用逗号隔开，
