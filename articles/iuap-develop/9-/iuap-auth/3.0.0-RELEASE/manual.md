@@ -27,12 +27,6 @@ iUAP auth组件利用spring和shiro进行集成，使用token的方式对用户�
 
 ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 
-	<dependency>
-	  <groupId>com.yonyou.iuap</groupId>
-	  <artifactId>iuap-dubbox</artifactId>
-	  <version>${iuap.modules.version}</version>
-	</dependency>
-
 ## 功能结构 ##
 
 <img src="/images/shiro_auth.jpg"/>

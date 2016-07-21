@@ -1,4 +1,4 @@
-# 多数据库持久化组件 #
+# JDBC持久化组件 #
 
 ## 简介 ##
 
@@ -86,7 +86,7 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 
 注意:
 
-实体类需要集成BaseEntity。
+实体类需要继承BaseEntity。
 
 @Id，@coloumn等注解是iuap-jdbc中的注解，请开发者注意和javax包下的注解进行区分，不要混淆。 @GeneratedValue(strategy = Stragegy.UUID, moudle = "users")注解中的ID生成策略可以参考Stragegy中的枚举值，和iuap-oid中的生成策略保持一致。
 
@@ -162,7 +162,7 @@ getMetaDefinedName和getNamespace方法是为了后期的元数据操作时候�
     			return dao.queryByPK(User.class, id);
     		}
     		
-    		public void save(User user) throws DAOException {
+    		public String save(User user) throws DAOException {
     			dao.insert(user);
     		}
     		
@@ -174,10 +174,9 @@ getMetaDefinedName和getNamespace方法是为了后期的元数据操作时候�
     			dao.remove(users);
     		}
     		
-    		public String update(User user) throws DAOException {
+    		public int update(User user) throws DAOException {
     			return dao.update(user);
     		}
-    	
     	
     		public Page queryPage(String name,PageRequest pageRequest) throws 	DAOException {
        			SQLParameter parameter = new SQLParameter();
@@ -202,19 +201,19 @@ getMetaDefinedName和getNamespace方法是为了后期的元数据操作时候�
 		    }
 		
 		    @Transactional(rollbackFor = DAOException.class)
-		    public String update(User user) throws DAOException {
+		    public int update(User user) throws DAOException {
 		        return userDao.update(user);
 		    }
 		    
 		    @Transactional(rollbackFor = DAOException.class)
-		    public String remove(String id) throws DAOException {
+		    public void remove(String id) throws DAOException {
 		        User user = new User();
 		        user.setId(id);
 		        return userDao.remove(user);
 		    }
 		    
-		    public String queryById(String id) throws DAOException {
-		        return userDao.queryByPK(User.class,id);
+		    public User queryById(String id) throws DAOException {
+		        return userDao.queryByID(id);
 		    }
 		    
 		     public Page queryPage(String name,PageRequest pageRequest) throws DAOException {

@@ -10,15 +10,15 @@
 	<dependency>
 		<groupId>com.yonyou.iuap</groupId>
 		<artifactId>iuap-mq</artifactId>
-		<version>${iuap.module.version}</version>
+		<version>${iuap.modules.version}</version>
 	</dependency>
 
-iuap.module.version为在pom.xml定义的需要引用组件的版本。
+iuap.modules.version为在pom.xml定义的需要引用组件的版本。
 
 ## 配置和使用方式 ##
 **1:在属性文件中，配置连接信息，根据项目选择配置不同的消息连接方式**
 
-	//mq
+	#mq
 	mq.username=admin
 	mq.password=admin
 	mq.addresses=localhost:5672
@@ -30,7 +30,8 @@ iuap.module.version为在pom.xml定义的需要引用组件的版本。
 
 **2:如果是RabbitMQ方式，配置消息生产者和消费者对应的spring配置文件，文件中定义消息队列、监听等信息**
 
-	//消息生产者对应的关键bean声明如下，更详细的配置请参考示例工程
+消息生产者对应的关键bean声明如下，更详细的配置请参考示例工程.
+
 	<!-- 连接服务配置  -->
 	<rabbit:connection-factory id="connectionFactory" addresses="${mq.addresses}"  username="${mq.username}" password="${mq.password}" publisher-confirms="false"/>
          
@@ -65,7 +66,8 @@ iuap.module.version为在pom.xml定义的需要引用组件的版本。
     </bean>
 
 
-	//消息消费者方对应的关键bean声明如下，更详细的配置请参考示例工程
+消息消费者方对应的关键bean声明如下，更详细的配置请参考示例工程.
+
 	<rabbit:listener-container connection-factory="connectionFactory">
 		<rabbit:listener queues="simple_queue" ref="queueLitener"/>
 	</rabbit:listener-container>

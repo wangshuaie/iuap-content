@@ -15,10 +15,10 @@ iUAP后台日志中，统一使用slf4j+logback的方式进行日志的记录和
 	<dependency>
 		<groupId>com.yonyou.iuap</groupId>
 		<artifactId>iuap-log</artifactId>
-		<version>${iuap.module.version}</version>
+		<version>${iuap.modules.version}</version>
 	</dependency>
 
-iuap.module.version为在pom.xml定义的需要引用组件的版本。
+iuap.modules.version为在pom.xml定义的需要引用组件的版本。
 
 **3:类中声名Logger变量**
 
