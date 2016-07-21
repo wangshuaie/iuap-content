@@ -75,9 +75,9 @@
 如果是maven项目的话，可以直接在pom文件里加入如下依赖：  
 
 		<dependency> 
-				<groupId>com.yonyou</groupId>
-				<artifactId>yonyou-sso-ieop</artifactId>
-				<version>0.0.2-SNAPSHOT</version>
+			<groupId>com.yonyou.iuap</groupId>
+    		<artifactId>iuap-sso</artifactId>
+    		<version>1.0.0-RELEASE</version>
 		</dependency>  
 
 2. **web.xml下配置登录servlet和回调servlet**  

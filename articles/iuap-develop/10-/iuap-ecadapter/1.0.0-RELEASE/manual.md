@@ -1,5 +1,5 @@
 # 电商连接器 #
-   
+
 ## 功能简介 ##
 通过调用第三方电商平台的API，来获取电商的数据。
 对各个不同的电商平台，提供了一个统一的入口，以统一的JSON格式返回电商平台上可查的数据。   
@@ -22,11 +22,11 @@
 
 1. 引入电商连接组件Jar包，  
 如果是maven工程，可以直接使用如下依赖：  
- 
+
 	    <dependency>
-	    	<groupId>com.yonyou</groupId>
-	    	<artifactId>youyou-ecadapter-ieop</artifactId>
-	    	<version>0.0.5-SNAPSHOT</version>
+    		<groupId>com.yonyou.iuap</groupId>
+    		<artifactId>iuap-ecadapter</artifactId>
+    		<version>1.0.0-RELEASE</version>
 	    </dependency>   
 
 2. 将配置文件放到指定目录  
@@ -47,4 +47,3 @@
 4. 发送HTTP请求到Servlet  
 在前端可以通过aJax异步请求(或者其他发送HTTP请求的方式)到配置的servlet中，参数格式参见具体电商平台的API接口。
 组件将会执行电商连接操作，在返回的data中将是标准的json数据，可以进一步处理。
-

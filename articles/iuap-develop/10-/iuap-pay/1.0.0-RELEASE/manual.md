@@ -615,10 +615,11 @@ bgUrl=&notifyUrl=&businessId=&platIdtfy=&merchantId=&orderId=&orderDate=&bankTyp
 如果是maven工程，可以直接使用如下依赖:
 
 		<dependency>
-			<groupId>com.yonyou</groupId>
-			<artifactId>yonyou-pay-ieop</artifactId>
-			<version>0.17.0-SNAPSHOT</version>
+    		<groupId>com.yonyou.iuap</groupId>
+    		<artifactId>iuap-pay</artifactId>
+    		<version>1.0.0-RELEASE</version>
 	    </dependency>
+	    
 2. 将配置文件和相应JSP文件放到指定目录  
 ![img002](img/image002.jpg)  
 ![img003](img/image003.jpg)  

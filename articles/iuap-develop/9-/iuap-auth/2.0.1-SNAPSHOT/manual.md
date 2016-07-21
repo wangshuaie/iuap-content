@@ -27,9 +27,15 @@ iUAP auth组件利用spring和shiro进行集成，使用token的方式对用户�
 
 ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 
+	<dependency>
+	  <groupId>com.yonyou.iuap</groupId>
+	  <artifactId>iuap-dubbox</artifactId>
+	  <version>${iuap.modules.version}</version>
+	</dependency>
+
 ## 功能结构 ##
 
-<img src="./images/shiro_auth.jpg"/>
+<img src="/images/shiro_auth.jpg"/>
 
 **基本概念**
 
@@ -108,7 +114,7 @@ iuap-auth组件依赖分布式缓存Redis，所以部署时候，需要先安装
 ## 工程样例 ##
 
 
-<img src="./images/auth_example.jpg"/>
+<img src="/images/auth_example.jpg"/>
 
 开发工具包DevTool中携带了对认证组件的示例工程，位置位于DevTool/examples/example\_iuap\_auth下，在IUAP_STUDIO中导入已有的Maven工程，可以将示例工程导入到工作区。示例工程中有较为完整的对iuap-auth组件的使用示例代码。
 
