@@ -75,7 +75,6 @@
    * [Dubbox扩展组件](articles/iuap-develop/9-/iuap-dubbox/2.0.1-SNAPSHOT/manual.md)
    * [JPA持久化扩展组件](articles/iuap-develop/9-/iuap-extend/2.0.1-SNAPSHOT/manual.md)
    * [文件组件](articles/iuap-develop/9-/iuap-file/2.0.1-SNAPSHOT/manual.md)
-   * [UI后端框架](articles/iuap-develop/9-/iuap-iweb/2.0.1-SNAPSHOT/manual.md)
    * [JDBC持久化组件](articles/iuap-develop/9-/iuap-jdbc/2.0.1-SNAPSHOT/manual.md)
    * [分布式锁组件](articles/iuap-develop/9-/iuap-lock/2.0.1-SNAPSHOT/manual.md)
    * [日志组件](articles/iuap-develop/9-/iuap-log/2.0.1-SNAPSHOT/manual.md)
