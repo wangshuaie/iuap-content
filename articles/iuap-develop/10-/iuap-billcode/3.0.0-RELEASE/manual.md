@@ -50,97 +50,99 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 
 （for mysql）
 
-	SET FOREIGN_KEY_CHECKS=0;
 	
-	-- ----------------------------
-	-- Table structure for pub_bcr_elem
-	-- ----------------------------
-	DROP TABLE IF EXISTS `pub_bcr_elem`;
-	CREATE TABLE `pub_bcr_elem` (
-	  `pk_billcodeelem` decimal(10,0) NOT NULL,
-	  `pk_billcodebase` varchar(40) NOT NULL,
-	  `elemtype` smallint(6) DEFAULT NULL,
-	  `elemvalue` varchar(100) DEFAULT NULL,
-	  `elemlenth` smallint(6) DEFAULT NULL,
-	  `isrefer` smallint(6) DEFAULT NULL,
-	  `eorder` smallint(6) DEFAULT NULL,
-	  `pk_billcodeentity` varchar(20) DEFAULT NULL,
-	  `fillstyle` smallint(6) DEFAULT NULL,
-	  `fillsign` varchar(4) DEFAULT NULL,
-	  `createdate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-	  `datedisplayformat` varchar(16) DEFAULT NULL,
-	  PRIMARY KEY (`pk_billcodeelem`)
-	) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-	
-	-- ----------------------------
-	-- Table structure for pub_bcr_precode
-	-- ----------------------------
-	DROP TABLE IF EXISTS `pub_bcr_precode`;
+    SET FOREIGN_KEY_CHECKS=0;
 
+    -- ----------------------------
+    -- Table structure for `pub_bcr_elem`
+    -- ----------------------------
+    DROP TABLE IF EXISTS `pub_bcr_elem`;
+    CREATE TABLE `pub_bcr_elem` (
+      `pk_billcodeelem` varchar(40) NOT NULL,
+      `pk_billcodebase` varchar(40) NOT NULL,
+      `elemtype` smallint(6) DEFAULT NULL,
+      `elemvalue` varchar(100) DEFAULT NULL,
+      `elemlenth` smallint(6) DEFAULT NULL,
+      `isrefer` smallint(6) DEFAULT NULL,
+      `eorder` smallint(6) DEFAULT NULL,
+      `fillstyle` smallint(6) DEFAULT NULL,
+      `datedisplayformat` varchar(16) DEFAULT NULL,
+      `fillsign` varchar(4) DEFAULT NULL,
+      `createdate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+      PRIMARY KEY (`pk_billcodeelem`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-	CREATE TABLE `pub_bcr_precode` (
-	  `pk_precode` decimal(10,0) NOT NULL,
-	  `pk_rulebase` varchar(40) NOT NULL,
-	  `markstr` varchar(100) DEFAULT NULL,
-	  `billcode` varchar(100) DEFAULT NULL,
-	  `lastsn` varchar(10) DEFAULT NULL,
-	  `markstrdesc` varchar(100) DEFAULT NULL,
-	  PRIMARY KEY (`pk_precode`)
-	) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-	
-	-- ----------------------------
-	-- Table structure for pub_bcr_return
-	-- ----------------------------
-	DROP TABLE IF EXISTS `pub_bcr_return`;
-	CREATE TABLE `pub_bcr_return` (
-	  `pk_billcodertn` decimal(10,0) NOT NULL,
-	  `pk_billcodebase` varchar(40) NOT NULL,
-	  `markstr` varchar(100) DEFAULT NULL,
-	  `rtnsn` varchar(10) DEFAULT NULL,
-	  `markstrdesc` varchar(100) DEFAULT NULL,
-	  PRIMARY KEY (`pk_billcodertn`)
-	) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-	
-	-- ----------------------------
-	-- Records of pub_bcr_return
-	-- ----------------------------
-	
-	-- ----------------------------
-	-- Table structure for pub_bcr_rulebase
-	-- ----------------------------
-	DROP TABLE IF EXISTS `pub_bcr_rulebase`;
-	CREATE TABLE `pub_bcr_rulebase` (
-	  `pk_billcodebase` varchar(40) NOT NULL,
-	  `rulecode` varchar(40) DEFAULT NULL,
-	  `rulename` varchar(300) DEFAULT NULL,
-	  `codemode` varchar(10) DEFAULT NULL,
-	  `iseditable` char(1) DEFAULT NULL,
-	  `isautofill` char(1) DEFAULT NULL,
-	  `format` varchar(20) DEFAULT NULL,
-	  `isdefault` char(1) DEFAULT NULL,
-	  `isused` char(1) DEFAULT NULL,
-	  `islenvar` char(1) DEFAULT NULL,
-	  `isgetpk` char(1) DEFAULT NULL,
-	  `createdate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-	`renterid` varchar(40) DEFAULT NULL,
-	  `productid` varchar(40) DEFAULT NULL,
-	  PRIMARY KEY (`pk_billcodebase`)
-	) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-	
-	-- ----------------------------
-	-- Table structure for pub_bcr_sn
-	-- ----------------------------
-	DROP TABLE IF EXISTS `pub_bcr_sn`;
-	CREATE TABLE `pub_bcr_sn` (
-	  `pk_billcodesn` varchar(40) NOT NULL,
-	  `pk_billcodebase` varchar(40) NOT NULL,
-	  `markstr` varchar(100) DEFAULT NULL,
-	  `lastsn` varchar(10) DEFAULT NULL,
-	  `markstrdesc` varchar(100) DEFAULT NULL,
-	  PRIMARY KEY (`pk_billcodesn`),
-	  KEY `idx_pub_bcr_sn` (`pk_billcodebase`,`markstr`)
-	) ENGINE=InnoDB DEFAULT CHARSET=utf8;  
+    -- ----------------------------
+    -- Table structure for `pub_bcr_precode`
+    -- ----------------------------
+    DROP TABLE IF EXISTS `pub_bcr_precode`;
+    CREATE TABLE `pub_bcr_precode` (
+      `pk_precode` varchar(40) NOT NULL,
+      `pk_rulebase` varchar(40) NOT NULL,
+      `markstr` varchar(100) DEFAULT NULL,
+      `billcode` varchar(100) DEFAULT NULL,
+      `lastsn` varchar(10) DEFAULT NULL,
+      `markstrdesc` varchar(100) DEFAULT NULL,
+      PRIMARY KEY (`pk_precode`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+    -- ----------------------------
+    -- Records of pub_bcr_precode
+    -- ----------------------------
+
+    -- ----------------------------
+    -- Table structure for `pub_bcr_return`
+    -- ----------------------------
+    DROP TABLE IF EXISTS `pub_bcr_return`;
+    CREATE TABLE `pub_bcr_return` (
+      `pk_billcodertn` varchar(40) NOT NULL,
+      `pk_billcodebase` varchar(40) NOT NULL,
+      `markstr` varchar(100) DEFAULT NULL,
+      `rtnsn` varchar(10) DEFAULT NULL,
+      `markstrdesc` varchar(100) DEFAULT NULL,
+      PRIMARY KEY (`pk_billcodertn`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+    -- ----------------------------
+    -- Records of pub_bcr_return
+    -- ----------------------------
+
+    -- ----------------------------
+    -- Table structure for `pub_bcr_rulebase`
+    -- ----------------------------
+    DROP TABLE IF EXISTS `pub_bcr_rulebase`;
+    CREATE TABLE `pub_bcr_rulebase` (
+      `pk_billcodebase` varchar(40) NOT NULL,
+      `rulecode` varchar(100) DEFAULT NULL,
+      `rulename` varchar(300) DEFAULT NULL,
+      `codemode` varchar(10) DEFAULT NULL,
+      `iseditable` char(1) DEFAULT NULL,
+      `isautofill` char(1) DEFAULT NULL,
+      `format` varchar(20) DEFAULT NULL,
+      `isdefault` char(1) DEFAULT NULL,
+      `isused` char(1) DEFAULT NULL,
+      `islenvar` char(1) DEFAULT NULL,
+      `isgetpk` char(1) DEFAULT NULL,
+      `renterid` varchar(40) DEFAULT NULL,
+      `sysid` varchar(40) DEFAULT NULL,
+      `createdate` timestamp NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+      PRIMARY KEY (`pk_billcodebase`),
+      UNIQUE KEY `rulecode` (`rulecode`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+    -- ----------------------------
+    -- Table structure for `pub_bcr_sn`
+    -- ----------------------------
+    DROP TABLE IF EXISTS `pub_bcr_sn`;
+    CREATE TABLE `pub_bcr_sn` (
+      `pk_billcodesn` varchar(40) NOT NULL,
+      `pk_billcodebase` varchar(40) NOT NULL,
+      `markstr` varchar(100) DEFAULT NULL,
+      `lastsn` varchar(10) DEFAULT NULL,
+      `markstrdesc` varchar(100) DEFAULT NULL,
+      PRIMARY KEY (`pk_billcodesn`),
+      KEY `idx_pub_bcr_sn` (`pk_billcodebase`,`markstr`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 ### spring集成 ###
@@ -259,6 +261,132 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 
 注意：自定义编码规则组件的上下文，需要在程序启动时调用`com.yonyou.uap.billcode.BillCodeEngineContext.getInstance('A')`将引擎上下文A载入内存（否则将走默认的的上下文配置` 'com/yonyou/uap/billcode/BillCodeEngineContext.xml'`）
 
+## 编码规则对象注册说明 ##
+### 编码规则
+
+详见com.yonyou.uap.billcode.model.IBillCodeBaseVO
+
+<table>
+  <tr>
+    <th>字段名</th>
+    <th>名称</th>
+	<th>说明</th>
+  </tr>
+  <tr>
+    <td>pk_billcodebase</td>
+    <td>主键</td>
+	<td></td>
+  </tr>
+  <tr>
+    <td>rulecode</td>
+    <td>规则编码</td>
+	<td></td>
+  </tr>
+  <tr>
+    <td>rulecode</td>
+    <td>规则编码</td>
+	<td></td>
+  </tr>
+  <tr>
+    <td>rulename</td>
+    <td>规则名称</td>
+	<td></td>
+  </tr>
+  <tr>
+    <td>codemode</td>
+    <td>编码方式</td>
+	<td>前编码或后编码，具体见IBillCodeBaseVO中常量</td>
+  </tr>
+  <tr>
+    <td>iseditable</td>
+    <td>生成的编码是否可以编辑</td>
+	<td>true/false</td>
+  </tr>
+  <tr>
+    <td>isautofill</td>
+    <td>编码是否保证连</td>
+	<td>true/false，为true时，系统会重新使用被删除或取消的流水号，否则取消或删除的流水号不会在使用</td>
+  </tr>
+  <tr>
+    <td>isBolGetRandomCode</td>
+    <td>是否获取随机码</td>
+	<td>true/false</td>
+  </tr>
+  <tr>
+    <td>isBolSNAppendZero</td>
+    <td>序列号是否补零</td>
+	<td>true/false，不补0，序列号4位，1显示为1，否则，为0001</td>
+  </tr>
+</table>
+
+### 编码规则元素
+
+详见com.yonyou.uap.billcode.model.IBillCodeElemVO
+
+<table>
+  <tr>
+    <th>字段名</th>
+    <th>名称</th>
+	<th>说明</th>
+  </tr>
+  <tr>
+    <td>pk_billcodeelem</td>
+    <td>主键</td>
+	<td></td>
+  </tr>
+  <tr>
+    <td>pk_billcodebase</td>
+    <td>编码规则元素主键</td>
+	<td></td>
+  </tr>
+  <tr>
+    <td>elemtype</td>
+    <td>元素类型</td>
+	<td>见常量com.yonyou.uap.billcode.model.IBillCodeElemVO.TYPE_XX</td>
+  </tr>
+  <tr>
+    <td>elemvalue</td>
+    <td>元素值</td>
+	<td>不同类型的编码元素意义不同：
+	 <br>0-流水号 			：流水号生成器的类型
+	 <br>1-常量     			：常量值
+	 <br>2-系统时间		：空
+	 <br>3-随机码			：空
+	 <br>4-单据业务时间	：扩展人员决定是否使用
+	 <br>5-单据字符串属性     ：扩展人员决定是否使用
+	 <br>6-单据参照属性	：扩展人员决定是否使用</td>
+  </tr>
+  <tr>
+    <td>elemlenth</td>
+    <td>编码元素的长度</td>
+	<td></td>
+  </tr>
+  <tr>
+    <td>isrefer</td>
+    <td>元素流水依据</td>
+	<td>见常量com.yonyou.uap.billcode.model.IBillCodeElemVO.REF_XXX</td>
+  </tr>
+  <tr>
+    <td>eorder</td>
+    <td>编码元素的排序</td>
+	<td>最终的单据编码按此顺序拼接而成</td>
+  </tr>
+  <tr>
+    <td>fillstyle</td>
+    <td>补位方式</td>
+	<td>见常量com.yonyou.uap.billcode.model.IBillCodeElemVO.FIllSTYLE_XXX</td>
+  </tr>
+  <tr>
+    <td>fillsign</td>
+    <td>补位符号</td>
+	<td></td>
+  </tr>
+  <tr>
+    <td>datedisplayformat</td>
+    <td>日前格式化</td>
+	<td>只有元素是日期类型时才会用到，最终日期的格式</td>
+  </tr>
+</table>
 
 
 ## API接口 ##
