@@ -16,7 +16,7 @@
 ## 获取开发平台版本
 
 
-寻找企业应用解决方案提供开发工具，即刻开始体验[iuap.youyon.com](http://iuap.yonyou.com/webpage/developer/ieop/views/download-center.html)；
+寻找企业应用解决方案提供开发工具，即刻开始体验[iUAP开发工具](http://iuap.yonyou.com/webpage/developer/ieop/views/download-center.html)；
 
 加入开发平台预览体验计划，保持消息灵通；
 
