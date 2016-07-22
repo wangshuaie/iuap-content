@@ -1,32 +1,45 @@
 #组织组件概述 
 
 ## 业务需求 ##
+
 企业系统开发中，经常需要维护企业的组织结构，业务会根据企业的组织进行管理，因此我们提供基本的组织组件，业务可以根据自己的需要进行扩张使用。
 
-
 # 整体设计 #
+
 ## 依赖环境 ##
 
 组件采用Maven进行编译和打包发布，其对外提供的依赖方式如下：
 
+```
 	<dependency>
       <groupId>com.yonyou.iuap</groupId>
       <artifactId>iuap-organization</artifactId>
       <version>${iuap.modules.version}</version>
     </dependency>
+```
 
 ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
+
 ## 功能说明 ##
+
 组织组件主要是提供组织的核心模型和基本服务，支持通过组织职能的方式对组织进行扩展。
 
-# 使用说明 #
-## 使用方法
+1.	提供组织的核心模型和基本服务
+2.	提供组织基本信息的管理；
+3.	提供组织职能的管理；
+4.	支持通过组织职能的方式对组织进行扩展；
+5.	支持对组织基本信息和组织职能的扩展；
 
+# 使用说明 #
+
+## 使用方法
 
 1，	配置spring文件，参考示例工程：organization-applicationContext.xml
 
 2，字段结构如下：
+
 #####（1）组织表org_orgs
+
 <table>
    <tr>
       <td>名称</td>
@@ -126,6 +139,7 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 </table>
  
 #####（2）组织类型表org_type
+
 <table>
    <tr>
       <td>名称</td>
@@ -180,6 +194,7 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 
 （1）IOrgService，主要提供组织相关的接口：
 
+```
     public interface IOrgService {
 	
 		public void save(OrgEntity orgEntity);
@@ -212,10 +227,11 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 	
 		public List<OrgEntity> queryOrgsByIdList(List<String> idList);
     }
-
+```
 
 （2）IOrgTypeService，主要提供组织职能的相关接口：
 
+```
     public interface IOrgTypeService {
 
 	    public void save(OrgTypeEntity orgTypeEntity);
@@ -257,13 +273,18 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 		public boolean isTypeOfByOrgId(String orgId, String orgtypeId);
 	
     }
+```
+
 ## 扩展开发说明
+
 #### 1，扩展组织基本信息
+
 例如，我们想要增加描述组织信息的字段，可以扩展组织表org_orgs，修改服务IOrgService的默认实现，在spring中配置即可。
 
 也可在具体的组织类型上增加相应组织类型特有的字段，对应的服务类和实体类自己实现，参照组织职能扩展，对应的pk_org存为该数据同步到组织表中的主键。
 
 #### 2，组织职能扩展
+
 例如，我们想要增加公司这一主职职能，应在org_type中注册一条组织职能的相关信息,注册组织类型对应的服务类与实体类，并进行相应的实现。
 <table>
     <tr>
