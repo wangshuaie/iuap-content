@@ -28,15 +28,14 @@
 ## 依赖环境 ##
 
 组件采用Maven进行编译和打包发布，其对外提供的依赖方式如下：
-
+```
 	<dependency>
 	  <groupId>com.yonyou.iuap</groupId>
 	  <artifactId>iuap-billcode</artifactId>
 	  <version>${iuap.modules.version}</version>
 	</dependency>
-
+```
 ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
-
 
 ## 流程说明 ##
 编码规则分为前编码与后编码，使用过程如下：
