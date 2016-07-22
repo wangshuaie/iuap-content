@@ -7,22 +7,34 @@
 可以注册多个监听，按注册指定的顺序依次执行；
 
 
+## 功能说明 ##
+
+1.	基于插件扩展的同一系统内部的事件通知机制；
+2.	支持多个监听，按注册指定的顺序依次执行；
+3.	支持事件和监听的注册；
+4.	支持版本管理；
+
+
+
 # 整体设计 #
 
 ## 依赖环境 ##
 
 组件采用Maven进行编译和打包发布，其对外提供的依赖方式如下：
 
+```
 	<dependency>
 	  <groupId>com.yonyou.iuap</groupId>
 	  <artifactId>iuap-organization</artifactId>
 	  <version>${iuap.modules.version}</version>
 	</dependency>
-
+```
 ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 
 ##数据库表
+
 目前未提供界面需要通过数据库注册的方式。
+
 ### 事件类型pub_eventtype 
 <table>
    <tr>
@@ -146,18 +158,18 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 
 # 使用说明 #
 
-##集成说明
+## 集成说明
 
 1、服务启动，Spring初始化配置文件路径中添加classpath:eventLocal-applicationContext.xml,请参考示例工程。
 
 2、执行建表脚本
 	
 
-##配置说明
+## 配置说明
 
 组件需要访问数据库，eventLocal-applicationContext.xml文件定义了一个依赖id为dataSource数据源的bean，请在主配置文件中提供id为dataSource的数据源，或者修改配置文件eventlocal-applicationContext.properties，具体配置参数请参考示例工程。
 
-##使用示例
+## 使用示例
 
 假定一个事件用户新增前事件：
 
@@ -181,6 +193,8 @@ BusinessEvent event = new BusinessEvent("USER","ADD_BEFORE",System.currentTimeMi
 		EventDispatcher.fireEvent(event);
 </pre>
 #####（4）监听类实现IBussinessListener
+
+```
     public class LocalEventPluginImpl implements IBussinessListener{
 	/**
 	 * 事件响应
@@ -193,3 +207,4 @@ BusinessEvent event = new BusinessEvent("USER","ADD_BEFORE",System.currentTimeMi
 		System.out.println("doBackAction, event="+businessEvent);
 	}
     }
+ ```
