@@ -1,14 +1,18 @@
-# 元数据持久化组件使用向导 #
+# 元数据持久化组件 #
 
-## maven依赖 ##
+## 组件简介 ##
+iUAP元数据持久化组件是遵循元数据设计规范，基于iuap-jdbc的持久化组件。基于元数据的定义，该组件提供了对数据的增删改查，数据表扩展以及关联关系查询等功能。同时提供热点数据缓存，数据变更日志等功能。
+
+## 配置和使用方式 ##
+### maven依赖 ###
 
 	<dependency>
 	  <groupId>com.yonyou.iuap</groupId>
-	  <artifactId>metadata-jdbc</artifactId>
-	  <version>2.0.1-SNAPSHOT</version>
+	  <artifactId>iuap-mdjdbc</artifactId>
+	  <version>3.0.0-RELEASE</version>
 	</dependency>
 
-## spring配置示例 ##
+### spring配置示例 ###
 
 	<?xml version="1.0" encoding="UTF-8"?>
 	<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
