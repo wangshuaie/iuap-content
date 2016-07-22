@@ -2,13 +2,14 @@
 #附件系统服务组件概述
 
 ## 业务需求 ##
+
 	独立的附件服务系统，支持基本的增删改查直传等等，可以和其他组件集成。
 	支持多种格式的附件上传、支持一次选择多个附件、支持跨域应用、支持后台校验信息的包装返回、
 	支持直传回调、支持回调自定义参数的扩展、支持oss和FastDFS、支持缩略图调节、
 	支持较短的uuid  19位字符（为了适用千万级数据的优化、支持动态数据源
 
 
-##解决方案##
+## 解决方案 ##
 	 1.我们提供了jar包和2个war包多种形式，方便集成的挑选
 	 2.我们采用了springmvc 的附件上传方式，和纯数据流相比速度大概提升几倍，提供了2中封装好的上传方式
 	 3.我们采用CROS 框架保证跨域应用
@@ -17,23 +18,35 @@
 	 6.采用uuid 的优化算法生成19位的id
 	 7.支持可选择性数据源形式。
 
+## 功能说明 ##
+
+1.	独立的附件服务系统，支持基本的增删改查直传等等，可以和其他组件集成。
+2.	支持多种格式的附件上传
+3.	支持一次选择多个附件
+4.	支持跨域应用
+5.	支持后台校验信息的包装返回；
+6.	支持直传回调、支持回调自定义参数的扩展、支持oss和FastDFS、支持缩略图调节；
+7.	支持较短的uuid  19位字符（为了适用千万级数据的优化）；
+8.	支持可选择性数据源形式；
+9.	支持微服务和组件两种方式；
+
+
 #整体设计#
 
 ##依赖环境
-	<dependency>
+```
+<dependency>
 	  <groupId>com.yonyou.iuap</groupId>
 	  <artifactId>iuap-filesystem-service</artifactId>
 	  <version>${iuap.modules.version}</version>
 	  <type>war</type>
 	</dependency>
-
+```
 ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 
-##功能结构
-     本组件依赖于文件组件，通过文件组件可适配不同的文件服务器，目前支持FastDFS，阿里的OSS服务。
-     本组件主要用于业务系统的附件管理功能，提供具体业务单据于单据下多个附件的分组管理功能。通过附件管理表建立业务单据与具体文件的关系，支持业务单据对文件的管理功能。同时屏蔽了不同文件服务器不同接口调用。
-
-
+## 功能结构
+本组件依赖于文件组件，通过文件组件可适配不同的文件服务器，目前支持FastDFS，阿里的OSS服务。
+本组件主要用于业务系统的附件管理功能，提供具体业务单据于单据下多个附件的分组管理功能。通过附件管理表建立业务单据与具体文件的关系，支持业务单据对文件的管理功能。同时屏蔽了不同文件服务器不同接口调用。
 
 
 # 使用说明 #
@@ -52,7 +65,7 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 
 1.application.properties：用户中心、阿里云、FastDFS 配置文件
 
-
+```
     #用户中心得地址
     redis.session.url=direct://ip:端口?poolSize=pool大小&poolName=pool名称
     #超时时间
@@ -84,18 +97,20 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
     #回调方法:一般不用修改，开发人员扩展使用
 	callbackUrl=/file/rewrite
 	callbackBody=filename=${object}&bucket=${bucket}&size=${size}&groupname=${x:groupname}&filepath=${x:filepath}&permission=${x:permission}&modular=${x:modular}
-
+```
 
 2.iuapfile.properties：阿里云bucket信息配置文件
 
+```
     #私有bucket
     defaultBucket=阿里文件存储的私有账户
     #可读bucket==公有
     defaultBucketRead=阿里文件存储的公有账户（read权限账户）
-
+```
 
 3.applicationContext.xml：属性文件加载配置，主要是数据库属性文件和阿里云用户中心文件的加载
 
+```
     <?xml version="1.0" encoding="UTF-8"?>
 	<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context" xmlns:jdbc="http://www.springframework.org/schema/jdbc"  
@@ -133,10 +148,11 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 	</context:component-scan>
 
 	</beans>        
-
+```
 
 4.jdbc.properties：数据库配置文件
 
+```
     #驱动
     jdbc.driver=com.mysql.jdbc.Driver
     #url地址
@@ -155,12 +171,11 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 	jdbc.minIdle=1
 	#定义最长等待时间
 	jdbc.maxWait=60000
-
-
-
+```
 
 5.fileserver-spring-mybatis.xml：MYbatis配置文件一般不用修改，配合jdbc.properties文件使用
 
+```
 		<?xml version="1.0" encoding="UTF-8"?>
 		<beans xmlns="http://www.springframework.org/schema/beans"
 			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -220,12 +235,11 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 			</bean>
 			<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
 			</beans>
-
-
-
+```
 
 6.applicationContext-shiro.xm：用户中心得auth组件配置文件。要保证其他应用的auth组件配置和附件服务的auth组件配置保持一致。（具体应用可以参考auth组件说明）
 
+```
 	<?xml version="1.0" encoding="UTF-8"?>
 	<beans xmlns="http://www.springframework.org/schema/beans"
 		xmlns:util="http://www.springframework.org/schema/util" xmlns:aop="http://www.springframework.org/schema/aop"
@@ -333,11 +347,11 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 	        <property name="sessionMutex" value="${sessionMutex}"/>
 	    </bean>
 	</beans>
-
-
+```
 
 7.pub_filesystem.sql：建表sql语句，需要在数据库里执行的sql。
 
+```
 	 CREATE TABLE `pub_filesystem` (
 	  `id` varchar(36) NOT NULL ,
 	  `pkfile` varchar(100) NOT NULL,
@@ -355,8 +369,8 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 	  PRIMARY KEY (`id`)
 	  ) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
 
+```
 
-***
 ##示例工程说明：
 
  1.文件说明：
@@ -373,6 +387,8 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
      1.线程绑定变量参数的截取器 :fileserver-spring-mvc.xml文件中下面代码为拦截器配置代码。
        当你进行上传等基本操作的时候，拦截器会将cookies中的tenantid、usercode、userid、sysid
        写到线程变量中，供后台使用这些公共信息
+     
+     ```
 		<mvc:interceptors>  
 	      <!-- session超时 -->  
 	      <mvc:interceptor>  
@@ -391,8 +407,11 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 	        </bean>  
 	      </mvc:interceptor>  
 	    </mvc:interceptors>
+```
 
 	 2.CORS跨域框架:在web 中添加了下面的代码，cors使用方式自己参考网上api,可自己按需求修改
+
+```
 		 <filter>
 	    <filter-name>CORS</filter-name>
 	    <filter-class>com.thetransactioncompany.cors.CORSFilter</filter-class>
@@ -417,14 +436,16 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 	      <param-value>true</param-value>
 	    </init-param>
 	  </filter>
+```
 
-	  3.iuap-filesystem.jar包的使用，此包是附件系统的核心包。所有的核心代码都在里面（配置文件不在其中）
-
+3.iuap-filesystem.jar包的使用，此包是附件系统的核心包。所有的核心代码都在里面（配置文件不在其中）
 
 
 ##代码示例说明：
 
-   	第一步：导入js文件
+第一步：导入js文件
+
+```
 		<script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/ossupload.js"></script>
 		<script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/ajaxfileupload.js"></script>
 		<script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/interface.file.js"></script>
