@@ -19,8 +19,8 @@ iUAP、NC Cloud产品的开发非常迅速，为了保障安全性，需要有�
 	  <groupId>com.yonyou.iuap</groupId>
 	  <artifactId>iuap-securitylog-rest-sdk</artifactId>
 	  <version>${iuap.modules.version}</version>
-```	</dependency>
-
+	</dependency>
+```
 ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 
 ## 基本概念
@@ -34,19 +34,20 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 
 ## 组件配置 ##
 
-   需要配置的配置文件，securitylogrestsdk-applicationContext.xml和securitylogrestsdk-applicationContext-mq-provider.xml
+需要配置的配置文件，securitylogrestsdk-applicationContext.xml和securitylogrestsdk-applicationContext-mq-provider.xml
 
-   需要的MQ配置文件，logConfig.properties ，里面是关于MQ的内容。支持通过环境变量传入路径的方式，key值是securitylog-logConfig-filePath，即securitylog-logConfig-filePath=配置文件路径。
+需要的MQ配置文件，logConfig.properties ，里面是关于MQ的内容。支持通过环境变量传入路径的方式，key值是securitylog-logConfig-filePath，即securitylog-logConfig-filePath=配置文件路径。
 
 当然，若是从环境变量中读取不到，最后还是会走默认的classpath下的配置文件，注意和服务端保持一致：
 
+```
     #集群地址配置，多个的用逗号隔开
     mq.address=172.20.14.133:5672
 
     #如果mq.isLocal=true, 可以不用配置下面两项的值
     mq.username=admin
     mq.password=admin
-
+```
 
 ## 组件API ##
 
