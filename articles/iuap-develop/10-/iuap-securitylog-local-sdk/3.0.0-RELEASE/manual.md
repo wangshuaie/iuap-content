@@ -38,14 +38,14 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 
 （2）需要配置服务信息的配置文件securitylogconfiger.properties，也支持从环境变量中传入，key值为securitylogconfiger-filePath，传入方式为securitylogconfiger-filePath = 配置文件路径。
 
->使用非公有服务时，需要配置日志服务所在的ip和端口
 ```
+#使用非公有服务时，需要配置日志服务所在的ip和端口
+
 serverip=127.0.0.1
 serverport=8080
-```
 
->应用名
-```
+#应用名
+
 appname=iuap-securitylog-server
 ```
 
