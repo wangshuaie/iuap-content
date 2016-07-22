@@ -1,10 +1,12 @@
 **1:工程的pom.xml中，增加对iuap-utils的依赖,如果其它组件已经依赖uitls，可省略此步骤**
 
+```
 	<dependency>
 		<groupId>com.yonyou.iuap</groupId>
 		<artifactId>iuap-utils</artifactId>
 		<version>${iuap.modules.version}</version>
 	</dependency>	
+```
 
 iuap.modules.version为在pom.xml中定义的需要引用的组件的版本。
 
@@ -21,7 +23,7 @@ iuap.modules.version为在pom.xml中定义的需要引用的组件的版本。
 **3:http工具类简单封装**
 
 	HttpUtil类中封装了对HTTP的get请求、post请求的基本调用，可以添加自定义的header
-
+```
 	/**
 	 * 基本的Post请求
 	 * @param url 请求url
@@ -37,13 +39,12 @@ iuap.modules.version为在pom.xml中定义的需要引用的组件的版本。
 	 * @param headers http header
 	 */
 	public HttpResponse doGet(String url, Map<String, String> queryParams, Map<String, String> headers);
-	
+```
 
-
-##### 3.1 http传递上下文信息
+** 3.1 http传递上下文信息 **
 
 HttpContextUtil 类在 HttpUtil的基础上，可以传递上下文信息到被调用的系统中，上下文信息被自动放到header头里面。
-
+```
   	 调用方法和HttpUtil类似：
 	/**
 	 * 加入header的Get请求
@@ -69,10 +70,11 @@ HttpContextUtil 类在 HttpUtil的基础上，可以传递上下文信息到被�
 	public HttpResponse doPostWithContext(String url, Map<String, String> queryParams, Map<String, String> formParams) throws Exception{
 		return doPostWithContext(url, queryParams, formParams, null);
 	}
-
+```
 
 发送的上下文信息字段包括
 
+```
   	String sysid;  //系统id
   	String tenantid ;// 租户id
   	String userid;    //用户id
@@ -82,12 +84,13 @@ HttpContextUtil 类在 HttpUtil的基础上，可以传递上下文信息到被�
   	String locale;    //本地信息
   	String logints ；//登录时间
  	Map<String, String>  parameters ; //扩展属性，自定义信息加入其中
-
+```
 
 这些信息放在java 的  ThreadLocal里面 。
 
 接收方配置在 web.xml中配置过滤器来接收传递过来的上下文信息，配置如下：
 
+```
 	<!-- 过滤上下文信息 -->
 	<filter>    
 		<filter-name>InvocationInfoFilter</filter-name>    
@@ -97,10 +100,11 @@ HttpContextUtil 类在 HttpUtil的基础上，可以传递上下文信息到被�
 		<filter-name>InvocationInfoFilter</filter-name>    
 		<url-pattern>/restcontext/*</url-pattern>    
 	</filter-mapping> 
+```
 
 com.yonyou.iuap.context.filter.ContextFilter 类位于  iuap-generic.jar 包中。
 
-<url-pattern>/restcontext/*</url-pattern> 指需要过滤的 url路径。
+> <url-pattern>/restcontext/*</url-pattern> 指需要过滤的 url路径。
 
 接收到信息后，调用 InvocationInfoProxy将信息打印出来
 
@@ -112,7 +116,7 @@ com.yonyou.iuap.context.filter.ContextFilter 类位于  iuap-generic.jar 包中�
 InvocationInfoProxy (位于iuap-generic.jar中)
 
 
-#### 4. 配置文件敏感属性加密
+** 4. 配置文件敏感属性加密 **
 对  application.properties中如用户名，密码等数据加密。
 
 先用 com.yonyou.iuap.utils.PropertyCodec（iuap-util.jar中）中的  encryptPwd() 方法加密；
