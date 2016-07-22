@@ -3,30 +3,40 @@
 ## 业务需求 ##
 应用程序中经常会用到跑定时任务的需求，比如定时垃圾回收。有关任务调度需求有时候很复杂，如每隔多长时间重复执行，一个任务在不同时间段执行等。
 
-##解决方案##
+## 解决方案 ##
 
 任务调度是基于Quartz开发的，具有简单却强大的机制，能依据事件间隔来调度任务，也可以按照cron表达式来操作。任务调度引擎和组件客户端SDK分离，可减小应用服务器的负荷。
 
 iuap-dispatch-sdk是任务调度客户端SDK组件，该组件可通过客户端接口调用服务端的添加、删除、暂停、启动定时任务等功能。
 
+## 功能说明 ##
+1.	提供独立的任务调度服务；
+2.	支持定时任务执行；
+3.	支持重复任务执行；
+4.	提供Rest服务对任务进行操作，包括，添加、删除、暂停、重启任务等；
+5.	支持集群环境下任务执行唯一；
+6.	提供任务配置与管理API和界面；
+7.	任务支持分组管理；
+8.	支持任务日志查询和搜索；
 
 # 整体设计 #
 
 ## 依赖环境 ##
+
 组件采用Maven进行编译和打包发布，依赖Quartz框架,其对外提供的依赖方式如下：
 
+```
 	<dependency>
 	  <groupId>com.yonyou.iuap</groupId>
 	  <artifactId>iuap-dispatch-sdk</artifactId>
 	  <version>${iuap.modules.version}</version>
 	</dependency>
+```
 
 ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 
-
 ## 功能结构 ##
-
-<img src="images/sdk.jpg"/>
+![](images/sdk.jpg)
 
 ## 流程说明 ##
 - 1、用户通过DispatchRemoteManager接口调度任务。
@@ -45,6 +55,8 @@ iuap-dispatch-sdk是任务调度客户端SDK组件，该组件可通过客户端
 **1:配置监听Servlet**
 
   任务调度客户端的配置文件web.xml中配置监听任务调度客户端SDK提供的servlet类地址，用于执行回调任务。
+ 
+```
     <servlet>
           <servlet-name>DispatchClientServlet</servlet-name>
        	<servlet-class>com.yonyou.iuap.dispatch.client.controller.DispatchClientServlet</servlet-class>
@@ -54,6 +66,7 @@ iuap-dispatch-sdk是任务调度客户端SDK组件，该组件可通过客户端
 		<servlet-name>DispatchClientServlet</servlet-name>
 		<url-pattern>/dispatchClientServlet</url-pattern>
 	</servlet-mapping>
+```
 
 **2:服务配置**
 
@@ -70,6 +83,7 @@ dispatch-client.properties配置文件字段说明
 
 *(1) 新建任务处理类，需要实现ITask接口*
 
+```
     import java.util.Map;
 
     import com.yonyou.iuap.dispatch.client.ITask;
@@ -82,12 +96,13 @@ dispatch-client.properties配置文件字段说明
 		
 	 }
     }
- 
+```
+
 *(2) 新增任务*
 
 	**A、简单类型任务**
 
-
+```
      public void addSimpleTask(Date startDate, TimeConfig timeConfig, String note){
 		SimpleTaskConfig taskConfig = 
 					new SimpleTaskConfig(UUID.randomUUID().toString()/*任务名*/, 
@@ -103,9 +118,11 @@ dispatch-client.properties配置文件字段说明
 			System.out.println("任务添加失败--"+taskConfig.getJobCode());
 		}
 	}
+ ```
  
     **B、Cron类型任务**
-
+    
+```
     public void addCronTask(){
 		CronTaskConfig cronTaskConfig = new CronTaskConfig("cronTask", 
 														   "cronTaskGroup", 
@@ -123,21 +140,26 @@ dispatch-client.properties配置文件字段说明
 		}
 	}
  
+```
 
 ## 开发步骤 ##
 
 - 加入依赖
+```
 	<dependency>
 	  <groupId>com.yonyou.iuap</groupId>
 	  <artifactId>iuap-dispatch-sdk</artifactId>
 	  <version>${iuap.modules.version}</version>
 	</dependency>
+```
 
 ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 
 - 组件配置
   任务调度客户端的配置文件web.xml中需要配置任务调度客户端SDK提供的servlet类地址，用于执行回调任务。
-    <servlet>
+ 
+ ```
+ <servlet>
           <servlet-name>DispatchClientServlet</servlet-name>
        	<servlet-class>com.yonyou.iuap.dispatch.client.controller.DispatchClientServlet</servlet-class>
     </servlet>
@@ -146,6 +168,7 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 		<servlet-name>DispatchClientServlet</servlet-name>
 		<url-pattern>/dispatchClientServlet</url-pattern>
 	</servlet-mapping>
+```
 
 dispatch-client.properties配置文件配置
 
