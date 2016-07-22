@@ -636,8 +636,11 @@ HTTP POST
   </tr>
 </table>
 签名信息描述：所有值，为空的时候也参与。  
-md5签名的方式为：  
+
+md5签名的方式为：
+```
 bgUrl=&notifyUrl=&businessId=&platIdtfy=&merchantId=&orderId=&orderDate=&bankType=&payeeBankAccount=&payeeBankType=&payeeBankName=&payeeName=&deviceId=&payerName=&payerCardType=&payerContactMbl=&payerContactMal=&orderAmount=&amtType=&orderTime=&expireTime=&goodsId=&productName=&productNum=&productDesc=&redoFlag=&merPriv=&expand=&expand2=&key=商户密钥
+```
 
 ## 开发步骤 ##
 
