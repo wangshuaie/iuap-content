@@ -1,8 +1,10 @@
 # 业务日志组件概述 #
 ## 业务需求 ##
+
 一个现实场景：  
 我们对于记录（也叫业务日志）的操作，很多时候是这样编码的：  
 
+```
 		// 创建一家公司
 		public Organization createCompany(CompanyDto dto) {
 			// 执行业务方法
@@ -11,12 +13,16 @@
 			LogDAO.save(new BusinessLog(userDAO.getSubjectName() 
 					+ "，创建子公司：" + dto.getCompanyName()));
 		}
+```
+
 最后结果就是：  
 1. 新公司的创建  
 2. 业务日志：张三，创建子公司：广州子公司  
 咋一看这样写没有什么问题，但是其中有一个最大的问题：**业务逻辑和日志逻辑的混在一起。**
 如果业务逻辑和日志逻辑足够复杂的时候，你可以想像你的代码就如同意大利面一样。以后维护的时候，就会变成人间地狱！  
-##解决方案##
+
+## 解决方案 ##
+
 业务日志组件可以解决此问题：**业务逻辑和日志逻辑“分离”！**  
 业务日志组件的目标  
 1. 日志的记录对业务方法尽量**无侵入**  
@@ -26,24 +32,36 @@
 5. 修改日志模板而不需要重启应用  
 事实上，要达到真正的无侵入是不可能的，业务日志组件对业务方法的侵入只不过是要在业务方法上加上一个注解。
 
-# 整体设计 #
-## 依赖环境 ##
-组件采用Maven进行编译和打包发布，外提供的依赖方式如下：
+## 功能说明 ##
 
+1.	根据编码规则和一些必要信息，生成业务对象编码；
+2.	编码规则支持多种存储方式，文件、数据库等；
+3.	支持灵活的规则定义，包括业务数据属性、日期、时间、常量、流水等；
+4.	支持最大号定义和归零规则定义；
+5.	支持扩展机制对编码规则元素的自定义替换；
+6.	支持批量取号、补号、退号等编码操作；
+7.	支持高并发场景下不重号、丢号；
+
+# 整体设计 #
+
+## 依赖环境 ##
+
+组件采用Maven进行编译和打包发布，外提供的依赖方式如下：
+```
 		<dependency>
 			<groupId>com.yonyou.iuap</groupId>
 			<artifactId>iuap-busilog</artifactId>
 			<version>${iuap.modules.version}</version>
 		</dependency>
-
+```
 ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
+
 ## 功能说明 ##
+
 业务与日志分离的原理是采用Spring AOP的拦截机制进行。
 
 组件对使用@BusilogConfig("业务方法别名")注解的业务方法，通过Spring AOP进行拦截。当Spring察觉到被注解的业务方法被调用的时候，即可对此方法进行日志记录。  
 其中，本组件通过Groovy脚本配置日志模版，定义拦截的业务方法的参数。日志注解@BusilogConfig("业务方法别名")用来给需要日志记录的方法链接日志模版，不同的业务方法可以有不同的日志模板。同时对于日志内容的输出也是可配置的，用户可以自定义来实现对业务日志的持久化操作。  
-
-
 
 # 使用说明 #
 ## 组件包说明 ##
@@ -75,7 +93,8 @@ maven私服上发布的有示例工程，用户可将示例工程下载下来，
 
 1. 执行数据库脚本  
 如果用户需要将业务日志持久化到数据库中的话：（for mysql） 
- 
+
+```
 		drop table if exists busilog_saas;
 		
 		CREATE TABLE busilog_saas( 
@@ -89,6 +108,7 @@ maven私服上发布的有示例工程，用户可将示例工程下载下来，
      		logdate TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
      		PRIMARY KEY (id)
 		) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+```
 
 2. spring集成（配置文件参见组件的示例工程example-iuap-busilog）  
 需要添加的配置文件及存放目录示意图：  
@@ -108,6 +128,7 @@ maven私服上发布的有示例工程，用户可将示例工程下载下来，
      4. mybatis数据源配置。
  - busilog-systemConfig.properties：配置组件相关参数
 
+```
 			#日志开关
 			yonyou.businesslog.enable=true
 			#指定拦截的业务方法，使用Spring的切入点n写法
@@ -144,12 +165,14 @@ maven私服上发布的有示例工程，用户可将示例工程下载下来，
 			minIdle=10
 			#定义最长等待时间
 			maxWait=90000
+```
 
  - BusilogMapper.xml：配置数据库与实体的对应关系以及对实体操作的配置文件。无须修改。
 
 3.	为业务方法加上annotation  
-这个别名必须符合Java方法名的命名规则，给业务方法加别名的目的是为了方便业务方法与日志模板之间的映射。  
 
+这个别名必须符合Java方法名的命名规则，给业务方法加别名的目的是为了方便业务方法与日志模板之间的映射。  
+```
 		package com.yonyou.uap.busiog.service;
 
 		import com.yonyou.uap.ieop.busilog.config.annotation.BusiLogConfig;
@@ -166,9 +189,12 @@ maven私服上发布的有示例工程，用户可将示例工程下载下来，
 		
 			}
 		}
+```
 
 ## 常用接口 ##
+
 ### 删除指定的日志记录 ###
+
 **描述**  
 实现业务日志的删除。  
 如果用户将业务日志输出到数据库中，此接口可以实现对指定ID的记录进行删除。  
@@ -177,6 +203,7 @@ com.yonyou.uap.busilog.service.BusiLogService.delete(String)
 **请求方式**  
 服务调用  
 **请求参数说明**  
+```
 <table>
   <tr>
     <th><br>  参数字段<br>  </th>
@@ -193,6 +220,8 @@ com.yonyou.uap.busilog.service.BusiLogService.delete(String)
     <td><br>  业务日志ID<br>  </td>
   </tr>
 </table>
+```
+
 **返回参数说明**  
 int 0表示失败，1表示成功
 
@@ -219,7 +248,7 @@ List<Busilog>
 
 1. 在类路径下加入'BusinessLogConfig.groovy'   
 2. 文件模板为：   
-
+```
 		class BusinesslogConfig {
 		    //必须
 		    def context
@@ -234,6 +263,7 @@ List<Busilog>
 		    }
 		
 		}
+```
 3. 配置模板实际上是一个Groovy类，你可以在类中定义任何方法。如果方法为某个业务方法的别名（使用'@BusilogConfig'注解）那么，我们就认为它是一个业务日志方法。它的返回值（return或者放在方法最后一行的变量）将会被Set到'com.yonyou.uap.ieop.busilog.BusinessLog'的实例中。   
 
 日志方法返回值有两种情况：  
