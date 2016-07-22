@@ -76,14 +76,18 @@ iuap_quickstart工程是iUAP开发平台的实例工程，该工程基于iUAP开
 
 
 
-iUAP开发工具可使用三种方式快速生成javabean实体类。
+iUAP开发工具可使用**三种方式**快速生成javabean实体类。
 
-1. 工具使用JPA插件，通过数据表的方式自动建立实体类，首先建立好数据库、实体表、以及数据库连接，在工程上右键选择配置->转为JPA工程，完成转化后，右键工程选择JPA tools->从数据表反向生成Entity。  
+**方式一：** 工具使用JPA插件，通过数据表的方式自动建立实体类，首先建立好数据库、实体表、以及数据库连接，在工程上右键选择配置->转为JPA工程，完成转化后，右键工程选择JPA tools->Generate Entities from Tables, 从数据表反向生成Entity。  
+
 ![](./image/iwebJPA.png)   
 ![](./image/iwebJPA2.png)
-2. 通过元数据设计器设计元数据模型，并生成java源代码。
+
+**方式二：** 通过元数据设计器设计元数据模型，并生成java源代码。
+
 ![](./image/metajava.png)  
-3. 通过代码快速生成向导，选择适用的模版类型生成相应格式的javaBean。
+
+**方式三：** 通过代码快速生成向导，选择适用的模版类型生成相应格式的javaBean。
 
 ![](./image/codegenjava.png)  
 
@@ -100,39 +104,23 @@ iUAP开发工具可使用三种方式快速生成javabean实体类。
 
 		public class Demo implements Serializable {
 
-		    private static final long serialVersionUID = 1L;
-
-		
-
+		    private static final long serialVersionUID = 1L
+		    
 		    @Id
-
 		    private long id;
 
-		
-
 		    @NotBlank(message="测试编码不能为空!")
-
 		    private String code;
-
-		
-
+		    
 		    private String memo;
-
-		
 
 		    private String name;
 
-		
-
 		    private String isdefault;
-
-		
 
 		    public Demo() {
 
 		    }
-
-		
 
 		    public long getId() {
 
@@ -140,15 +128,11 @@ iUAP开发工具可使用三种方式快速生成javabean实体类。
 
 		    }
 
-		
-
 		    public void setId(long id) {
 
 		        this.id = id;
 
 		    }
-
-		
 
 		    public String getCode() {
 
@@ -156,15 +140,11 @@ iUAP开发工具可使用三种方式快速生成javabean实体类。
 
 		    }
 
-		
-
 		    public void setCode(String code) {
 
 		        this.code = code;
 
 		    }
-
-		
 
 		    public String getMemo() {
 
@@ -172,15 +152,11 @@ iUAP开发工具可使用三种方式快速生成javabean实体类。
 
 		    }
 
-		
-
 		    public void setMemo(String memo) {
 
 		        this.memo = memo;
 
-		    }
-
-		
+		    }	
 
 		    public String getName() {
 
@@ -188,23 +164,17 @@ iUAP开发工具可使用三种方式快速生成javabean实体类。
 
 		    }
 
-		
-
 		    public String getIsdefault() {
 
 		        return isdefault;
 
 		    }
-
 		
-
 		    public void setIsdefault(String isdefault) {
 
 		        this.isdefault = isdefault;
 
-		    }
-
-		
+		    }	
 
 		    public void setName(String name) {
 
@@ -222,7 +192,7 @@ iUAP开发工具可使用三种方式快速生成javabean实体类。
 
 
 
-开发工具中的数据模型有很多用途，比如绑定控件替换参数，一键生成数据绑定配置文件，页面模式化向导等。 这里的数据模型的概念实际上是基于JavaBean实体类的xml文件，以.model为后缀名。iEOP开发工具提供两种方式生成数据模型。   
+开发工具中的数据模型有很多用途，比如绑定控件替换参数，一键生成数据绑定配置文件，页面模式化向导等。 这里的数据模型的概念实际上是基于JavaBean实体类的xml文件，以.model为后缀名。iUAP开发工具提供两种方式生成数据模型。   
 
 一是通过数据模型向导直接新建模型。右键工程，选择新建->数据模型。下一步输入模型的名称以及位置，点击完成后，通过model编辑器完成模型的录入。 如图所示：   
 
@@ -298,7 +268,7 @@ iUAP开发工具可使用三种方式快速生成javabean实体类。
 
 完成html代码创建后，并不意味着可以和后台数据做关联，数据还需要采用knockout的方式进行双向绑定，所以我们需要支持创建这种数据绑定js文件，
 
-选中工程， 右键新建，在向导页中选择iEOP->数据绑定向导。 下一步选择js文件的位置，这里js文件一般需要与相应的html文件放在同一级目录下并且命名一样。下一步选择数据模型及其属性，点击完成即可创建JS文件。这里的js文件作为中间层，提供前台控件和后台数据的绑定机制。 如图所示：  
+选中工程， 右键新建，在向导页中选择iUAP->数据绑定向导。 下一步选择js文件的位置，这里js文件一般需要与相应的html文件放在同一级目录下并且命名一样。下一步选择数据模型及其属性，点击完成即可创建JS文件。这里的js文件作为中间层，提供前台控件和后台数据的绑定机制。 如图所示：  
 
 ![](./image/bind.png)   
 
@@ -368,7 +338,7 @@ web页面编辑器内嵌了jquery插件，可以提示jquery语法。提示效�
 
 ## 3.5 标签和代码块智能提示配置
 
-标签可通过在窗口->首选项->iEOP->Html标签扩展里面进行编辑，可创建自定义标签提示。  
+标签可通过在窗口->首选项->iUAP->Html标签扩展里面进行编辑，可创建自定义标签提示。  
 
 
 ![](./image/tagconfig.png)   
@@ -421,7 +391,7 @@ web页面编辑器内嵌了jquery插件，可以提示jquery语法。提示效�
 
 ### 4.4.1 元数据管理器
 
-元数据管理器是提供元数据的相关管理工具，它支持元数据的创建、数据库导入实体组件、导入元数据bmf文件及删除元数据文件同时方便查看所有模型资源以及公共资源, 使我们能更清楚、更直观地查看。
+元数据管理器是提供元数据的相关管理工具，它支持元数据的创建、数据库导入实体组件、导入元数据bmf文件及删除元数据文件同时方便查看所有模型资源以及公共资源。
 管理器的文件系统结构是按树形方式展开，反映组件的树型组织关系：
 
 ![](./image/metadata25.png)
