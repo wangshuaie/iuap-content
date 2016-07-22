@@ -1,7 +1,11 @@
 # 第三方登录组件概述 #
+
 ## 业务需求 ##
+
 身在一个离不开网络的时代，每天都面对着不同的登陆界面，能有一种简单的登陆方式显得很重要。第三方登陆方便了用户日常的网络生活，登陆方便快捷，并且很多资料信息可以公用，也可将自己在某个平台的动态信息同步到各个平台。
+
 ## 解决方案 ##
+
 iuap-sso第三方登录组件是将各主流通讯软件以及门户网站作为登录方式，通过Oauth2.0协议，在不获取第三方账号安全信息的前提下，通过第三方账号的认证，登录自有系统。  
 
 # 整体设计 #
@@ -9,18 +13,18 @@ iuap-sso第三方登录组件是将各主流通讯软件以及门户网站作为
 ## 依赖环境 ##
 
 组件采用Maven进行编译和打包发布，其对外提供的依赖方式如下：
-
+```
 	<dependency>
 	  <groupId>com.yonyou.iuap</groupId>
 	  <artifactId>iuap-sso</artifactId>
 	  <version>${iuap.modules.version}</version>
 	</dependency>
-
+```
 ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 
 ## 功能结构 ##
 
-<img src="images/oauth.jpg"/>
+![](images/oauth.jpg)
 
 **基本过程**
 
@@ -40,6 +44,7 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 根据传入的登录类型，调用不同IloginPubService的实现。  
 以QQ为例，调用腾讯平台提供不同接口，分别根据AppKey和AppId获取用户认证code，认证token，以及查询qq用户信息，并转化为统一用户登录信息，调用 `com.yonyou.uap.ieop.login.afterlogin.IafterloginService`默认实现类`com.yonyou.uap.ieop.login.afterlogin.ShiroAfterloginService`的doAfterLogin.  
 
+```
 		/**
 		 * <p>Title: doAfterLogin</p>
 		 * <p>Description: 第三方登录成功后，自有系统登录，并进行用户信息关联存储</p>
@@ -49,17 +54,20 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 		 */
 		publicvoid doAfterLogin(HttpServletRequest request,
 				HttpServletResponse response,LoginInfo info);  
-
+```
 
 # 使用说明 #
 
 ## 组件包说明 ##
+
 iuap-sso组件目前提供微信：WECHAT ，新浪微博：WEIBO，qq：QQ三种方式的第三方登陆平台，根据传入的登录类型，调用不同IloginPubService的实现。  
 以QQ为例，调用腾讯平台提供不同接口，分别根据AppKey和AppId获取用户认证code，认证token，以及查询qq用户信息，并转化为统一用户登录信息，调用iuap-sso组件提供的接口最终在第三方登录成功后，进行自有系统登录，并进行用户信息关联存储。
+
 ##组件配置##
 
 **web.xml下配置登录servlet和回调servlet**  
 
+```
 		<servlet>
 			<servlet-name>login_servlet</servlet-name>
 		<servlet-class>com.yonyou.uap.ieop.login.servlet.LoginServlet</servlet-class>
@@ -77,7 +85,7 @@ iuap-sso组件目前提供微信：WECHAT ，新浪微博：WEIBO，qq：QQ三�
 			<servlet-name>return_servlet</servlet-name>
 			<url-pattern>/extlogin/qq</url-pattern>    
 		</servlet-mapping>  
-
+```
 
 其中，组件已支持的回调Servlet有：  
 
@@ -91,10 +99,11 @@ QQ为`com.yonyou.uap.ieop.login.servlet.QQUserInfoServlet`
 maven库上提供了iuap-sso组件的示例工程iuap-sso-example-1.0.1.zip，下载后将示例工程导入到工作区。示例工程中有较为完整的对iuap-sso组件的使用示例代码。
 
 ## 开发步骤 ##
+
 ### 与Spring整合 ###
 
 **web.xml下配置登录servlet和回调servlet**  
-
+```
 		<servlet>
 			<servlet-name>login_servlet</servlet-name>
 		<servlet-class>com.yonyou.uap.ieop.login.servlet.LoginServlet</servlet-class>
@@ -112,7 +121,7 @@ maven库上提供了iuap-sso组件的示例工程iuap-sso-example-1.0.1.zip，�
 			<servlet-name>return_servlet</servlet-name>
 			<url-pattern>/extlogin/qq</url-pattern>    
 		</servlet-mapping>  
-
+```
 
 其中，组件已支持的回调Servlet有：  
 
@@ -126,17 +135,20 @@ QQ为`com.yonyou.uap.ieop.login.servlet.QQUserInfoServlet`
 
 **前台加入第三方登录按钮并配置相应链接至servlet**  
 
+```
 	<a href=" /login_servlet?LoinType=QQ&isLogin=true" title="QQ">QQ登录</a>  
-
+```
 
 ### 配置文件 ###
 
 1. **配置对应第三方系统的配置文件**  
 修改qqconnectconfig.properties(此文件需要放在工程的class path路径下)内容。其中：app_ID和app_KEY为支持等三方登录功能的平台申请的ID和KEY，redirect_URI为用户在第三方平台登录授权后回调的URI地址，需要与3.4.1.2中配置的回调servlet对应。
 
+```
 	app_ID = 101248396
 	app_KEY = c1b2f603ce729addc4d63d61c915d00c.
 	redirect_URI = http://xxxx:8080/xxxx/extlogin/qq  
+```
 
 2. **指定登录成功后的逻辑处理Service**  
 本地创建`com.yonyou.uap.ieop.login.afterlogin.ShiroAfterloginService`类并继承`com.yonyou.uap.ieop.login.afterlogin.IafterloginService`
