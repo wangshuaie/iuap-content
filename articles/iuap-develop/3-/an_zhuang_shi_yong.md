@@ -6,7 +6,7 @@
 
 首次运行指导:       
 1. 运行开发环境前请先右键以管理员身份运行开发根目录下的initDevTool.bat。           
-2. 强烈建议解压到D盘根目录，如果没有处在D盘根目录，请运行DevTool目录下的startDevTool.bat开启开发环境IDE，自行设置maven环境到DevTool下的maven库, 设置方法: 在stud o中点击：窗口 > 首选项 > Maven > User Settings。修改Global Settings 和User Settings为当前devtool中的\repository\Maven\Maven3.2.2\conf\settings.xml文件。点击  Update Settings 按钮,更新Local Repository。     
+2. 强烈建议解压到D盘根目录，如果没有处在D盘根目录，请运行DevTool目录下的startDevTool.bat开启开发环境IDE，自行设置maven环境到DevTool下的maven库, 设置方法: 在studio中点击：窗口 > 首选项 > Maven > User Settings。修改Global Settings 和User Settings为当前devtool中的\repository\Maven\Maven3.2.2\conf\settings.xml文件。点击  Update Settings 按钮,更新Local Repository。     
 3. 运行bin目录下的startpgsql.bat，并在开发环境的IDE中以jetty的方式调试示例工程。
 4. 如果打开postgresql数据库发生闪退，需要对DevTool\DB\pgsql文件夹赋予完全控制权限。对文件夹点击右键选择属性--选择安全标签--点击编辑--为当前用户添加完全控制权限。
 5. 运行postgresql数据库需要安装vc2010运行库，DevTool\DB\pgsql文件夹下vcredist_x86.exe为安装包。
