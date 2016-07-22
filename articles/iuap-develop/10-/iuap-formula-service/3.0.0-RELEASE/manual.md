@@ -60,6 +60,7 @@ iuap-formula-service/formula/execute4get?formula={"variables":{"d1":3,"d2":4,"i1
 /iuap-formula-service/formula/execute
 	
 参数格式：
+
 String param ="{\"formulas\":[\"f1->d1*d2*i1\"],\"variables\":{\"d1\":3,\"d2\":4,\"i1\":6}}";
 	
 返回值格式如下：{"f1":[72]}
