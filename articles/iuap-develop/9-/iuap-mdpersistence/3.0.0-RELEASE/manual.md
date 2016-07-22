@@ -8,13 +8,15 @@
 	  <artifactId>metadata-jdbc</artifactId>
 	  <version>2.0.1-SNAPSHOT</version>
 	</dependency>
+
 ```
 
 ## spring配置示例 ##
 
 ```
-	<?xml version="1.0" encoding="UTF-8"?>
-	<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+    <?xml version="1.0" encoding="UTF-8"?>
+     <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:util="http://www.springframework.org/schema/util"
@@ -150,19 +152,21 @@
         </property>
     </bean>
 	</beans>
+
 ```
 
 ## 元数据持久化组件特征 ##
 
-*说明，元数据定义相关请参考工具使用手册*  
+说明，元数据定义相关请参考工具使用手册
 
 ### 支持基于元数据定义的单表数据的增删改查 ###
 
 元数据持久化组件的增删改查逻辑to
 
 ```
-	@Service
-	public class UserService {
+
+@Service
+public class UserService {
 
     @Autowired
     private MetadataDAO baseDAO;
@@ -229,6 +233,7 @@
 元数据持久化组件对于元数据操作接口提供了数据变更通知功能，需要在`MetaDAO`的属性中设置`dataChangeNotifier`属性，组件默认提供了日志记录的功能，如果应用需要自定义扩展，需要实现`IDataChangeListener`接口，并做如下配置
 
 ```
+
  <bean id="dataChangeNotifier" class="com.yonyou.iuap.persistence.bs.notifier.DataChangeNotifier">
         <property name="dataChangeListenerList">
             <list>
@@ -236,6 +241,7 @@
             </list>
         </property>
     </bean>
+
 ```
 
 ### 支持基于元数据定义，删除主表数据，级联删除子表数据的功能 ###
