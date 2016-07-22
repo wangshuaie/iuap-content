@@ -18,16 +18,17 @@ iuap-message组件提供了向手机发送短信、发送电子邮件、向APP�
 ## 依赖环境 ##
 
 组件采用Maven进行编译和打包发布，其对外提供的依赖方式如下：
-
+```
 	<dependency>
       <groupId>com.yonyou.iuap</groupId>
       <artifactId>iuap-message</artifactId>
       <version>${iuap.modules.version}</version>
     </dependency>
-
+```
 ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 
 ## 功能说明 ##
+
 iuap-message组件提供了向手机发送短信、发送电子邮件、向APP推送消息的功能。
 
 1. 消息推送  
@@ -37,19 +38,26 @@ iuap-message组件提供了向手机发送短信、发送电子邮件、向APP�
 3. 发送邮件  
 电子邮件服务，是基于JavaMail实现的邮件发送服务，使用JDK原生的javax.mail组件来完成发送邮件的服务。
 
-	主要工作流程如下： 	
-	1. 验证登录权限Authenticator   
-	2. 根据设置的Properties和Authenticator创建一个Session  
-	3. 创建一个MimeMessage实例，设置这个message的收信人、主题、内容等 
-	4. 发送邮件Transport.send(message);  
+主要工作流程如下： 	
+1. 验证登录权限Authenticator   
+2. 根据设置的Properties和Authenticator创建一个Session  
+3. 创建一个MimeMessage实例，设置这个message的收信人、主题、内容等 
+4. 发送邮件Transport.send(message);  
  
 # 使用说明 #
+
 ## 组件包说明 ##
+
 iuap-message组件提供了向手机发送短信、发送电子邮件、向APP推送消息的功能。
+
 ##组件配置##
+
 将配置文件message-senderInfo.xml(可在上文示例工程拿到)放到工程的classpath下，如果是maven工程，放在src/main/resources目录下即可
+
 ## 工程样例 ##
+
 消息推送组件提供有示例工程iuap-message-example，用户可从maven库上下载，示例工程中有较为完整的对iuap-message组件的使用示例代码。
+
 ## 开发步骤 ##
 
 *可直接参考以下示例工程：*
@@ -60,7 +68,8 @@ iuap-message组件提供了向手机发送短信、发送电子邮件、向APP�
 将配置文件message-senderInfo.xml(可在上文示例工程拿到)放到工程的classpath下，如果是maven工程，放在src/main/resources目录下即可  
 
 2 . 调用消息服务的接口方法，发送消息:
-  
+
+```
     // 创建消息接收者
     MessageReceiver emailReceivers = new EmailReceiver("username1@domain.com,username2@domain.com");
     
@@ -69,8 +78,10 @@ iuap-message组件提供了向手机发送短信、发送电子邮件、向APP�
     
     // 发送消息
     List<MessageResponse> responseList = new MessageSend(emailReceivers, emailContent).send(); 
+```
 
 ## 常用接口 ##
+
 **描述**  
 短信、邮件和APP消息推送接口  
 
@@ -108,12 +119,12 @@ new MessageSend(msgReceivers, msgContent).send();
 ## 扩展机制 ##
 发送HTML内容的电子邮件：  
 在设置邮件发送内容时，可以直接编写HTML代码，如下：  
-      
+ ```     
     StringBuffer htmlContent = new StringBuffer();
     htmlContent.append("<h1>我是标题</h1>");
     htmlContent.append("<h3>企业互联网运营支撑平台</h3>");
     htmlContent.append("<div><img src='http://img4.3lian.com/sucai/img6/230/29.jpg'></div>");
     htmlContent.append("<a href='http://ieop.yyuap.com/'>用友应用支撑平台</a>");
     MessageContent mailContent = new EmailContent("HTML Mail测试", htmlContent.toString());
-
+```
 这样就可以发送HTML格式的邮件。  
