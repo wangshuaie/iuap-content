@@ -44,6 +44,8 @@ iuap-persistence组件提供对通用持久化功能的集成，包括Spring dat
         <version>${iuap.modules.version}</version>
     </dependency>
 
+${iuap.modules.version} 为在pom.xml中定义的需要引入组件的version。
+
 **2.spring配置文件中，增加对连接池、数据源的依赖**
 
     <!-- 数据源配置, 使用Tomcat JDBC连接池 -->

@@ -219,7 +219,9 @@ iuap.modules.version为在pom.xml定义的需要引用组件的版本。
 
 #####9.2 接收消息端（消费者）
 
-接收方继承类 com.yonyou.iuap.mq.rabbit.consumer.MqSaasListener ，并覆写 handleMessage() 方法
+接收方继承类 com.yonyou.iuap.mq.rabbit.consumer.MqSaasListener ，并覆写 handleMessage() 方法。
+
+注意:如果是saas应用，需要引入组件iuap-saas-mq。
 
 	public class MqSaasTestListener extends MqSaasListener{
 		private static Logger logger = LoggerFactory.getLogger(MqSaasTestListener.class);

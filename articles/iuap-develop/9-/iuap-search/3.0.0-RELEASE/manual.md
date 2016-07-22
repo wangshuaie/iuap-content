@@ -63,7 +63,7 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 		    //此处省略getter,setter
 		}
 
-
+单元测试示例代码如下：
 
 		public class SearchExample{
 		    
