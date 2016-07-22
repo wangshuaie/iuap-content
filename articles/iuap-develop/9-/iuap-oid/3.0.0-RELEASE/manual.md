@@ -34,16 +34,18 @@ iuap-oid组件支持多种ID生成方式，如UUID、Redis自增、snowflake，U
 ## 配置和使用方式 ##
 
 **1:在工程的pom.xml文件中加入对oid组件的依赖**
+```
 	<dependency>
 		<groupId>com.yonyou.iuap</groupId>
 		<artifactId>iuap-oid</artifactId>
 		<version>${iuap.modules.version}</version>
 	</dependency>
-
+```
 ${iuap.modules.version} 为在pom.xml中定义的需要引入组件的version。
 
 **2:在属性配置文件中，加入oid的使用类型配置**
 
+```
 	#idtype=uuid
 	#idtype=redis
 	#idtype=snowflake
@@ -51,6 +53,7 @@ ${iuap.modules.version} 为在pom.xml中定义的需要引入组件的version。
 	#idproviderclass=com.yonyou.iuap.persistence.oid.CustomIdProvider
 
 	//idtype为需要使用的ID生成类型，目前包括UUID、redis自增、snowflake、uapoid几种类型
+```
 
 **3:使用redis自增主键时候，需要配置redis对应的文件，请参考cache组件**
 
