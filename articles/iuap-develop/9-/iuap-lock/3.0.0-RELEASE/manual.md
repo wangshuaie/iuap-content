@@ -52,7 +52,7 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 
 **4:初始化连接池**
 
-在应用启动时，需要初始化连接池，可以下listener中定义，示例如下：
+在应用启动时，需要初始化连接池，可以在web.xml中定义listener，在listener中实现初始化，示例如下：
 
 	public void contextInitialized(ServletContextEvent event) {
 		WebApplicationContext wac = WebApplicationContextUtils.getWebApplicationContext(event.getServletContext());

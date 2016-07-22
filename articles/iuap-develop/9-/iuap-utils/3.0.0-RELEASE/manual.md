@@ -3,10 +3,10 @@
 	<dependency>
 		<groupId>com.yonyou.iuap</groupId>
 		<artifactId>iuap-utils</artifactId>
-		<version>${iuap.module.version}</version>
+		<version>${iuap.modules.version}</version>
 	</dependency>	
 
-iuap.module.version为在pom.xml中定义的需要引用的组件的版本。
+iuap.modules.version为在pom.xml中定义的需要引用的组件的版本。
 
 **2:属性文件读取的使用**
 
@@ -98,9 +98,9 @@ HttpContextUtil 类在 HttpUtil的基础上，可以传递上下文信息到被�
 		<url-pattern>/restcontext/*</url-pattern>    
 	</filter-mapping> 
 
-	com.yonyou.iuap.context.filter.ContextFilter 类位于  iuap-generic.jar 包中。
+com.yonyou.iuap.context.filter.ContextFilter 类位于  iuap-generic.jar 包中。
 
-    <url-pattern>/restcontext/*</url-pattern> 指需要过滤的 url路径
+<url-pattern>/restcontext/*</url-pattern> 指需要过滤的 url路径。
 
 接收到信息后，调用 InvocationInfoProxy将信息打印出来
 
@@ -108,7 +108,8 @@ HttpContextUtil 类在 HttpUtil的基础上，可以传递上下文信息到被�
 		System.out.println( InvocationInfoProxy.getLocale());
 		System.out.println( InvocationInfoProxy.getSysid());
 		.......
-        InvocationInfoProxy (位于iuap-generic.jar中)
+
+InvocationInfoProxy (位于iuap-generic.jar中)
 
 
 #### 4. 配置文件敏感属性加密
