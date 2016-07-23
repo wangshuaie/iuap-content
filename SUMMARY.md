@@ -9,7 +9,7 @@
 * [安装盘说明](articles/iuap-develop/3-/README.md)
    * [介质说明](articles/iuap-develop/3-/jie_zhi_shuo_ming.md)
    * [安装使用](articles/iuap-develop/3-/an_zhuang_shi_yong.md)
-  [快速入门](articles/iuap-develop/4-/README.md)
+* [快速入门](articles/iuap-develop/4-/README.md)
 * [场景开发](articles/iuap-develop/6-/README.md)
 * [开发过程](articles/iuap-develop/4-/README.md)
    * [开发配置与预览](articles/iuap-develop/4-/part1/README.md)
