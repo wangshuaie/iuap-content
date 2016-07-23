@@ -50,7 +50,7 @@
    * [对象OID组件](articles/iuap-develop/9-/iuap-oid/3.0.0-RELEASE/manual.md)
    * [JDBC持久化组件](articles/iuap-develop/9-/iuap-jdbc/3.0.0-RELEASE/manual.md)
    * [Mybatis持久化组件](articles/iuap-develop/9-/iuap-mybatis/3.0.0-RELEASE/manual.md)
-   * [持久化组件](articles/iuap-develop/9-/iuap-persistence/3.0.0-RELEASE/manual.md)
+   * [JPA持久化组件](articles/iuap-develop/9-/iuap-persistence/3.0.0-RELEASE/manual.md)
    * [JPA持久化扩展组件](articles/iuap-develop/9-/iuap-extend/3.0.0-RELEASE/manual.md)
    * [文件组件](articles/iuap-develop/9-/iuap-file/3.0.0-RELEASE/manual.md)
    * [分布式锁组件](articles/iuap-develop/9-/iuap-lock/3.0.0-RELEASE/manual.md)
