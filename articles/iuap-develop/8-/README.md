@@ -63,9 +63,9 @@ router.init();
 在平台前端主页面中，使用了router的相关方法来监听地址变化。同时使用requirejs来做动态加载。从而实现的整个单页面应用的运转。
 
 
-## iUAP Design
+## 前端页面开发
 
-iUAP Design 是企业级Web应用开发前端整体解决方案。包含设计语言、前端框架、插件库、组件库、模板库等。
+前端页面开发使用了iUAP Design的UI框架以及数据模型框架，iUAP Design 是企业级Web应用开发前端整体解决方案。包含设计语言、前端框架、插件库、组件库、模板库等。
 
 平台中使用了iUAP Design中的控件库做为默认控件，同时不限制开发者引用第三方控件库，如做图表开发时，我们会引用echart.js 。
 
@@ -80,4 +80,26 @@ iUAP Design 是企业级Web应用开发前端整体解决方案。包含设计�
 - 多维数据模型：解决了字段关联、主子数据、主子孙等多维数据模型的绑定问题。
 
 
-页面开发中的相关问题，可访问地址： http://design.yyuap.com/ 进行学习。
+页面开发中的UI相关问题，可访问地址： [http://design.yyuap.com/dist/pages/neoui/index.html](http://design.yyuap.com/dist/pages/neoui/index.html) 进行学习。
+
+
+页面开发中的数据模型相关问题，可访问地址： [http://design.yyuap.com/dist/pages/kero/overview.html](http://design.yyuap.com/dist/pages/kero/overview.html) 进行学习。
+
+
+## 与后端的数据交互
+
+前端框架与服务端没有耦合，中间通过JSON数据格式进行数据传递。可采用正常的ajax请求。例如，使用jquery的ajax请求：
+```
+    $.ajax({
+        url:'api/xxx',
+        data:{xxx:xxx},
+        success:function(data){
+            alert(data.msg)
+        }
+    })
+
+```
+
+如果要发送数据模型中的相关数据，需要把数据模型中的数据转成JSON发请到服务端，参考iUAP Design中的数据模型相关API用法：
+
+[http://design.yyuap.com/dist/pages/kero/udatatable.html](http://design.yyuap.com/dist/pages/kero/udatatable.html)
