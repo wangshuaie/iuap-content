@@ -375,14 +375,24 @@ web页面编辑器内嵌了jquery插件，可以提示jquery语法。提示效�
 安装完成后，确保maven项目pom.xml文件有元数据组件。
 
 如下代码段：
-```
+
 	<dependency>
       <groupId>com.yonyou.iuap</groupId>
 	  <artifactId>metadata-jdbc</artifactId>
 	  <version>2.0.1-SNAPSHOT</version>
-	</dependency>
-    
-```    
+	</dependency> 
+
+据库连接配置
+
+设置数据库连接配置信息
+
+规则：一个项目配置一个数据库连接配置，具体位置：src/main/resources/application.properties
+
+![](image/metadata28.png)
+
+
+![](image/metadata29.png)
+ 
 ## 4.4 界面功能分布
 
 根据界面功能分布，MDP模型设计器有5个重要的组成部分，分别是元数据管理器、画布、工具面板、属性面板和模型视图。
