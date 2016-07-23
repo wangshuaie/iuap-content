@@ -1,9 +1,9 @@
-#Mybatis³Ö¾Ã»¯×é¼ş
+ï»¿#MybatisæŒä¹…åŒ–ç»„ä»¶
 
-iuapÊ¹ÓÃiuap-mybatis×÷ÎªMyBatis³Ö¾Ã»¯µÄÖ§³Ö¡£iuap-mybatisÌá¹©ÁËÍ³Ò»µÄSpringÉ¨Ãè×¢½âºÍ·ÖÒ³²å¼ş¡£
+iuapä½¿ç”¨iuap-mybatisä½œä¸ºMyBatisæŒä¹…åŒ–çš„æ”¯æŒã€‚iuap-mybatisæä¾›äº†ç»Ÿä¸€çš„Springæ‰«ææ³¨è§£å’Œåˆ†é¡µæ’ä»¶ã€‚
 
 
-# °æ±¾¼°¸üĞÂ 
+# ç‰ˆæœ¬åŠæ›´æ–° 
 
-1. ¼ÓÈëSpringÉ¨Ãè×¢½â`@MyBatisRepository`
-2. ·ÖÒ³²å¼ş£¬Ä¿Ç°Ö§³Ö`Mysql`ºÍ`Oracle`µÄÎïÀí·ÖÒ³
+1. åŠ å…¥Springæ‰«ææ³¨è§£`@MyBatisRepository`
+2. åˆ†é¡µæ’ä»¶ï¼Œç›®å‰æ”¯æŒ`Mysql`å’Œ`Oracle`çš„ç‰©ç†åˆ†é¡µ

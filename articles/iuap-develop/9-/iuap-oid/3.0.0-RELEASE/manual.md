@@ -33,15 +33,19 @@ iuap-oid组件支持多种ID生成方式，如UUID、Redis自增、snowflake，U
 
 ## 配置和使用方式 ##
 
-**1:在工程的classpath中加入对oid组件的依赖**
+**1:在工程的pom.xml文件中加入对oid组件的依赖**
+```
 	<dependency>
 		<groupId>com.yonyou.iuap</groupId>
 		<artifactId>iuap-oid</artifactId>
 		<version>${iuap.modules.version}</version>
 	</dependency>
+```
+${iuap.modules.version} 为在pom.xml中定义的需要引入组件的version。
 
 **2:在属性配置文件中，加入oid的使用类型配置**
 
+```
 	#idtype=uuid
 	#idtype=redis
 	#idtype=snowflake
@@ -49,6 +53,7 @@ iuap-oid组件支持多种ID生成方式，如UUID、Redis自增、snowflake，U
 	#idproviderclass=com.yonyou.iuap.persistence.oid.CustomIdProvider
 
 	//idtype为需要使用的ID生成类型，目前包括UUID、redis自增、snowflake、uapoid几种类型
+```
 
 **3:使用redis自增主键时候，需要配置redis对应的文件，请参考cache组件**
 
@@ -61,11 +66,14 @@ iuap-oid组件支持多种ID生成方式，如UUID、Redis自增、snowflake，U
 		<constructor-arg ref="redisPool"></constructor-arg>
 	</bean> 
 
-	//属性文件
+属性文件中配置示例如下：
+
+	#属性文件
 	redis.url=direct://172.20.6.48:6379?poolSize=50&poolName=mypool
 
 	idtype=redis
-	//可以设置特殊模块自增起始值
+
+	#可以设置特殊模块自增起始值
 	IUAP_PRIMARY_MYMODULE_START_VALUE=10000
 
 **4:使用uapoid类型时候，连接数据库，并初始化数据表，stepSize可根据项目指定，为每次取到本地JVM中自增ID的范围**
@@ -80,9 +88,9 @@ iuap-oid组件支持多种ID生成方式，如UUID、Redis自增、snowflake，U
 	    <property name="stepSize" value="5000" />
     </bean>
 
-	注意:建表和初始化sql语句请参考示例工程，最终生成的为20位的字符串，前八位为用户指定的schema名。
+注意:建表和初始化sql语句请参考示例工程，最终生成的为20位的字符串，前八位为用户指定的schema名。
 
-	以mysql为例，其sql脚本如下：
+以mysql为例，其sql脚本如下：
 
     CREATE TABLE pub_oid(schemacode VARCHAR(8) NOT NULL,oidbase VARCHAR(20) NOT NULL,id VARCHAR(36) NOT NULL,ts TIMESTAMP NULL,PRIMARY KEY (id))ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

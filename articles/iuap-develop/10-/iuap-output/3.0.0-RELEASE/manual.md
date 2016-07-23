@@ -2,41 +2,49 @@
 #打印组件概述#
 
 ## 业务需求 ##
+
 业务系统通过WEB方式提供应用时，由于各个浏览器厂商正在屏蔽插件，所以不能通过传统的浏览器插件调用客户端实现打印功能。这就要求我们实现能在浏览器上实现打印功能。
 
 ##解决方案##
+
 iuap-output组件提供了界面直接打印和HTML模板打印两种方式。
 
 * 界面直接打印（即调用js函数完成指定区域的打印）   
 
 * HTML模板方式打印（即通过定义html的模板通过后台接口得到对应的json对象，将json数据导入到html模板中，形成打印界面）
 
+## 功能说明 ##
+
+1.	提供统一的web打印能力；
+2.	支持界面直接打印；
+3.	支持HTML模板方式打印
+4.	支持批量连续打印
+
 
 # 整体设计 #
+
 ## 依赖环境 ##
 
 组件采用Maven进行编译和打包发布，其对外提供的依赖方式如下：
-
+```
 	<dependency>
       <groupId>com.yonyou.iuap</groupId>
 	  <artifactId>iuap-output</artifactId>
 	  <version>${iuap.modules.version}</version>
     </dependency>
-
+```
 ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 
 ## 功能说明 ##
-组织组件主要通过生成pdf的方式提供对于浏览器的打印功能。 
 
+组织组件主要通过生成pdf的方式提供对于浏览器的打印功能。 
 
 # 使用说明 #
 
-
 ##组件配置##
 
-
 **在工程中要打印的jsp文件中引入打印的PrintModel.js**
-
+```
 	 <!-- 需要jQuery支持 -->
 	 <script type="text/javascript" src="resources/js/jquery-2.1.4.min.js"></script>
 	 <!-- 界面直接打印组件JS -->
@@ -47,20 +55,23 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 	    printByElementIds（e_ids）// 打印e_ids元素的区域，e_ids为一个数组
 	    printByElementCss（e_css）// 打印css样式为e_css元素区域
 	    printByElementCsses（e_csses）；// 打印css样式为e_csses元素区域，e_csses为数组 
-	
+```	
 
 ## 工程样例 ##
 
 ### 界面直接打印 ###
 
 1. 前台页面引入组件*PrintModel.js*  
+```
+	<!-- 需要jQuery支持 -->
+	<script type="text/javascript" src="resources/js/jquery-2.1.4.min.js"></script>
+	<!-- 界面直接打印组件JS -->
+	<script type="text/javascript" src="resources/js/PrintModel.js"></script>
+```
 
-		    <!-- 需要jQuery支持 -->
-			<script type="text/javascript" src="resources/js/jquery-2.1.4.min.js"></script>
-			<!-- 界面直接打印组件JS -->
-			<script type="text/javascript" src="resources/js/PrintModel.js"></script>
 2.调用相应的JS函数，传入打印区域的ID或样式，即可打印指定的区域 
 
+```
 >    	  function printDirectCurrentPage() {
 >     		Print.printByElementIds([ "printarea" ]);
 >     	}   
@@ -99,17 +110,22 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 > 				订单支付金额：<span>￥57.30</span>
 > 			</div>
 > 		</div>
+```
 
 ### HTML模板打印 ###
 
 1. 前台页面引入组件*PrintModel.js*  
-
+2. 
+```
 		<!-- 需要jQuery支持 -->
 			<script type="text/javascript" src="resources/js/jquery-2.1.4.min.js"></script>
 			<!-- 界面直接打印组件JS -->
 			<script type="text/javascript" src="resources/js/PrintModel.js"></script>
+```
 
 2. HTML模板方式时需要在自己的js文件中实现函数getStyle(返回css样式定义字符串)、getTemplate(返回模板定义字符串)、getJsonData(返回模板需要的json对象)方法，参考orderdetail.js中的实现方法。 
+
+```
 >     function getStyle1(){
 	    var style = ' .container {border: solid 1px #aaaaaa;min-width:860px;font-size: 12px;font-family: "宋体";text-align: left;}';
 	    style += ' @media print {.printstyle {width: 650px;display: inline-block;}}';
@@ -163,7 +179,7 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 		template += '<div class="totolAmount">订单总额：<span>￥<%=printdata.totalamount%></span>&nbsp; 元</div></div>';
 		return template;
 }
-
+```
 
 
 

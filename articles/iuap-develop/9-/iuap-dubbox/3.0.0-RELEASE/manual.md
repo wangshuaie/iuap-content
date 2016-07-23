@@ -38,7 +38,7 @@ iuap-dubbox组件依赖dubbo 2.8.4版本，是基于spring 4.0.5 重新编译的
 		<version>${iuap.modules.version}</version>
 	</dependency>
 
-iuap-dubbox组件依赖上述jar包，外部项目直接依赖iuap-dubbox即可：
+iuap-dubbox组件依赖上述jar包，外部项目直接依赖iuap-dubbox和Zookeeper的相关客户端即可，示例如下：
 
 	<dependency>
 	  <groupId>com.yonyou.iuap</groupId>
@@ -46,7 +46,34 @@ iuap-dubbox组件依赖上述jar包，外部项目直接依赖iuap-dubbox即可�
 	  <version>${iuap.modules.version}</version>
 	</dependency>
 
-${iuap.modules.version}是在pom.xml中定义的引用组件的版本。
+	 <dependency>
+	    <groupId>com.github.sgroschupf</groupId>
+	    <artifactId>zkclient</artifactId>
+	    <version>${zkclient.version}</version>
+	    <exclusions>
+	        <exclusion>
+	            <artifactId>log4j</artifactId>
+	            <groupId>log4j</groupId>
+	        </exclusion>
+	    </exclusions>
+	</dependency>
+	<dependency>
+	    <groupId>org.apache.zookeeper</groupId>
+	    <artifactId>zookeeper</artifactId>
+	    <version>${zookeeper.version}</version>
+	    <exclusions>
+	        <exclusion>
+	            <artifactId>slf4j-log4j12</artifactId>
+	            <groupId>org.slf4j</groupId>
+	        </exclusion>
+	        <exclusion>
+	            <artifactId>log4j</artifactId>
+	            <groupId>log4j</groupId>
+	        </exclusion>
+	    </exclusions>
+	</dependency>
+
+${iuap.modules.version}是在pom.xml中定义的引用组件的版本。Zookeeper推荐版本为3.4.6，示例中使用的zkclient版本为0.1。
 
 ## 功能结构 ##
 

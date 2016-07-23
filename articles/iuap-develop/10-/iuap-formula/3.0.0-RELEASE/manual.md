@@ -2,28 +2,32 @@
 
 公式组件是以接口的方式提供算数、字符串运算能力的组件。使用者定义公式和变量，公式组件根据公式和变量值进行运算并返回运算结果。
 
-
 # 整体设计 #
-
 
 ## 依赖环境 ##
 
 组件采用Maven进行编译和打包发布，其对外提供的依赖方式如下：
 
+```
 	<dependency>
 	  <groupId>com.yonyou.iuap</groupId>
 	  <artifactId>iuap-formula</artifactId>
 	  <version>${iuap.modules.version}</version>
 	</dependency>
-
+```
 ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 
+## 功能说明 ##
 
+1.	支持公式定义和执行；
+2.	支持公式批量执行；
+3.	提供数学运算、字符串运算能力
+4.	支持自定义函数功能扩展公式；
+5.	以Rest服务的方式提供公式运算能力
 
 # 使用说明 #
 
 ## 说明简介
-
 
 下文主要是对公式组件的基本使用进行简要说明，对公式函数中的一些特殊情况加以说明，并对公式函数自定义扩展功能予以介绍
 
@@ -31,8 +35,8 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 
 通过FormulaParseFather执行公式。
 
-	示例：
-	
+示例：
+```
 	    String formula = "a->abs(data)";
 		FormulaParseFather f = new FormulaParse();;
 		f.setExpress(formula);
@@ -41,12 +45,13 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 		assertEquals("应该相等", 1, result[0][0]);
 		assertEquals("应该相等", 2, result[0][1]);
 		assertEquals("应该相等", 0, result[0][2]);
+```	
 
-##函数介绍 
+##函数介绍 ##
 
-###1.字符串函数
+### 1.字符串函数 ###
 
-####1.1 charat(string,index)
+#### 1.1 charat(string,index) ####
 
 公式含义
 
@@ -76,7 +81,7 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 </table>
 
 
-####1.2 endswith(string, end)
+#### 1.2 endswith(string, end) ####
 
 公式含义
 
@@ -117,7 +122,7 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 
 
 
-####1.3 equalsIgnoreCase(string1, string2)
+#### 1.3 equalsIgnoreCase(string1, string2) ####
 公式含义
 
 判断忽略大小写字符串string1是否与字符串string2相等
@@ -153,7 +158,8 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
    </tr>
 </table>
 
-####1.4	indexOf(st1, st2) 
+#### 1.4	indexOf(st1, st2)  ####
+
 公式含义
 
 判断字符串st1中第一个字符串st2所在的位置,比如lastIndexOf("HI,UAP2006, UAP","UAP")返回3.
@@ -176,7 +182,8 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 </table>
 注：参数都不能为null
 
-####1.5 isEmpty(str)
+####1.5 isEmpty(str) ####
+
 公式含义
 用于判断变量是否为空,包括空串("")及空值(null)
 	对应类：nc.vo.pub.formulaset.function.IsEmpty
@@ -202,7 +209,7 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
   
 </table>
 
-####1.6 lastIndexOf(st1, st2) 
+#### 1.6 lastIndexOf(st1, st2)  ####
 公式含义
 
 判断字符串st1中最后一个字符串st2所在的位置,比如lastIndexOf("HI,UAP2006,UAP","UAP")返回11.
@@ -225,7 +232,8 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
   
 </table>
 
-####1.7 left(st, index) 
+#### 1.7 left(st, index)  ####
+
 公式含义
 
 求字符串st左边前index个字符组成的字符串
@@ -247,7 +255,8 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
   
 </table>
 
-####1.8 leftStr(st,len,defaultStr) 
+#### 1.8 leftStr(st,len,defaultStr)  ####
+
 公式含义
 
 求字符串st左边前len个字符组成的字符串，如果字符串长度小于len，则用defaultStr补齐,比如leftStr("abc",6,"@")将返回abc@@@.
@@ -271,7 +280,7 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
   
 </table>
 
-####1.9 length(st) 
+#### 1.9 length(st)  ####
 公式含义
 
 求字符串st的长度
@@ -296,7 +305,7 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
   
 </table>
 
-####1.10 mid(String st, int start, int end) 
+#### 1.10 mid(String st, int start, int end)  ####
 
 公式含义
 
@@ -322,7 +331,7 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
  
 </table>
 
-####1.11 right(String st, int index) 
+#### 1.11 right(String st, int index)  ####
 公式含义
 
 求字符串st右边前index个字符组成的字符串
@@ -344,7 +353,8 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 </table>
 
 
-####1.12 rightStr(st,len,defaultStr) 
+#### 1.12 rightStr(st,len,defaultStr)  ####
+
 公式含义
 
 求字符串st右边后len个字符组成的字符串，如果字符串长度小于len，则用defaultStr补齐,比如rightStr("abc",6,"@")将返回abc@@@.
@@ -367,7 +377,8 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
   
 </table>
 
-####1.13 startsWith(String st, String start) 
+#### 1.13 startsWith(String st, String start)  ####
+
 公式含义
 
 判断字符串st是否以字符串start开头
@@ -403,7 +414,8 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
   
 </table>
 
-####1.14 toLowerCase(String st) 
+#### 1.14 toLowerCase(String st)  ####
+
 公式含义
 
 求字符串st的小写形式,比如toLowerCase("Abc")返回"abc"。
@@ -423,7 +435,8 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 </table>
 注：参数不能为null。
 
-####1.15 toString(obj) 
+#### 1.15 toString(obj)  ####
+
 公式含义
 
 将对象obj转换为本解析器可识别的字符串形式。
@@ -451,7 +464,8 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
   
 </table>
 
-####1.16 toUpperCase(String st) 
+#### 1.16 toUpperCase(String st)  ####
+
 公式含义
 
 求字符串st的大写形式。
@@ -473,7 +487,8 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 </table>
 注：参数不能为null。
 
-####1.17 trimZero(value, [decimal])
+#### 1.17 trimZero(value, [decimal]) ####
+
 公式含义
 
 剪除字符串或数字str的末尾0值, var:表示待截取的值，可以为数值也可以为字符，若字符型不能转换为数值则返回原值(如"8.023a")。 
@@ -483,8 +498,8 @@ trimZero(8.023000); //return 8.023
 trimZero("8.023000a"); //return "8.023000a" 
 trimZero("8.023000",2); //return "8.02"
 
-对应类：nc.vo.pub.formulaset.function.TrimZero
-。
+对应类：nc.vo.pub.formulaset.function.TrimZero。
+
 类型返回值表
 <table>
    <tr>
@@ -521,9 +536,10 @@ trimZero("8.023000",2); //return "8.02"
 </table>
 注：参数decimal可以不写，此时默认为-1（int），如果设置decimal的值，则其不能为null。
 
-###2.数学函数
+### 2.数学函数 ###
 
-####2.1 abs(num)
+#### 2.1 abs(num)  ####
+
 公式含义
 求数num的绝对值
 
@@ -552,7 +568,8 @@ trimZero("8.023000",2); //return "8.02"
 </table>
 注：参数值不能为null。
 
-####2.2 acos(x)
+#### 2.2 acos(x) ####
+
 公式含义
 
 返回一个弧度x的反余弦(arccos),弧度值在0到Pi之间
@@ -577,7 +594,7 @@ trimZero("8.023000",2); //return "8.02"
 </table>
 注：参数不能为null。Complex.acos():acos(z)  =  -i * log( z + i * sqrt(1 - z*z) )。
 
-####2.3 add(num1,num2)
+#### 2.3 add(num1,num2) ####
 
 公式含义
 
@@ -621,7 +638,7 @@ trimZero("8.023000",2); //return "8.02"
 </table>
 注：其他的情况下，将会用普通+的方式进行运算
 
-####2.4 asin(x)
+#### 2.4 asin(x) ####
 公式含义
 
 返回一个弧度x的反正弦(arcsin),弧度值在-Pi/2到Pi/2之间
@@ -647,7 +664,7 @@ trimZero("8.023000",2); //return "8.02"
 注：参数不能为null。
 Complex.asin(): asin(z)  =  -i * log(i*z + sqrt(1 - z*z))。
 
-####2.5 atan(x)
+#### 2.5 atan(x) ####
 
 公式含义
 
@@ -674,7 +691,7 @@ Complex.asin(): asin(z)  =  -i * log(i*z + sqrt(1 - z*z))。
 注：参数不能为null。
 Complex.atan():atan(z) = -i/2 * log((i-z)/(i+z))。
 
-####2.6 cos(x)
+#### 2.6 cos(x) ####
 
 公式含义
 
@@ -701,7 +718,7 @@ Complex.atan():atan(z) = -i/2 * log((i-z)/(i+z))。
 Complex.cos():cos(z)  =  ( exp(i*z) + exp(-i*z) ) / 2。
 
 
-####2.7 div(num1,num2)
+#### 2.7 div(num1,num2) ####
 
 公式含义
 
@@ -746,7 +763,7 @@ Complex.cos():cos(z)  =  ( exp(i*z) + exp(-i*z) ) / 2。
 </table>
 注：其他情况下，会使用/操作进行运算
 
-####2.8 exp(x)
+#### 2.8 exp(x) ####
 
 公式含义
 
@@ -772,7 +789,7 @@ e的x次方
 </table>
 注：参数不能为null
 
-####2.9 int(x) 
+#### 2.9 int(x) ####
 
 公式含义
 
@@ -800,7 +817,7 @@ e的x次方
 
 注：参数不能为null
 
-####2.10 ln(x)
+#### 2.10 ln(x) ####
 
 公式含义
 
@@ -827,7 +844,7 @@ e的x次方
 </table>
 注：参数不能为null
 
-####2.11 log(x)
+#### 2.11 log(x) ####
 
 公式含义
 
@@ -854,7 +871,7 @@ e的x次方
 </table>
 注：参数不能为null
  
-####2.12 max(x, y) 
+#### 2.12 max(x, y) ####
 
 公式含义
 
@@ -889,7 +906,7 @@ e的x次方
 
 注：参数不能为null，Comparable：java.lang.Comparable。
 
-####2.13 min(x, y) 
+#### 2.13 min(x, y) ####
 
 公式含义
 
@@ -922,7 +939,7 @@ e的x次方
   
 </table>
 
-####2.14 mul(num1,num2)
+#### 2.14 mul(num1,num2) ####
 
 公式含义
 
@@ -967,7 +984,7 @@ e的x次方
 
 注：其他情况下，会使用*操作进行运算
 
-####2.15 round(double num, int index) 
+#### 2.15 round(double num, int index) ####
 
 公式含义
 
@@ -1002,7 +1019,7 @@ e的x次方
 </table>
 注：返回类型均为Double，参数不能为null
 
-####2.16 sgn(num) 
+#### 2.16 sgn(num) ####
 
 公式含义
 
@@ -1024,7 +1041,7 @@ e的x次方
 </table>
 注：参数不能为null
 
-####2.17 sin(x)
+#### 2.17 sin(x) ####
 
 公式含义
 
@@ -1050,7 +1067,7 @@ e的x次方
 </table>
 注：参数不能为null
 
-####2.18 sqrt(x)
+#### 2.18 sqrt(x) ####
 
 公式含义
 
@@ -1079,7 +1096,7 @@ e的x次方
 </table>
 注：参数不能为null
 
-###2.19 sub(num1,num2)
+#### 2.19 sub(num1,num2) ####
 
 公式含义
 
@@ -1123,7 +1140,7 @@ e的x次方
 注：其他的情况下，将会用普通-的方式进行运算
 
 
-####2.20 tan(x)
+#### 2.20 tan(x) ####
 公式含义
 
 返回给定角度x的正切值；
@@ -1148,7 +1165,7 @@ e的x次方
 </table>
 注：参数类型不能为null
 
-####2.21 toNumber(String st) 
+#### 2.21 toNumber(String st) ####
 
 公式含义
 
@@ -1175,7 +1192,7 @@ e的x次方
 </table>
 注：参数类型不能为null
 
-####2.22 zeroifnull(var)
+#### 2.22 zeroifnull(var) ####
 
 公式含义
 
@@ -1205,7 +1222,7 @@ e的x次方
 </table>
 注：参数类型不能为null
 
-####2.23 acosh(param)
+#### 2.23 acosh(param) ####
 
 公式含义
 
@@ -1231,7 +1248,7 @@ acosh(z)  =  log(z + sqrt(z*z - 1))
 </table>
 
 
-####2.24 angle(x,y)
+#### 2.24 angle(x,y) ####
 
 公式含义
 
@@ -1254,7 +1271,7 @@ acosh(z)  =  log(z + sqrt(z*z - 1))
   
 </table>
 
-####2.25 asinh(param)
+#### 2.25 asinh(param) ####
 
 公式含义
 
@@ -1280,7 +1297,7 @@ asinh(z)  =  log(z + sqrt(z*z + 1))
 </table>
 
 
-####2.26 atanh(param)
+#### 2.26 atanh(param) ####
 
 公式含义
 
@@ -1306,7 +1323,7 @@ asinh(z)  =  log(z + sqrt(z*z + 1))
 </table>
 
 
-####2.27 cosh(param)
+#### 2.27 cosh(param) ####
 
 公式含义
 
@@ -1331,7 +1348,7 @@ cosh(z)  =  ( exp(z) + exp(-z) ) / 2
    
 </table>
 
-####2.28 mod(x, y)
+#### 2.28 mod(x, y) ####
 
 公式含义
 
@@ -1360,7 +1377,7 @@ cosh(z)  =  ( exp(z) + exp(-z) ) / 2
 </table>
 
 
-####2.29 rand()
+#### 2.29 rand() ####
 
 公式含义
 
@@ -1373,7 +1390,7 @@ cosh(z)  =  ( exp(z) + exp(-z) ) / 2
 返回new Double(Math.random())
 
 
-####2.30 sinh(param)
+#### 2.30 sinh(param) ####
 
 公式含义
 
@@ -1399,7 +1416,7 @@ sinh(z)  =  ( exp(z) - exp(-z) ) / 2
 </table>
 
 
-####2.31 sum(x,y)
+#### 2.31 sum(x,y) ####
 
 公式含义
 
@@ -1428,7 +1445,7 @@ sinh(z)  =  ( exp(z) - exp(-z) ) / 2
 </table>
 
 
-####2.32 tanh(param)
+#### 2.32 tanh(param) ####
 
 公式含义
 
@@ -1454,7 +1471,7 @@ tanh(z)  =  sinh(z) / cosh(z)
 </table>
 
 
-## 自定义公式扩展说明
+## 自定义公式扩展说明 ##
 
 公式提供自定义函数功能。自定义函数配置文件目录如下：
 
@@ -1462,6 +1479,7 @@ WEB-INF\classes\formulaconfig
 
 配置文件格式如下：
 
+```
 	<?xml version="1.0" encoding="utf-8"?>
 	<formula-array>
 	<formula>
@@ -1470,5 +1488,6 @@ WEB-INF\classes\formulaconfig
 	  <functionClass>nc.ui.bd.pubinfo.address.FormatAddress</functionClass>
 	</formula>
 	</formula-array>
+```
 
 自定义公式的实现方法可以参见nc.vo.pub.formulaset.function.Max这个类

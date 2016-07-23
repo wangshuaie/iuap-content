@@ -25,15 +25,17 @@ iuap使用iuap-mybatis作为MyBatis持久化的支持。iuap-mybatis提供了统
 # 使用说明 #
 
 ## Maven依赖配置 ##
-
+```
 	<dependency>
 	    <groupId>com.yonyou.iuap</groupId>
 	    <artifactId>iuap-mybatis</artifactId>
 	    <version>${iuap.modules.version}</version>
 	</dependency>
+```
 
 ## 典型配置 ##
 
+```
     <!-- 使用annotation定义事务 -->
     <aop:aspectj-autoproxy/>
 
@@ -71,6 +73,7 @@ iuap使用iuap-mybatis作为MyBatis持久化的支持。iuap-mybatis提供了统
         <property name="annotationClass" value="com.yonyou.iuap.persistence.mybatis.anotation.MyBatisRepository"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
+```
 
 ## 版本迁移 ##
 
@@ -79,25 +82,28 @@ iuap使用iuap-mybatis作为MyBatis持久化的支持。iuap-mybatis提供了统
 - 查询条件转换接口 `RequestConvertor`
   应用通过该接口实现类，将自定义的查询条件转换为iuap-mybatis插件的分页条件，包括数据获取区间，排序条件等等。
   
-
+```
 	    <property name="requestConvertor">
 	        <bean class="xxx.xxx.xxxRequestConvertor"/>
 	    </property>
-
+```
 
 - 查询结果转换接口 `ResultConvertor`
   应用通过实现该接口，将iuap-mybatis的返回结果PageResult转换为应用自己的page对象。
- 
+
+```
          <property name="resultConvertor">
              <bean class="xxx.xxx.xxxResultConvertor"/>
          </property>
-         
+```
+
 ## 示例工程说明 ##
 
 开发工具包中包含对iuap-mybatis组件的使用示例(DevTool/examples/example-iuap-mybatis),请参考示例工程中的具体配置和使用示例。
 
 - 实体类示例
-
+- 
+```
 	public class IpuQuotation implements Serializable {
 	
 		private static final long serialVersionUID = -9169987729255268660L;
@@ -151,9 +157,11 @@ iuap使用iuap-mybatis作为MyBatis持久化的支持。iuap-mybatis提供了统
 	        this.datailentitylist = datailentitylist;
 	    }
 	}
+```
 
 - 数据库操作类示例
 
+```
 		@MyBatisRepository
 		public interface IpuQuotationMapper extends PageMapper<IpuQuotation> {
 		
@@ -171,9 +179,11 @@ iuap使用iuap-mybatis作为MyBatis持久化的支持。iuap-mybatis提供了统
 		
 		    PageResult<IpuQuotation> retrievePage(PageRequest pageRequest, @Param("subject") String subject);
 		}
+```
 
 - 映射文件示例(注意spring配置文件中对mybatis映射文件的位置)
 
+```
 		<?xml version="1.0" encoding="UTF-8"?>
 		<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 		<mapper namespace="com.yonyou.iuap.repository.quotation.IpuQuotationMapper">
@@ -348,4 +358,5 @@ iuap使用iuap-mybatis作为MyBatis持久化的支持。iuap-mybatis提供了统
 		        </if>
 		    </select>
 		</mapper>
+```
 

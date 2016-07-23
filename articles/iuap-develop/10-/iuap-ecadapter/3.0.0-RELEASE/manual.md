@@ -1,22 +1,31 @@
-#认证组件概述#
+# 认证组件概述 #
 
 ## 业务需求 ##
+
 电子商务在现代化社会扮演的角色越来越重要，因此许多应用都需要和电商平台进行对接，那么如何实现这种对接，困扰着不少企业。电商连接器组件能轻松解决这个问题。
 
-##解决方案##
+## 解决方案 ##
+
 通过调用第三方电商平台的API，来获取电商的数据。
 对各个不同的电商平台，提供了一个统一的入口，以统一的JSON格式返回电商平台上可查的数据。
+
+## 功能说明 ##
+
+1. 定义标准接口;
+2. 转换Json文件格式;
+3. 发送数据标准接口；
+4. 接收数据标准接口；
 
 # 整体设计 #
 
 ## 依赖环境 ##
-
+```
 	<dependency>
     	<groupId>com.yonyou.iuap</groupId>
     	<artifactId>iuap-ecadapter</artifactId>
     	<version>${iuap.modules.version}</version>
 	</dependency>
-
+```
 ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 
 ## 工作流程 ##
@@ -44,16 +53,16 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
  
 组件的配置文件ecadapter-applicationContext.xml，可在示例工程rc/main/resources目录下找到
 在web.xml文件中添加如下配置：   
-
+```
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
     	classpath*:/ecadapter-applicationContext.xml,
     </param-value>
 	</context-param>
-
+```
 或者将组件提供的servlet配置到工程中：
-
+```
     <servlet>
     	<servlet-name>ecadapter</servlet-name>
     	<servlet-class>com.yonyou.uap.ieop.ecadapter.service.ECAdapterServlet</servlet-class>
@@ -62,6 +71,7 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
     	<servlet-name>ecadapter</servlet-name>
     	<url-pattern>/ecadapter</url-pattern>
     </servlet-mapping>
+```
 
 3 . 发送HTTP请求到Servlet或者controller  
 在前端可以通过aJax异步请求(或者其他发送HTTP请求的方式)到配置的servlet/controller中，参数格式参见具体电商平台的API接口。
