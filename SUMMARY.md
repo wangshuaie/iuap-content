@@ -13,6 +13,7 @@
 * [工具及规范](articles/iuap-develop/5-/README.md)
    * [工具说明](articles/iuap-develop/5-/part1/README.md)
        * [工具概述](articles/iuap-develop/5-/part1/gong_ju_gai_shu.md)
+       * [功能说明](articles/iuap-develop/5-/part1/gong_neng_shuo_ming.md)
        * [开发环境搭建](articles/iuap-develop/5-/part1/kai_fa_huan_jing_da_jian.md)
        * [开发工具使用](articles/iuap-develop/5-/part1/kai_fa_gong_ju_shi_yong.md)
    * [代码规范](articles/iuap-develop/5-/part2/README.md)
