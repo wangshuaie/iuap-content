@@ -1,9 +1,36 @@
 # 文件组件 #
 
-## 简介 ##
-文件组件提供对文件上传、下载、删除等功能，提供API对FastDFS、阿里云OSS等文件服务器上的文件进行操作，支持集群形式连接，支持OSS直传，支持对OSS请求的安全性校验等。
+## 业务需求 ##
+业务上涉及到对文件进行操作时，就需要能够对文件资源进行管理，传统的文件系统在互联网应用背景下往往效率不高、稳定性不佳。无法达到高并发、高性能、高可用的要求。例如在需要扩展文件存储空间时，传统的文件系统就很可能需要暂停服务。
 
-## 配置和使用方式 ##
+因此文件组件为用户提供了处理文件资源的解决方案。为用户提供文件的上传、下载、删除功能。并提供对分布式文件系统的支持，提高文件操作的性能。
+
+##解决方案##
+iuap-file组件提供对FastDFS、阿里云OSS文件系统的适配，支持集群连接模式、支持oss直传、支持对OSS请求的安全校验。同时在对不同的文件系统进行适配时，尽量保持接口参数相同，实现一套代码支持多个文件系统。
+
+# 整体设计 #
+
+## 依赖环境 ##
+组件采用Maven进行编译和打包发布，依赖FastDFS和阿里云OSS的客户端SDK,其对外提供的依赖方式如下：
+
+	<dependency>
+	  <groupId>com.yonyou.iuap</groupId>
+	  <artifactId>iuap-file</artifactId>
+	  <version>${iuap.modules.version}</version>
+	</dependency>
+
+${iuap.modules.version} 为平台在maven私服上发布的组件的version。
+
+## 功能结构 ##
+
+
+<img src="/images/file_structure.jpg"/>
+
+组件封装了三种文件系统，并暴露出了常用的文件操作接口，用户通过这些接口，去操作组件所管理的对应文件系统。
+
+# 使用说明 #
+
+## 配置 ##
 **文件组件目前适配了三种文件系统，本地文件存储、阿里云、FastDfs**
 
 文件组件支持三套文件系统，在使用不同的系统时接口保持统一，通过FileManager类下的静态方法，提供对文件上传下载删除的服务。
@@ -58,10 +85,10 @@ ${iuap.modules.version} 为在pom.xml中定义的需要引入组件的version。
 在工程上配置属性文件时，可以根据使用的存储类型，配置需要的部分。
 
 
-**3:功能调用**
 
+## 功能调用 ##
 
-**3.1:阿里云oss**
+###1.阿里云oss###
 
 
 **非直传**
@@ -70,11 +97,9 @@ ${iuap.modules.version} 为在pom.xml中定义的需要引入组件的version。
     
 	//上传，参数（bucket名，文件名，上传文件字节数组），返回（上传文件的文件名）
     String uploadFile(String bucketName, String fileName,byte[] fileContent)
-	
 
  	//下载，参数（bucket名，文件名），返回（下载文件的字节数组）
  	byte[] downLoadFile(String bucketName,String fileName) ;
-	
 
 	//删除，参数（bucket名，文件名），返回（删除是否成功标志）
     boolean deleteFile(String bucketName,String fileName)
@@ -93,31 +118,35 @@ example测试类
 	/**
 	 * 阿里云上传下载删除测试
 	 * 测试前请设置application.properties的storeType=AliOss
+	 * 参数"your bucket"为阿里云oss的bucket名，请更换为您的bucket名
 	 * @throws Exception
 	 */
 	@Test
 	public void testAliUpload() throws Exception {
 		String filename;
 		//借用文件流生成文件的二进制数组
-		LocalClient client =LocalClient.getInstance();		
+		LocalClient client =LocalClient.getInstance();
+		//参数为测试文件路径;		
 		byte[] content =client.download("/etc/filetest/test.txt");
-		//阿里云上传（功能测试）
-		filename=FileManager.uploadFile(null,"test.txt",content);
-		//阿里云下载（功能测试）
-		byte[] downloadContent=FileManager.downLoadFile("zhukai",filename);
+		//==================准备工作完毕=============================
 		
-		//用文件流将阿里云下载到的文件二进制数组转化为文件
-		client.upload("/etc/filetest/aliyuntest.txt", "aliyuntest.txt", downloadContent);
-		//阿里云删除（功能测试）
-		boolean flag=FileManager.deleteFile("zhukai",filename);
+		//阿里云上传
+		filename=FileManager.uploadFile("your bucket","test.txt",content);
+		//阿里云下载
+		byte[] downloadContent=FileManager.downLoadFile("your bucket",filename);
+		//获取文件url
+		String url = FileManager.getUrl("your bucket", filename, 60);
+		//获取图片url(将上传文件路径改为图片)
+		//String imgurl = FileManager.getImgUrl(Private, filename, 60);
 		//删除
-		client.deleteFile("/etc/filetest/aliyuntest.txt");
-		
+		boolean flag=FileManager.deleteFile("your bucket",filename);
 		
 		System.out.println(filename);
+		System.out.println(url);
+		//System.out.println(imgurl);
 		System.out.println("删除状态"+flag);
-		Assert.isTrue(flag);
-	}
+		//Assert.isTrue(flag);
+	}	
 
 **直传**
 
@@ -138,10 +167,13 @@ example测试类
     import javax.servlet.annotation.WebServlet;
     import javax.servlet.http.HttpServletRequest;
     import javax.servlet.http.HttpServletResponse;
-    //SaasCallbackServer类中的get方法完成了oss直传需要的签名动作，如果有其他需求也可以直接写自己的CallbackServer
+    
     @WebServlet(asyncSupported = true,name = "Oss",urlPatterns = { "/oss" })
     public class OssDirectServlet extends CallbackServer {
     	
+    	/**
+    	 * 
+    	 */
     	private static final long serialVersionUID = 1L;
     
     	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -149,7 +181,8 @@ example测试类
     		String ossCallbackBody = GetPostBody(request.getInputStream(), Integer.parseInt(request.getHeader("content-length")));//获取回调
     		boolean ret = VerifyOSSCallbackRequest(request, ossCallbackBody);//验证回调
     		
-    		if (ret) {
+    		if (ret)
+    		{
     			//验证通过进行操作
     			Map<String, Object> map = getUrlParams(ossCallbackBody);
     			String filename=(String) map.get("filename");//获取存储的文件名
@@ -158,59 +191,61 @@ example测试类
     			System.out.println(bucket);
     			
     			response(request, response, "{\"Status\":\"OK\"}", HttpServletResponse.SC_OK);
-    		} else {
+    
+    		}
+    		else
+    		{
     			response(request, response, "{\"Status\":\"verdify not ok\"}", HttpServletResponse.SC_BAD_REQUEST);
     		}
     	}
     
     }
+
     
 通过js进行上传
 
     
     function init(){
     
-    	//提交
-    	//获取oss签名参数
-    	var ret = get_signature()
+    //提交
+    //获取oss签名参数
+    var ret = get_signature()
     	//装配发送到oss文件上传url   
-	    var formData = new FormData(); 
-	    var file=$("#file").prop('files');
-	       
-	    var filepath=$("#file").val();
-	    var arr=filepath.split('\\');
-		//获得本地文件名（需要开发者提供）
-	    var filename=arr[arr.length-1];
+    var formData = new FormData(); 
+    var file=$("#file").prop('files');
+       
+    var filepath=$("#file").val();
+    var arr=filepath.split('\\');
+    var filename=arr[arr.length-1];//===================获得本地文件名（需要你提供）
     
-	    if (ret == true)
-	    {
-	    	//装配oss签名参数
-	    	formData.append("name",filename);
-	    	formData.append("key", key);
-	    	formData.append("policy", policyBase64);
-	    	formData.append("OSSAccessKeyId", accessid);
-	    	formData.append("success_action_status", '200');
-	    	formData.append("callback", callbackbody);
-	    	formData.append("signature", signature);
-	    	formData.append("file",document.getElementById('file').files[0])//===================获得文件数据（需要你提供）
-	    }
-
-    	//发送文件上传请求   
+    if (ret == true)
+    {
+    	//装配oss签名参数
+    	formData.append("name",filename);
+    	formData.append("key", key);
+    	formData.append("policy", policyBase64);
+    	formData.append("OSSAccessKeyId", accessid);
+    	formData.append("success_action_status", '200');
+    	formData.append("callback", callbackbody);
+    	formData.append("signature", signature);
+    	formData.append("file",document.getElementById('file').files[0])//===================获得文件数据（需要你提供）
+    }
+    //发送文件上传请求   
     	$.ajax({  
-	 	   url: host,  
-		   type: 'POST',  
-		   data: formData,  
-		   async: false,  
-		   contentType: false, //必须
-		   processData: false, //必须
-		   success: function (returndata) {  
-		       alert(returndata);  
-		   },  
-		   error: function (returndata) {  
-		   alert(returndata);  
-		   }  
-	    });  
-	}								
+    		url: host,  
+    		type: 'POST',  
+    		data: formData,  
+    		async: false,  
+    		contentType: false, //必须
+    		processData: false, //必须
+    		success: function (returndata) {  
+   	 			alert(returndata);  
+    		},  
+   			error: function (returndata) {  
+    			alert(returndata);  
+    		}  
+    	});  
+  	}
     
     //发送到应用服务器 获取oss签名参数
     function send_request(){
@@ -218,7 +253,7 @@ example测试类
     	$.ajax({
     		type : 'GET',
     		async : false,
-    		url :'http://localhost/example_iuap_saas_file/oss
+    		url :'http://localhost/example_iuap_file/oss?bucketname='+document.getElementById('bucketname').value,//==========租户id（需要你提供）
     		success : function(data){
     		obj=$.parseJSON(data);
     		} 
@@ -227,26 +262,27 @@ example测试类
     }
     
     //获取到签名参数后将参数填入变量待用
-    function get_signature() {
-	    //可以判断当前expire是否超过了当前时间,如果超过了当前时间,就重新取一下.3s 做为缓冲
-	    expire = 0
-	    now = timestamp = Date.parse(new Date()) / 1000; 
-	    console.log('get_signature ...');
-	    console.log('expire:' + expire.toString());
-	    console.log('now:', + now.toString())
-	    if (expire < now + 3) {
-		    console.log('get new sign')
-		    var obj = send_request(obj)
-		    policyBase64 = obj['policy']
-		    accessid = obj['accessid']
-		    signature = obj['signature']
-		    expire = parseInt(obj['expire'])
-		    callbackbody = obj['callback'] 
-		    host =obj['host']
-		    key = obj['perfix']+'${filename}'
-		    return true;
-	    }
-	    return false;
+    function get_signature()
+    {
+    	//可以判断当前expire是否超过了当前时间,如果超过了当前时间,就重新取一下.3s 做为缓冲
+    	expire = 0
+    	now = timestamp = Date.parse(new Date()) / 1000; 
+    	console.log('get_signature ...');
+    	console.log('expire:' + expire.toString());
+    	console.log('now:', + now.toString())
+    	if (expire < now + 3){
+    		console.log('get new sign')
+    		var obj = send_request(obj)
+    		policyBase64 = obj['policy']
+   			accessid = obj['accessid']
+    		signature = obj['signature']
+    		expire = parseInt(obj['expire'])
+    		callbackbody = obj['callback'] 
+    		host =obj['host']
+    		key = obj['perfix']+'${filename}'
+    		return true;
+    	}
+    	return false;
     };
     
     $("#submit").attr("onclick","init();");
@@ -283,24 +319,21 @@ http://image-demo.img-cn-hangzhou.aliyuncs.com/example.jpg@100h
 
 http://image-demo.img-cn-hangzhou.aliyuncs.com/example.jpg@100w
 
-
-**3.2:FastDFS**
+###2.FastDFS###
 
 
 组件提供API，操作FastDFS
 
 FastDfs API与使用oss系统时是相同的，所有的api都通过FileManager类静态调用，例子：FileManager.uploadFile("private","test.txt",content)。
 
-在使用FastDfs模式时，bucketName参数代表文件在操作FastDFS系统存储的权限（private、read、full）该权限将存入FastDFS文件的metadata中，目前组件还没有对不同权限的文件进行访问限制处理，请等待以后的更新。
+在使用FastDfs模式时，bucketName参数代表文件在操作FastDFS系统存储的权限（private、read、full）该权限将存入FastDFS文件的metadata中，目前组件还没有对不同权限的文件进行访问限制处理，请等待以后的更新。FastDfs模式下，bucketName目前为三个固定值PRIVATE、READ、FULL，代表三种权限。
 
 	//上传，参数（bucket名，文件名，上传文件字节数组），返回（上传文件的文件名）
     String uploadFile(String bucketName, String fileName,byte[] fileContent)
 	
-
  	//下载，参数（bucket名，文件名），返回（下载文件的字节数组）
  	byte[] downLoadFile(String bucketName,String fileName) ;
 	
-
 	//删除，参数（bucket名，文件名），返回（删除是否成功标志）
     boolean deleteFile(String bucketName,String fileName)
 
@@ -312,32 +345,38 @@ FastDfs API与使用oss系统时是相同的，所有的api都通过FileManager�
 
 example测试类
     
-    	/**
-    	 * fastdfs上传下载删除测试
-    	 * 测试前请设置application.properties的storeType=FastDfs
-    	 * @throws Exception
-    	 */
-    	@Test
-    	public void testFdfsUpload() throws Exception {
-    		String filename;
-    		//借用文件流生成文件的二进制数组
-    		LocalClient client =LocalClient.getInstance();		
-    		byte[] content =client.download("/etc/filetest/test.txt");
-    		//fastdfs上传
-    		filename=FileManager.uploadFile(null, "test.txt",content);
-    		//fastdfs下载
-    		byte[] downloadContent=FileManager.downLoadFile(null,filename);
-    		
-    		//用文件流将fastdfs下载到的文件二进制数组转化为文件
-    		client.upload("/etc/filetest/fdfstest.txt","fdfstest.txt", downloadContent);
-    		//删除
-    		boolean flag=FileManager.deleteFile(null,filename);	
-    		client.deleteFile("/etc/filetest/fdfstest.txt");
-    		
-    		System.out.println(filename);
-    		System.out.println("删除状态"+flag);
-    		Assert.isTrue(flag);
-    	}
+    /**
+	 * fastdfs上传下载删除测试
+	 * 测试前请设置application.properties的storeType=FastDfs
+	 * @throws Exception
+	 */
+	@Test
+	public void testFdfsUpload() throws Exception {
+		String filename;
+		//借用文件流生成文件的二进制数组
+		LocalClient client =LocalClient.getInstance();		
+		//参数为测试文件路径
+		byte[] content =client.download("/etc/filetest/test.txt");
+		//==================准备工作完毕=============================
+		
+		//fastdfs上传
+		filename=FileManager.uploadFile(Private, "test.txt",content);
+		//fastdfs下载
+		byte[] downloadContent=FileManager.downLoadFile(Private,filename);
+		//获取文件url
+		String url = FileManager.getUrl(Private, filename, 0);
+		//获取图片url(将上传文件路径改为图片)
+		//String imgurl = FileManager.getImgUrl(Private, filename, 0);
+		//删除
+		boolean flag=FileManager.deleteFile(Private,filename);	
+		
+		
+		System.out.println(filename);
+		System.out.println(url);
+		//System.out.println(imgurl);
+		System.out.println("删除状态"+flag);
+		Assert.isTrue(flag);
+	}
 
 **略缩图功能**
 
@@ -488,7 +527,7 @@ example.jpg@100w
 example.jpg@100h_100w
 
 
-**4.2:本地文件系统**
+###3.本地文件系统###
 
 本地文件系统一般用于开发测试，不建议部署为生产系统
 
@@ -528,5 +567,75 @@ example测试类
 		System.out.println("删除状态"+flag);
 		Assert.isTrue(flag);
 	}
+
+
+##常用接口##
+**文件组件api接口介绍**
+
+组件接口类FileManager
+
+FastDfs模式下，bucketName为三个固定值PRIVATE、READ、FULL，代表三种权限。
+
+<table style="border-collapse:collapse">
+	<tr>
+		<th>方法名</th>
+		<th>参数</th>
+		<th>返回值</th>
+		<th>功能说明</th>
+	</tr>
+
+	<tr>
+		<td>uploadFile</td>
+		<td>
+			1. String bucketName（bucket名）<br/>
+			2. String fileName（上传文件名）<br/>
+			3. byte[] fileContent（上传文件字节数组）<br/>
+		</td>
+		<td>String（上传后的文件名）</td>
+		<td>上传文件</td>
+	</tr>
+	<tr>
+		<td>downLoadFile</td>
+		<td>
+			1. String bucketName（下载文件所在bucket名）<br/>
+			2. String fileName（下载文件名）<br/>
+		</td>
+		<td>byte[]（下载文件的二进制数组）</td>
+		<td>下载文件</td>
+	</tr>
+	<tr>
+		<td>deleteFile</td>
+		<td>
+			1. String bucketName（bucket名）<br/>
+			2. String fileName（要删除的文件名）<br/>
+		</td>
+		<td>boolean（删除文件是否成功）</td>
+		<td>删除文件</td>
+	</tr>
+	<tr>
+		<td>getUrl</td>
+		<td>
+			1. String bucketName(bucket名)<br/>
+			2.  String fileName（获取url的文件名<br/>
+			3.  int expired（单位 秒 ，连接过期时间,目前该参数只支持阿里云oss私有bucket)<br/>
+		</td>
+		<td>String（文件的url）</td>
+		<td>返回文件url</td>
+	</tr>
+	<tr>
+		<td>getImgUrl</td>
+		<td>
+			1. String bucketName(bucket名)<br/>
+			2. String fileName（获取url的文件名）<br/>
+			3. int expired（单位 秒 ，连接过期时间,目前该参数只支持阿里云oss私有bucket）<br/>
+		</td>
+		<td>String（图片的url）</td>
+		<td>
+			返回图片url <br/>
+			使用阿里云oss时在fileName加入类似@100h的参数能生成略缩图<br/>
+			使用fdfs时在fileName加入类似@100h的参数能生成略缩图（需要布置nginx支持）<br/>
+		</td>
+	</tr>
+</table>
 	
-**5:更多详细的使用方法，请参考示例工程(DevTool/examples/example_iuap_file)**
+**更多详细的使用方法，请参考示例工程(DevTool/examples/example_iuap_file)**
