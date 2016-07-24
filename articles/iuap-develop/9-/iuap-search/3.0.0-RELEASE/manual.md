@@ -84,7 +84,7 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 		}
 
 
-## 索引查询
+## 索引查询 ##
 ### 普通检索 ###
 
 **solr 的query界面参数和Criteria API对应表**
@@ -177,3 +177,21 @@ iuap search组件提供了索引修改的异步接口。解耦应用数据修改
 	    </bean>
 
 **更多API操作和配置方式，请参考对应的示例工程(DevTool/examples/example\_iuap_search)**
+
+## 配置中文分词 ##
+
+- 修改对应的core的config文件夹下的schema.xml,添加ik分词配置：
+
+	    <!-- IKAnalyzer 中文分词--> 
+	    <fieldType name="text_ik" class="solr.TextField">
+			<analyzer type="index" isMaxWordLength="false" class="org.wltea.analyzer.lucene.IKAnalyzer"/>
+			<analyzer type="query" isMaxWordLength="true" class="org.wltea.analyzer.lucene.IKAnalyzer"/>
+		</fieldType>
+		<field name="ik" type="text_ik" indexed="true" stored="true" multiValued="false" />  
+
+- 在声明字段时，指定类型为text_ik
+
+		<field name="title" type="text_ik" indexed="true" stored="true" multiValued="false"/>
+
+- 添加新的索引后，title字段的查询即支持中文分词，可以用solr控制台的分析工具查看分词效果
+
