@@ -10,6 +10,11 @@ iuap平台使用iuap-mybatis作为MyBatis持久化的支持。iuap-mybatis提供
 
 在iuap-persistence组件中已经对mybatis的基础使用做了说明，iuap-persistence中依赖了基础的spring data jpa和mybatis相关，如果项目上明确使用Mybatis，则不需要引入iuap-persistence组件，直接依赖iuap-mybatis组件即可，注意要和iuap其他组件的版本保持一致。
 
+## 功能说明 ##
+1.	提供统一的Spring扫描注解；
+2.	提供Mybatis分页插件;
+
+
 # 整体设计 #
 
 ## 依赖环境 ##
