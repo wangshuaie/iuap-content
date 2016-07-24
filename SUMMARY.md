@@ -16,7 +16,7 @@
    * [前端开发](articles/iuap-develop/4-/qian_duan_kai_fa.md)
    * [前后端数据交互](articles/iuap-develop/4-/qian_hou_duan_shu_ju_jiao_hu.md)
    * [工程调试运行](articles/iuap-develop/4-/gong_cheng_diao_shi_yun_xing.md)
-   * 打包部署
+   * [打包部署](articles/iuap-develop/4-/da_bao_bu_shu.md)
 * [工具及规范](articles/iuap-develop/5-/README.md)
    * [工具说明](articles/iuap-develop/5-/part1/README.md)
        * [工具概述](articles/iuap-develop/5-/part1/gong_ju_gai_shu.md)
