@@ -20,21 +20,32 @@ CREATE TABLE
 
 ## 创建实体类
 1）	右键工程，选择iuap tools下的快速代码生成
- 
+
+ ![](image/image17.png)
+
 2）	选择从数据库导入，点击下一步按钮
- 
+
+![](image/image18.png)
+
 3）	选择数据表，选中需要生成代码的列，调整不能识别的字段
- 
+
+![](image/image19.png)
+
 4）	点击下一步，选择代码要生成的包名和类名
- 
+
+![](image/image20.png)
+
 5）	点击完成，生成对应的代码如下
- 
+
+![](image/image21.png)
+
 6）	在productid上添加主键的注解如下
 
 ```
 @Id和@GeneratedValue(strategy=Stragegy.UUID,moudle="example_demo")
 
 ```
+![](image/image22.png)
 
 7）	请确保注解引入的包为iuap-jdbc组件中的包
 
@@ -48,6 +59,10 @@ import com.yonyou.iuap.persistence.jdbc.framework.annotation.Stragegy;
 ## 编写dao类
 
 1）	在repository包下新建数据库操作类ProductDao并添加@Repository注解
+
+![](image/image23.png)
+
+![](image/image24.png)
 
 ```
 @Repository
@@ -64,6 +79,8 @@ private BaseDAO dao;
 ```
 
 3）	编写增改删查需要的几个方法，完整代码如下
+
+![](image/image25.png)
 
 ``` 
 package com.yonyou.iuap.example.repository;
@@ -149,6 +166,7 @@ public class ProductDao {
 ## 编写Service类
 
 1）在service包下新建ProductService类
+
 2）ProductService类中加入@Service注解
 
 ```
@@ -158,8 +176,11 @@ public class ProductService
 ```
 
 3）注入ProductDao
- 
+
+![](image/image26.png)
+
 4）	编写增改删除的几个方法，在新增和修改方法上加事务控制的注解@Transactional
+
 5）	完整示例代码如下
 
 ```
@@ -222,6 +243,8 @@ public class ProductService {
 
 ```
 
+![](image/image27.png)
+
 ## 编写Controller类
 
 1）	新建Controller类并声明Logger
@@ -251,6 +274,8 @@ private ProductService productService;
 ```
 
 4）	参考示例，编写分页查询、详情、保存、删除等方法，完成代码如下 
+
+![](image/image28.png)
 
 ```
 package com.yonyou.iuap.example.web;
