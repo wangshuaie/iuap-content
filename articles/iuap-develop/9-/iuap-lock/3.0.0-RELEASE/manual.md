@@ -104,3 +104,68 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 	注意：url-pattern要按照自己加锁业务的请求路径进行映射，不要使用/*，以免拦截范围过大。
 
 **7:更多API操作和配置方式，请参考分布式锁对应的示例工程(DevTool/examples/example_iuap_lock)**
+
+## API接口 ##
+
+###加锁操作###
+
+- 功能描述
+
+对敏感、关键的业务数据或资源进行加锁操作，加锁后可以进行业务操作，过程中不会有其他请求加锁成功。
+
+- 调用方式
+
+	boolean islocked = DistributedLock.lock(lockpath);
+
+- 参数说明
+
+<table style="border-collapse:collapse">
+  <tbody><tr>
+    <th>参数</th>
+    <th>类型</th>
+    <th>说明</th>
+  </tr>
+  <tr>
+    <td>lockpath</td>
+    <td>String</td>
+    <td>需要锁定资源的唯一标识</td>
+  </tr>
+</tbody></table>
+
+- 返回值说明
+	
+<table style="border-collapse:collapse">
+  <tbody><tr>
+    <th>类型</th>
+    <th>说明</th>
+  </tr>
+  <tr>
+    <td>boolean</td>
+    <td>加锁成功或者失败的标识</td>
+  </tr>
+</tbody></table>
+
+###解锁操作###
+
+- 功能描述
+
+对加锁后的资源进行解锁操作。
+
+- 调用方式
+
+	DistributedLock.unlock(lockpath);
+
+- 参数说明
+
+<table style="border-collapse:collapse">
+  <tbody><tr>
+    <th>参数</th>
+    <th>类型</th>
+    <th>说明</th>
+  </tr>
+  <tr>
+    <td>lockpath</td>
+    <td>String</td>
+    <td>需要解锁资源的唯一标识</td>
+  </tr>
+</tbody></table>
