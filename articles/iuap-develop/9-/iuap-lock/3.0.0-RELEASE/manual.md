@@ -169,3 +169,66 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
     <td>需要解锁资源的唯一标识</td>
   </tr>
 </tbody></table>
+
+###批量加锁操作###
+
+- 功能描述
+
+对多个资源同时加锁，批量加锁要么全部加锁成功，要么全部加锁失败。
+
+- 调用方式
+
+	boolean islocked = DistributedLock.lock(locks);
+
+- 参数说明
+
+<table style="border-collapse:collapse">
+  <tbody><tr>
+    <th>参数</th>
+    <th>类型</th>
+    <th>说明</th>
+  </tr>
+  <tr>
+    <td>locks</td>
+    <td>String[]</td>
+    <td>需要锁定资源的唯一标识数组</td>
+  </tr>
+</tbody></table>
+
+- 返回值说明
+	
+<table style="border-collapse:collapse">
+  <tbody><tr>
+    <th>类型</th>
+    <th>说明</th>
+  </tr>
+  <tr>
+    <td>boolean</td>
+    <td>批量加锁成功或者失败的标识</td>
+  </tr>
+</tbody></table>
+
+###批量解锁操作###
+
+- 功能描述
+
+对加锁后的资源进行批量解锁操作。
+
+- 调用方式
+
+	DistributedLock.unlock(locks);
+
+- 参数说明
+
+<table style="border-collapse:collapse">
+  <tbody><tr>
+    <th>参数</th>
+    <th>类型</th>
+    <th>说明</th>
+  </tr>
+  <tr>
+    <td>locks</td>
+    <td>String[]</td>
+    <td>需要批量解锁资源的唯一标识数组</td>
+  </tr>
+</tbody></table>
