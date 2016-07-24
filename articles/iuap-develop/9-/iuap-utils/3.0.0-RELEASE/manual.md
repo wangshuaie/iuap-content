@@ -103,6 +103,7 @@ HttpContextUtil 类在 HttpUtil的基础上，可以传递上下文信息到被�
 ```
 
 com.yonyou.iuap.context.filter.ContextFilter 类位于  iuap-generic.jar 包中。
+
 ```
 <url-pattern>/restcontext/*</url-pattern> 指需要过滤的 url路径。
 ```
