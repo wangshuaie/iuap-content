@@ -124,15 +124,15 @@ InvocationInfoProxy (位于iuap-generic.jar中)
 
 加密后内容如下：
 
+```
 	jdbc.driver=org.postgresql.Driver
 	jdbc.url=eJzLSklKtirILy5JL0otLsyx0tc3NDfSMzLQMzTRMzO0MjUxNtKvqigGAP96C6g=
 	jdbc.username=postgres
 	jdbc.password=eJwryC8uSS9KLQYAD7YDeA==
-
-
-
+```
 applicationContext.xml文件中读取 配置文件
 
+```
 	 <bean id="propertyConfigurer" class="com.yonyou.iuap.config.PropertyConfigurer">
         <property name="encryptKeySet">
             <set> <!-- 配置需要解密的属性-->
@@ -148,3 +148,4 @@ applicationContext.xml文件中读取 配置文件
         <property name="systemPropertiesMode"
                   value="#{T(org.springframework.beans.factory.config.PropertyPlaceholderConfigurer).SYSTEM_PROPERTIES_MODE_OVERRIDE}"/>
     </bean>
+```
