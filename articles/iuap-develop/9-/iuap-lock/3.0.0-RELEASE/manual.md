@@ -1,10 +1,10 @@
 # 分布式锁组件 #
 
-## 组件简介 ##
-iuap-lock组件是利用Zookeeper的强一致特性，提供的分布式锁功能，解决了多JVM中对共享资源加锁解锁的需求。本组件支持对共享资源的互斥锁的加锁解锁、线程内锁重入、批量加解锁等功能。支持对Zookeeper的单机和集群方式连接。
+## 业务需求 ##
+很多业务上都有对同一个资源并发进行读写访问的场景，又要保证单次访问的正确性和多次访问的一致性，这就要求对资源进行加锁。同时在服务部署可以水平伸缩的情况下，无法做到在单JVM中的加锁控制，所以需要有一个分布式的系统来统一进行加解锁处理。
 
-锁的逻辑实现的流程图如下：
-<img src="/images/iuap_lock_flow.jpg"/>
+## 解决方案 ##
+iuap的分布式锁组件是利用Zookeeper的强一致特性，通过Zookeeper来提供分布式锁的能力，解决了在多JVM中对共享资源加锁解锁的需求，并通过集群方式保证整个系统的高可用。本组件实现了对共享资源的互斥加解锁，在同一线程内的重复加锁，以及在业务结束后通过拦截触发的自动解锁功能等。
 
 ## 功能说明 ##
 1.	支持对共享资源的互斥加解锁；
@@ -12,6 +12,8 @@ iuap-lock组件是利用Zookeeper的强一致特性，提供的分布式锁功�
 3.	支持批量加解锁功能；
 4.	支持线程结束自动解锁功能。
 
+锁的逻辑实现的流程图如下：
+<img src="/images/iuap_lock_flow.jpg"/>
 
 
 # 使用说明 #
@@ -167,5 +169,68 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
     <td>lockpath</td>
     <td>String</td>
     <td>需要解锁资源的唯一标识</td>
+  </tr>
+</tbody></table>
+
+###批量加锁操作###
+
+- 功能描述
+
+对多个资源同时加锁，批量加锁要么全部加锁成功，要么全部加锁失败。
+
+- 调用方式
+
+	boolean islocked = DistributedLock.lock(locks);
+
+- 参数说明
+
+<table style="border-collapse:collapse">
+  <tbody><tr>
+    <th>参数</th>
+    <th>类型</th>
+    <th>说明</th>
+  </tr>
+  <tr>
+    <td>locks</td>
+    <td>String[]</td>
+    <td>需要锁定资源的唯一标识数组</td>
+  </tr>
+</tbody></table>
+
+- 返回值说明
+	
+<table style="border-collapse:collapse">
+  <tbody><tr>
+    <th>类型</th>
+    <th>说明</th>
+  </tr>
+  <tr>
+    <td>boolean</td>
+    <td>批量加锁成功或者失败的标识</td>
+  </tr>
+</tbody></table>
+
+###批量解锁操作###
+
+- 功能描述
+
+对加锁后的资源进行批量解锁操作。
+
+- 调用方式
+
+	DistributedLock.unlock(locks);
+
+- 参数说明
+
+<table style="border-collapse:collapse">
+  <tbody><tr>
+    <th>参数</th>
+    <th>类型</th>
+    <th>说明</th>
+  </tr>
+  <tr>
+    <td>locks</td>
+    <td>String[]</td>
+    <td>需要批量解锁资源的唯一标识数组</td>
   </tr>
 </tbody></table>
