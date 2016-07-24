@@ -205,6 +205,94 @@ iUAP平台提供元数据服务以实现元数据的查询、发布、删除和�
 
 - MetadataService
 
+**5:更多API操作和配置方式，请参考缓存对应的示例工程(DevTool/examples/example_iuap_metadata)**
+
+## 工程样例 ##
+
+
+<img src="/images/metadata_example.jpg"/>
+
+开发工具包DevTool中携带了对元数据服务的示例工程，位置位于DevTool/examples/example\_iuap\_metadata下，在IUAP_STUDIO中导入已有的Maven工程，可以将示例工程导入到工作区。示例工程中有较为完整的对iuap-mdpersistence和mdspi组件的使用示例代码。
+
+## 开发步骤 ##
+
+- 配置示例工程中的redis.session.url为正确的redis地址，redis可以采用DevTool中bin目录下的redis，例如示例工程下的application.properties
+
+		#元数据服务组件需要的redis地址配置
+		redis.url=direct://localhost:6379?poolSize=50&poolName=mypool
+		
+		#数据库配置信息
+		jdbc.driver=org.postgresql.Driver
+		jdbc.url=jdbc:postgresql://localhost:5432/publishtest?useUnicode=true&characterEncoding=utf-8
+		jdbc.catalog=publishtest
+		jdbc.username=root
+		jdbc.password=
+		
+		#连接池配置信息
+		jdbc.pool.maxIdle=10
+		jdbc.pool.maxActive=100
+		jdbc.pool.maxWait=120000
+		jdbc.pool.initialSize=20	
+		jdbc.pool.minEvictableIdleTimeMillis=6000
+		jdbc.pool.removeAbandoned=true
+		jdbc.pool.removeAbandonedTimeout=6000
+
+
+- 配置applicationContex-***.xml,例如示例工程中的配置文件
+
+		<?xml version="1.0" encoding="UTF-8"?>
+		<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+		xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd"
+		default-lazy-init="true">
+
+		<description>saas cache</description>
+	
+		<!-- 说明，如果想为业务配置多份的cache，需要配置多个pool，连接多个不同的url。 用bean id区分并注入，避免采用@Autowired的方式按类型注入。 -->
+	
+	
+		<bean id="redisPool" class="com.yonyou.iuap.cache.redis.RedisPoolFactory"
+			scope="prototype" factory-method="createJedisPool">
+			<constructor-arg value="${redis.url}" />
+		</bean>
+	
+		<bean id="jedisTemplate" class="org.springside.modules.nosql.redis.JedisTemplate">
+			<constructor-arg ref="redisPool"></constructor-arg>
+		</bean>
+	
+		<bean id="redisShardedPool" class="com.yonyou.iuap.cache.redis.RedisPoolFactory"
+			scope="prototype" factory-method="createShardedJedisPools">
+			<constructor-arg value="${redis.shardedurl}" />
+		</bean>
+	
+		<bean id="jedisShardedTemplate" class="org.springside.modules.nosql.redis.JedisShardedTemplate">
+			<constructor-arg ref="redisShardedPool"></constructor-arg>
+		</bean>
+	
+		<bean id="cacheManager" class="com.yonyou.iuap.cache.CacheManager">
+			<property name="jedisTemplate" ref="jedisTemplate" />
+		</bean>
+	
+		<bean id="saasCacheManager" class="com.yonyou.iuap.cache.SaasCacheManager">
+			<property name="cacheManager" ref="cacheManager" />
+		</bean>
+		<bean id="metadataCache" class="com.yonyou.metadata.mybatis.util.MetadataCache">
+			<property name="saasCacheMgr" ref="saasCacheManager" />
+			<property name="cacheManager" ref="cacheManager" />
+		</bean>
+		</beans>
+
+## 常用接口 ##
+
+- MetadataService
 
 <tr>
 <th class="colFirst" scope="col">限定符和类型</th>

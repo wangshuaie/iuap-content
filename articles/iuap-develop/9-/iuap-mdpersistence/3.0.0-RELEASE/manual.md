@@ -5,6 +5,19 @@
 业务系统在进行模型关系使用和查询时，不可避免的需要对数据库表有深入了解，知道具体字段的含义，且开发效率差，简单查询都需要代码开发
 运行效率查，公式解析解析代价
 
+
+##解决方案##
+iuap-mdjdbc组件提供一种完全基于模型角度，不用了解数据库结构的支持复杂条件查询的访问方式，有效的提高数据访问效率，且切合业务实际。
+
+
+# 整体设计 #
+
+## 依赖环境 ##
+组件采用Maven进行编译和打包发布，依赖spring框架,引入了UAP平台的一些基础组件如iuap-mdpersistence、iuap-mdperspi、iuap-log和iuap-cache、iuap-mybatis，以及一些基础组件如tomcat-jdbc、mysql-connector-java、commons-collections4，其对外提供的依赖方式如下：
+
+业务系统在进行模型关系使用和查询时，不可避免的需要对数据库表有深入了解，知道具体字段的含义，且开发效率差，简单查询都需要代码开发
+运行效率查，公式解析解析代价
+
 ##解决方案##
 
 iuap-mdjdbc组件提供一种完全基于模型角度，不用了解数据库结构的支持复杂条件查询的访问方式，有效的提高数据访问效率，且切合业务实际。
@@ -27,6 +40,18 @@ iuap-mdjdbc组件提供一种完全基于模型角度，不用了解数据库结
 	</dependency>
 ```
 
+
+${iuap.modules.version} 为平台在maven私服上发布的组件的version。
+
+## 流程说明 ##
+
+请参照iuap-jdbc组件的流程说明
+
+# 使用说明 #
+
+## 组件包说明 ##
+
+iUAP元数据持久化组件是遵循元数据设计规范，基于iuap-jdbc的持久化组件。基于元数据的定义，该组件提供了对数据的增删改查，数据表扩展以及关联关系查询等功能。同时提供热点数据缓存，数据变更日志等功能。
 
 ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 
@@ -184,12 +209,12 @@ iUAP元数据持久化组件是遵循元数据设计规范，基于iuap-jdbc的�
 ```
 
 ## 工程样例 ##
+
 <img src="/images/mdjdbc_example.jpg"/>
+
 ## 常用接口 ##
 
-
 ### 基于元数据定义的单表数据的增删改查 ###
-
 
 元数据持久化组件的增删改查逻辑to
 
@@ -257,9 +282,7 @@ iUAP元数据持久化组件是遵循元数据设计规范，基于iuap-jdbc的�
                 DASFacade.getAttributeValueAsPKMap(paths, dtList.toArray(new ODerDt[] {}));
 ```
 
-
 ### 基于元数据操作的数据变更通知，默认提供日志记录 ###
-
 
 元数据持久化组件对于元数据操作接口提供了数据变更通知功能，需要在`MetaDAO`的属性中设置`dataChangeNotifier`属性，组件默认提供了日志记录的功能，如果应用需要自定义扩展，需要实现`IDataChangeListener`接口，并做如下配置
 
