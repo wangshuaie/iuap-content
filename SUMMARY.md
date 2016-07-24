@@ -37,7 +37,7 @@
    * [持久层简介](articles/iuap-develop/7-/part3/README.md)
        * [JPA方式持久化](articles/iuap-develop/7-/part3/jpafang_shi_chi_jiu_hua.md)
        * [MyBatis方式持久化](articles/iuap-develop/7-/part3/mybatisfang_shi_chi_jiu_hua.md)
-       * [iUAP JDBC方式持久化](articles/iuap-develop/7-/part3/iuap_jdbcfang_shi_chi_jiu_hua.md)
+       * [iuap JDBC方式持久化](articles/iuap-develop/7-/part3/iuap_jdbcfang_shi_chi_jiu_hua.md)
    * [事务控制与连接池](articles/iuap-develop/7-/part4/README.md)
        * [事务操作基本规范](articles/iuap-develop/7-/part4/shi_wu_cao_zuo_ji_ben_gui_fan.md)
        * [数据库连接池](articles/iuap-develop/7-/part4/shu_ju_ku_lian_jie_chi.md)
