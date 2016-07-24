@@ -198,3 +198,25 @@ iuap search组件提供了索引修改的异步接口。解耦应用数据修改
 	
 	![](../images/analysis.png)
 
+## 启用停用词功能和扩展词典 ##
+
+- 将stopword.dic和IKAnalyzer.cfg.xml复制到classes根目录
+
+		<?xml version="1.0" encoding="UTF-8"?>
+		<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+		<properties>
+			<comment>IK Analyzer 扩展配置</comment>
+			<!--用户可以在这里配置自己的扩展字典 -->
+			<entry key="ext_dict">ext.dic;</entry>
+			<!--用户可以在这里配置自己的扩展停止词字典-->
+			<entry key="ext_stopwords">stopword.dic;</entry>
+		</properties>
+
+	ext.dic 为自定义词语，stopword.dic为会屏蔽掉的词语。
+
+- 扩展词典示例，修改ext.dic
+
+	在ext.dic中添加"我去",分词效果如下图：
+
+	![](../images/extdic.png)
+
