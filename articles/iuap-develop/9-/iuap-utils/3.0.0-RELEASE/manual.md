@@ -104,8 +104,9 @@ HttpContextUtil 类在 HttpUtil的基础上，可以传递上下文信息到被�
 
 com.yonyou.iuap.context.filter.ContextFilter 类位于  iuap-generic.jar 包中。
 
-> <url-pattern>/restcontext/*</url-pattern> 指需要过滤的 url路径。
-
+```
+<url-pattern>/restcontext/*</url-pattern> 指需要过滤的 url路径。
+```
 接收到信息后，调用 InvocationInfoProxy将信息打印出来
 
 		System.out.println( InvocationInfoProxy.getCallid());
@@ -123,15 +124,15 @@ InvocationInfoProxy (位于iuap-generic.jar中)
 
 加密后内容如下：
 
+```
 	jdbc.driver=org.postgresql.Driver
 	jdbc.url=eJzLSklKtirILy5JL0otLsyx0tc3NDfSMzLQMzTRMzO0MjUxNtKvqigGAP96C6g=
 	jdbc.username=postgres
 	jdbc.password=eJwryC8uSS9KLQYAD7YDeA==
-
-
-
+```
 applicationContext.xml文件中读取 配置文件
 
+```
 	 <bean id="propertyConfigurer" class="com.yonyou.iuap.config.PropertyConfigurer">
         <property name="encryptKeySet">
             <set> <!-- 配置需要解密的属性-->
@@ -147,3 +148,4 @@ applicationContext.xml文件中读取 配置文件
         <property name="systemPropertiesMode"
                   value="#{T(org.springframework.beans.factory.config.PropertyPlaceholderConfigurer).SYSTEM_PROPERTIES_MODE_OVERRIDE}"/>
     </bean>
+```
