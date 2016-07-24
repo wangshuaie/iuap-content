@@ -4,28 +4,47 @@
 ## 新建数据模型
 1）	切换到iUAP开发视图，工程上右键选择新建下的新建数据模型
 
+![](image/image29.png)
 
 2）	输入文件名为product.model，点击下一步
- 
+
+![](image/image30.png)
+
 3）选择实体类为Product，点击下一步
- 
+
+![](image/image31.png)
+
 4）使用默认的UTF-8编码，点击完成
- 
+
+![](image/image32.png)
+
 5）	工具生成数据模型文件，如下图
- 
+
+![](image/image33.png)
+
 ## 新建iuap页面
 
 1）	在webapp的pages下右键新建iuap页面，点击下一步
- 
+
+![](image/image34.png)
+![](image/image35.png)
  
 也可以切换到iUAP开发视图，在webapp下的pages目录右键，选择新建下的iUAP页面
- 
+
+![](image/image36.png)
+
 2）	输入页面目录名称为product，勾选使用数据模型，点击下一步
- 
+
+![](image/image37.png)
+
 3）选择数据模型为Product，勾选右下角的选择，点击完成
- 
+
+![](image/image38.png)
+
 4）工具为用户生成功能模块的js文件和html片段，所在位置如下图
- 
+
+![](image/image39.png)
+
 ## 调整模块的js文件
 
 1）	定义js前端的datatable数据模型，修完成改后如下
