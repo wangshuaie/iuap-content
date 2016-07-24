@@ -14,6 +14,15 @@ iuap-persistence组件提供对通用持久化功能的集成，包括Spring dat
 
 同时，iuap-persistence组件也是后续的动态数据源组件的基础。
 
+## 功能说明 ##
+
+1.	集成Spring Data JPA；
+2.	集成Mybatis；
+3.	集成Spring JDBC；
+4.	集成Tomcat JDBC数据库连接池；
+5.	支持JPA分页查询；
+
+
 # 整体设计 #
 
 ## 依赖环境 ##
