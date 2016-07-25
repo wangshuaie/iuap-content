@@ -1,7 +1,6 @@
 # 开发工具配置
 
 ## 获取并解压开发工具安装盘
-
 1）将获取到的DevTool开发工具包解压到D盘的根目录，解压后目录结构如下：
 
 ![](image/image3.png)
@@ -18,17 +17,17 @@
 
 ![](image/image5.png)
  
-## 启动iuap Studio
+## 启动iuap_studio
 
 1）	进入到DevTool的根目录，双击startDevTool.bat
 ![](image/image6.png) 
-2）	进入iuap Studio的主界面，显示如下
+2）	进入iuap studio的主界面，显示如下
  
  ![](image/image7.png)
  
 ## 检查Maven配置
 
-1）	打开Studio的窗口下首选项，选择Maven菜单
+1）	打开studio的窗口下首选项，选择Maven菜单
 
 ![](image/image8.png)
 
