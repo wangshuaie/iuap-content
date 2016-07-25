@@ -18,7 +18,7 @@
 
 ![](image/image5.png)
  
-## 启动iuap_studio
+## 启动iuap Studio
 
 1）进入到DevTool的根目录，双击startDevTool.bat
 
@@ -30,7 +30,7 @@
  
 ## 检查Maven配置
 
-1）打开studio的窗口下首选项，选择Maven菜单
+1）打开Studio的窗口下首选项，选择Maven菜单
 
 ![](image/image8.png)
 
