@@ -1,12 +1,12 @@
 # 前端开发
 
-
 ## 新建数据模型
-1）	切换到iUAP开发视图，工程上右键选择新建下的新建数据模型
+
+1）切换到iUAP开发视图，工程上右键选择新建下的新建数据模型
 
 ![](image/image29.png)
 
-2）	输入文件名为product.model，点击下一步
+2）输入文件名为product.model，点击下一步
 
 ![](image/image30.png)
 
@@ -18,13 +18,13 @@
 
 ![](image/image32.png)
 
-5）	工具生成数据模型文件，如下图
+5）工具生成数据模型文件，如下图
 
 ![](image/image33.png)
 
 ## 新建iuap页面
 
-1）	在webapp的pages下右键新建iuap页面，点击下一步
+1）在webapp的pages下右键新建iuap页面，点击下一步
 
 ![](image/image34.png)
 ![](image/image35.png)
@@ -33,7 +33,7 @@
 
 ![](image/image36.png)
 
-2）	输入页面目录名称为product，勾选使用数据模型，点击下一步
+2）输入页面目录名称为product，勾选使用数据模型，点击下一步
 
 ![](image/image37.png)
 
@@ -47,7 +47,7 @@
 
 ## 调整模块的js文件
 
-1）	定义js前端的datatable数据模型，修完成改后如下
+1）定义js前端的datatable数据模型，修完成改后如下
 
 ```
 mainDataTable: new u.DataTable({
@@ -78,7 +78,7 @@ mainDataTable: new u.DataTable({
 })
 ```
 
-2）	定义事件方法，如查询、添加、返回等，例如删除方法：
+2）定义事件方法，如查询、添加、返回等，例如删除方法：
 
 ```
 delRow: function() {
@@ -112,7 +112,7 @@ delRow: function() {
 }
 ```
 
-3）	对应html片段，绑定事件，完整示例product.js代码如下：
+3）对应html片段，绑定事件，完整示例product.js代码如下：
 
 ```
 define(['jquery', 'knockout', 'text!pages/product/product.html', 'uui'], function($, ko, template) {
@@ -357,7 +357,8 @@ define(['jquery', 'knockout', 'text!pages/product/product.html', 'uui'], functio
 
 ## 调整模块的html片段
 
-1）	调整html片段，调整表格和表单的html片段，示例如下：
+1）调整html片段，调整表格和表单的html片段，示例如下：
+
 ```
 <div class="u-widget-body">
 	<table class="u-table" style="width:100%;">
@@ -395,7 +396,7 @@ define(['jquery', 'knockout', 'text!pages/product/product.html', 'uui'], functio
 </div>
 ```
 
-2）	使用ko语法绑定事件和数据模型
+2）使用ko语法绑定事件和数据模型
 
 ```
 <tr data-bind="css: { 'is-selected' : row.selected() } ,attr:{'id': $index()}">
@@ -414,7 +415,7 @@ define(['jquery', 'knockout', 'text!pages/product/product.html', 'uui'], functio
 
 ```
 
-3）	完整的示例代码如下：
+3）完整的示例代码如下：
 
 ```
 <!-- 页面内容区(HTML片段，不能放置HTML 及 BODY 标签 )-->
@@ -631,6 +632,3 @@ define(['jquery', 'knockout', 'text!pages/product/product.html', 'uui'], functio
 ```
 
 4）请注意，js的数据模型中的字段定义务必和html中的数据绑定处的字段名称一致
-
-
-
