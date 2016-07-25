@@ -1,23 +1,10 @@
 # 数据库连接池
 
+iuap平台默认使用Tomcat Jdbc作为数据库连接池，如果不使用动态数据源的场景，推荐使用Druid连接池。
 
-iuap平台引入Druid和Tomcat Jdbc作为数据库连接池案例，如果不使用动态数据源的场景，推荐使用Druid连接池。
-Druid是目前最好的数据库连接池，在功能、性能、扩展性方面，都超过其他数据库连接池，包括DBCP、C3P0、BoneCP、Proxool、JBossDataSource。Druid已经在阿里巴巴部署了超过600个应用，经过一年多生产环境大规模部署的严苛考验。Druid提供了数据库访问性能的监控、DBCP和C3P0替换、数据库密码加密、SQL执行日志、扩展JDBC等功能。
 Tomcat jdbc连接池兼容dbcp，性能更高。以异步方式获取连接tomcat jdbc pool 是 tomcat 的一个模块，基于 tomcat JULI，使用 Tomcat 的日志框架。支持高并发应用环境，应用简单方便支持 JMX、支持 XA Connection。
 
 ## 4.2.2 数据库连接池配置
-
-Druid连接池需要引入jar包，druid-1.0.16.jar，Druid数据库连接池配置：
-
- ![](../image/image79.png)
-
-Jdbctemplate与Druid数据源绑定配置：
-
- ![](../image/image80.png)
-
-Druid数据库连接池属性配置：
-
- ![](../image/image81.png)
 
 Tomcat数据库连接池需要引入maven依赖如下，如果引入iuap-persistence会简介引入：
 
@@ -30,6 +17,20 @@ Tomcat数据库连接池需要引入maven依赖如下，如果引入iuap-persist
 Tomcat数据库连接池属性配置：
 
 ![](../image/image84.png) 
+
+ Druid也是较好的数据库连接池，在功能、性能、扩展性方面，都超过其他数据库连接池，如DBCP、C3P0、BoneCP、Proxool、JBossDataSource。Druid已经在阿里巴巴部署了超过600个应用，经过一年多生产环境大规模部署的严苛考验。Druid提供了数据库访问性能的监控、DBCP和C3P0替换、数据库密码加密、SQL执行日志、扩展JDBC等功能。
+ 
+Druid连接池需要引入jar包，druid-1.0.16.jar，Druid数据库连接池配置：
+
+ ![](../image/image79.png)
+
+Jdbctemplate与Druid数据源绑定配置：
+
+ ![](../image/image80.png)
+
+Druid数据库连接池属性配置：
+
+ ![](../image/image81.png)
 
 ## 4.2.3 数据库连接池使用
 
