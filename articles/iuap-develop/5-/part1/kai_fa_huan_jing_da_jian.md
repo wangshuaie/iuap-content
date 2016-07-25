@@ -32,7 +32,8 @@ workspace：是存放开发平台示例工程源码的工作空间文件夹。
 建议开发工具包文件夹放入D盘根目录下。
 在启动示例快速预览之前要进行一些准备：
 
-1、需要将devtool\repository\Maven\Maven3.2.2\conf\settings.xml 文件中的localRepository一项的路径改为\devtool\repository\Maven\Maven3.2.2\local\repo的绝对路径,并在eclipse中设置maven配置为settings.xml文件。 `<localRepository>此处改为maven本地库的地址</localRepository>`  
+1、需要将devtool\repository\Maven\Maven3.2.2\conf\settings.xml 文件中的localRepository一项的路径改为\devtool\repository\Maven\Maven3.2.2\local\repo的绝对路径,并在eclipse中设置maven配置为settings.xml文件。 `<localRepository>此处改为maven本地库的地址</localRepository>` 
+
 2、如果打开pgsql数据库发生闪退，需要对devtool\DB\pgsql文件夹赋予完全控制权限。对文件夹点击右键选择属性--选择安全标签--点击编辑--为USER用户添加完全控制权限。如下图  
 
 ![](./image/pgAuthor1.jpg)  
