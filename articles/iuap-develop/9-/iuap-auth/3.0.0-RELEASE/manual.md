@@ -22,7 +22,7 @@ iuap认证组件通过配置的方式对指定路径的服务资源进行拦截�
 
 ## 依赖环境 ##
 
-组件采用Maven进行编译和打包发布，依赖Apache的shiro框架,引入了shiro.shiro-spring的1.2.3版本和iUAP平台的一些基础组件如iuap-log和iuap-cache，其对外提供的依赖方式如下：
+组件采用Maven进行编译和打包发布，依赖Apache的shiro框架,引入了shiro.shiro-spring的1.2.3版本和iuap平台的一些基础组件如iuap-log和iuap-cache，其对外提供的依赖方式如下：
 
 	<dependency>
 	  <groupId>com.yonyou.iuap</groupId>

@@ -26,7 +26,7 @@ iuap缓存组件还实现了对连接池的管理，并支持Redis以主从方�
 
 ## 依赖环境 ##
 
-组件采用Maven进行编译和打包发布，依赖Jedis的2.6.0版本和iUAP平台的一些基础组件如iuap-log，其对外提供的依赖方式如下：
+组件采用Maven进行编译和打包发布，依赖Jedis的2.6.0版本和iuap平台的一些基础组件如iuap-log，其对外提供的依赖方式如下：
 
 	<dependency>
 	  <groupId>com.yonyou.iuap</groupId>
