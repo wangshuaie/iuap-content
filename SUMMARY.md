@@ -23,7 +23,7 @@
 * [服务端详解](articles/iuap-develop/7-/README.md)
    * [服务端系统框架](articles/iuap-develop/7-/part1/README.md)
        * [服务端功能架构](articles/iuap-develop/7-/part1/iuapgong_neng_jia_gou.md)
-       * [基于iUAP的系统架构](articles/iuap-develop/7-/part1/ji_yu_iuap_de_xi_tong_jia_gou.md)
+       * [基于iuap的系统架构](articles/iuap-develop/7-/part1/ji_yu_iuap_de_xi_tong_jia_gou.md)
    * [Spring框架集成](articles/iuap-develop/7-/part2/README.md)
        * [Spring 框架的整合](articles/iuap-develop/7-/part2/spring_kuang_jia_de_zheng_he.md)
        * [Spring MVC集成](articles/iuap-develop/7-/part2/spring_mvcji_cheng.md)
