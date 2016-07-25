@@ -2,7 +2,7 @@
 
 ## 概述
 
-开发平台前端开发中，默认采用了AMD模块化规范的单页面应用(SPA)。在页面中，采用了iUAP Design的UI控件库以及模型框架库分别来做UI层开发和数型层(MVVM)开发。
+开发平台前端开发中，默认采用了AMD模块化规范的单页面应用(SPA)。在页面中，采用了iuap Design的UI控件库以及模型框架库分别来做UI层开发和数型层(MVVM)开发。
 
 ## AMD模块化规范
 
@@ -65,11 +65,11 @@ router.init();
 
 ## 前端页面开发
 
-前端页面开发使用了iUAP Design的UI框架以及数据模型框架，iUAP Design 是企业级Web应用开发前端整体解决方案。包含设计语言、前端框架、插件库、组件库、模板库等。
+前端页面开发使用了iuap Design的UI框架以及数据模型框架，iuap Design 是企业级Web应用开发前端整体解决方案。包含设计语言、前端框架、插件库、组件库、模板库等。
 
-平台中使用了iUAP Design中的控件库做为默认控件，同时不限制开发者引用第三方控件库，如做图表开发时，我们会引用echart.js 。
+平台中使用了iuap Design中的控件库做为默认控件，同时不限制开发者引用第三方控件库，如做图表开发时，我们会引用echart.js 。
 
-平台页面中，采用了iUAP Design的模型框架,一种基于knockout.js扩展的MVVM模型做为主开发框架。
+平台页面中，采用了iuap Design的模型框架,一种基于knockout.js扩展的MVVM模型做为主开发框架。
 
 主要优势有：
 - 完善的控件体系：包含所有常见的控件。
@@ -100,6 +100,6 @@ router.init();
 
 ```
 
-如果要发送数据模型中的相关数据，需要把数据模型中的数据转成JSON发请到服务端，参考iUAP Design中的数据模型相关API用法：
+如果要发送数据模型中的相关数据，需要把数据模型中的数据转成JSON发请到服务端，参考iuap Design中的数据模型相关API用法：
 
 [http://design.yyuap.com/dist/pages/kero/udatatable.html](http://design.yyuap.com/dist/pages/kero/udatatable.html)
