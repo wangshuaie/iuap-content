@@ -1,9 +1,12 @@
 # 事务操作基本规范
 
 ## 4.1.1 事务简介
-在持久化操作时，如果是更新操作或者涉及到多表操作，一般需要进行事务控制来保证数据的完整性和一致性。控制事务的方式有多种，可以采取编程式事务，或者配置型事务。在iUAP持久层框架的基础上，推荐使用Spring的事务控制，采用注解配置的方式进行事务控制。
+
+在持久化操作时，如果是更新操作或者涉及到多表操作，一般需要进行事务控制来保证数据的完整性和一致性。控制事务的方式有多种，可以采取编程式事务，或者配置型事务。在iuap持久层框架的基础上，推荐使用Spring的事务控制，采用注解配置的方式进行事务控制。
 IUAP平台提供的持久化方式有多种，如果单独使用Spring jdbc或者Mybatis，可以采用DataSourceTransactionManager进行事务管理，如果和Spring Data Jpa混合使用，需要配置为JpaTransactionManager，建议业务开发前期进行选型，尽量避免持久层的混合使用。
+
 ## 4.1.2 事务传播机制
+
 Spring事务的几种传播特性如下：
 
 -   PROPAGATION_REQUIRED: 
@@ -20,7 +23,9 @@ Spring事务的几种传播特性如下：
     总是非事务地执行，如果存在一个活动事务，则抛出异常。
 - 	PROPAGATION\_NESTED：
     如果一个活动的事务存在，则运行在一个嵌套的事务中. 如果没有活动事务, 则按TransactionDefinition.PROPAGATION\_REQUIRED 属性执行。业务开发Service类时候，可以在方法上指定事务的传播机制，按照业务需求配置具体的属性，默认配置为PROPAGATION_REQUIRED，也是最常用。
+
 ## 4.1.3 事务隔离级别
+
 	在多个事务并发执行操作数据库时，需要考虑事务的隔离级别。 数据库事务的隔离级别有4个，由低到高依次为Read uncommitted、Read committed、Repeatable read、Serializable，这四个级别可以逐个解决脏读、不可重复读、幻读这几类问题。
 概念定义：
 
@@ -84,7 +89,7 @@ Spring事务的几种传播特性如下：
 
 - PostgreDql：默认隔离级别是READ COMMTIED
  
-iUAP平台持久化使用Spring管理事务，Spring事务的隔离级别如下：
+iuap平台持久化使用Spring管理事务，Spring事务的隔离级别如下：
 
 
 
@@ -104,16 +109,21 @@ iUAP平台持久化使用Spring管理事务，Spring事务的隔离级别如下�
 最高代价但是最可靠的事务隔离级别。事务被处理为顺序执行。除了防止脏读，不可重复读外，还避免了幻像读。
 
 ## 4.1.4 事务配置 ##
-iUAP平台建议使用声明式的方式使用Spring管理事务，声明式事务的配置方式如下：
+
+iuap平台建议使用声明式的方式使用Spring管理事务，声明式事务的配置方式如下：
 
 （1）spring配置文件中配置事务管理器
+
 如果是Spring JDBC和Mybatis，配置DataSourceTransactionManager：
+
  ![](../image/image73.png)
 
 如果使用Spring Data Jpa，配置JpaTransactionManager：
+
  ![](../image/image46.png)
 
 （2）配置事务注解特性
+
  ![](../image/image47.png)
 
 <tx:annotation-driven>常用属性如下：
