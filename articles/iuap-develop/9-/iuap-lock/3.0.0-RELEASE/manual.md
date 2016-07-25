@@ -14,7 +14,7 @@ iuap的分布式锁组件是利用Zookeeper的强一致特性，通过Zookeeper�
 
 锁的逻辑实现的流程图如下：
 
-![](../images/iuap_lock_flow.jpg)
+![](./images/iuap_lock_flow.jpg)
 
 
 # 使用说明 #
