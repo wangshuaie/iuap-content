@@ -1,6 +1,6 @@
 # 开发工具使用
 
-# 1.iUAP_Studio 开发工具
+# 1.iuap Studio 开发工具
 
 ## 1.1 产品概述
 
