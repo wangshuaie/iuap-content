@@ -1,7 +1,22 @@
-# iUAP Design 快速开发（中文版）
+# iuap快速开发
 
+通过阅读快速入门文档，开发者可以用setp by step的方式掌握如何使用 iuap Studio 开发出一个具有简单增改删查功能的单据，同时达到以下目标：
 
-开发平台提供完整的开发工具，帮助业务开发人员快速搭建开发环境，熟悉iUAP平台的开发方式，简单快速的进入软件开发与使用各iUAP企业应用的组件库。开发基于Maven推荐标准工程管理，可以很容易的实现前后端开发分离及自动化构建；
+- 掌握DevTool和 iuap Studio 的初始化和基本配置
+- 掌握通过 iuap Studio 创建新的 iuap 工程
+- 掌握如何开发服务端的Entity、Dao、Service、Controller类
+- 掌握如何编辑前端的模块js和html
+- 掌握如何利用工具使用jetty调试工程
+- 熟悉如何使用Maven进行打包部署
 
-本文档旨在介绍如何利用平台提供的DevTool工具包，快速的熟悉开发过程。具体的前端开发和后端技术组件的使用，请参看[iUAP官网](http://iuap.yonyou.com)的其它帮助文档和手册。
+按照此文档开发出的简单增改删查示例的效果如下：
+     
+![](image/image2.png)
 
+修改界面：
+
+![](image/imageedit.jpg)
+
+查看界面：
+
+![](image/imageview.jpg)

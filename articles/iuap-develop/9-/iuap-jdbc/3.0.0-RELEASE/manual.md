@@ -1,14 +1,18 @@
 # JDBC持久化组件 #
 
-## 简介 ##
+## 业务需求 ##
+业务在面临持久化问题时，经常会遇到对不同数据源的匹配问题。在解决这一问题时，采用多套适配代码是一种常用手段，但是这种解决方式对开发影响较大，需要更多持久化工作，此外在持久化开发过程中还需要有一些常用的数据库建库建表操作，都需要平台的持久化组件统一屏蔽这类问题。
 
-iUAP平台采用iuap-jdbc作为数据持久化中间件，实现对对业务数据的持久化服务。
+##解决方案##
+iuap平台采用iuap-jdbc作为数据持久化组件，实现对业务数据的持久化服务。该组件对JDBC做了轻量封装，采用基于注解的ORM映射机制，使用简单，简化了代码配置，通过少量代码就可以完成持久化操作。组件能够自动适配多种数据源，提供不同数据库的基本语法转换能力，做到一套语法，多种数据库兼容执行，所有这些都对开发透明，开发者可以更关注于业务本身，屏蔽了底层数据库切换带来的影响。
 
-本组件对jdbc做了轻量封装，采用基于注解的ORM映射机制，简化代码配置。
-使用简单，面向对象的方式编程，直接操作POJO，少量代码完成持久化操作。
-组件能够自动识别数据源，提供不同数据库的基本语法转换的能力，做到一套语法，多种数据库兼容执行，目前支持MySQL，Oracle，PostgreSQL。
+## 功能说明 ##
+1.	封装JDBC，基于注解的ORM映射机制，简化代码配置；
+2.	面向对象编程，直接操作POJO，少量代码完成增删改查操作；
+3.	自动识别适配数据源，提供多种数据库的语法转换，目前支持MySQL、Oracle和PostgreSQL;
 
-## 多数据库持久化组件特征 ##
+
+# 功能特征 #
 
 -  多数据库语法适配
 
@@ -37,9 +41,14 @@ iUAP平台采用iuap-jdbc作为数据持久化中间件，实现对对业务数�
 
 ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 
+## 相关配置 ##
+
+
 ## 简单示例 ##
 
 使用iuap-jdbc完成单表的增删改查。示例包括实体类、DAO类、Service类。其中dao类通过注入BaseDao类，并使用它对数据进行操作。
+
+**数据库表**
 
 - user数据库表
 
@@ -52,46 +61,7 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 		  dr int
 		);
 
-
-- 生成User.java对象
-
-		@Entity(name = "User",namespace="your.package.name")
-		@Table(name = "users")
-		public class User extends BaseEntity{
-	
-		    @Id
-		    @Column(name = "id")
-		    @GeneratedValue(strategy = Stragegy.UUID, moudle = "users")
-		    private String id;
-		    
-		    @Column(name = "name")
-		    private String name;
-		
-		    @Column(name="ts")
-		    private Date ts;
-		   
-		    @Column(name="dr")
-		    private Integer dr;
-		    
-		    //省略getter,setter...
-		    
-		    public String getMetaDefinedName() {
-		        return "User";
-		    }
-		    
-		    public String getNamespace() {
-		        return "your.package.name";
-		    }
-		}
-
-注意:
-
-实体类需要继承BaseEntity。
-
-@Id，@coloumn等注解是iuap-jdbc中的注解，请开发者注意和javax包下的注解进行区分，不要混淆。 @GeneratedValue(strategy = Stragegy.UUID, moudle = "users")注解中的ID生成策略可以参考Stragegy中的枚举值，和iuap-oid中的生成策略保持一致。
-
-getMetaDefinedName和getNamespace方法是为了后期的元数据操作时候预留，如果不需要元数据，开发人员手动重写即可。
-
+**spring配置文件**
 
 -  在Spring中声明数据源和BaseDAO
 
@@ -149,6 +119,51 @@ getMetaDefinedName和getNamespace方法是为了后期的元数据操作时候�
 	        <property name="jdbcTemplate" ref="jdbcTemplate"/>
 	    </bean>
 
+**实体类**
+
+- 生成User.java对象
+
+   		@Entity(name = "User",namespace="your.package.name")
+    	@Table(name = "users")
+    	public class User extends BaseEntity{
+    	
+    		@Id
+    		@Column(name = "id")
+    		@GeneratedValue(strategy = Stragegy.UUID, moudle = "users")
+    		private String id;
+    		
+    		@Column(name = "name")
+    		private String name;
+    		
+    		@Column(name="ts")
+    		private Date ts;
+    		   
+    		@Column(name="dr")
+    		private Integer dr;
+    		
+    		//省略getter,setter...
+    		
+    		public String getMetaDefinedName() {
+    			return "User";
+    		}
+    		
+    		public String getNamespace() {
+    			return "your.package.name";
+    		}
+    	}
+
+注意:
+
+实体类需要继承com.yonyou.iuap.persistence.vo.BaseEntity类。
+
+@Id，@coloumn等注解是iuap-jdbc中的注解，请开发者注意和javax包下的注解进行区分，不要混淆。 @GeneratedValue(strategy = Stragegy.UUID, moudle = "users")注解中的ID生成策略可以参考Stragegy中的枚举值，和iuap-oid中的生成策略保持一致。
+
+getMetaDefinedName和getNamespace方法是为了后期的元数据操作时候预留，如果不需要元数据，开发人员手动重写即可（必须有该方法）。
+
+业务代码中不需要操作操作`User`对象的`ts`属性，但是每次修改操作ts属性都会变成服务器的当前时间。组件的**sql增强功能**会自动在增加或修改的时候，在`sql`上增加`ts`字段，使得应用更加专注于业务相关的逻辑。
+
+**DAO类**
+
 - 推荐新建一个实体类User的DAO
 
         @Repository
@@ -162,7 +177,7 @@ getMetaDefinedName和getNamespace方法是为了后期的元数据操作时候�
     			return dao.queryByPK(User.class, id);
     		}
     		
-    		public String save(User user) throws DAOException {
+    		public void save(User user) throws DAOException {
     			dao.insert(user);
     		}
     		
@@ -174,9 +189,10 @@ getMetaDefinedName和getNamespace方法是为了后期的元数据操作时候�
     			dao.remove(users);
     		}
     		
-    		public int update(User user) throws DAOException {
+    		public String update(User user) throws DAOException {
     			return dao.update(user);
     		}
+    	
     	
     		public Page queryPage(String name,PageRequest pageRequest) throws 	DAOException {
        			SQLParameter parameter = new SQLParameter();
@@ -185,6 +201,10 @@ getMetaDefinedName和getNamespace方法是为了后期的元数据操作时候�
        			return page;
     		}
     	}
+
+组件提供分页API，应用只需要传入查询条件sql，不必关心分页逻辑，组件自动帮您完成分页。详见`BaseDAO`的API `queryPage()`
+
+**Service类**
 
 - 创建实体类User的Service
 
@@ -201,19 +221,19 @@ getMetaDefinedName和getNamespace方法是为了后期的元数据操作时候�
 		    }
 		
 		    @Transactional(rollbackFor = DAOException.class)
-		    public int update(User user) throws DAOException {
+		    public String update(User user) throws DAOException {
 		        return userDao.update(user);
 		    }
 		    
 		    @Transactional(rollbackFor = DAOException.class)
-		    public void remove(String id) throws DAOException {
+		    public String remove(String id) throws DAOException {
 		        User user = new User();
 		        user.setId(id);
 		        return userDao.remove(user);
 		    }
 		    
-		    public User queryById(String id) throws DAOException {
-		        return userDao.queryByID(id);
+		    public String queryById(String id) throws DAOException {
+		        return userDao.queryByPK(User.class,id);
 		    }
 		    
 		     public Page queryPage(String name,PageRequest pageRequest) throws DAOException {
@@ -221,9 +241,421 @@ getMetaDefinedName和getNamespace方法是为了后期的元数据操作时候�
 	   		}
 		}
 
-业务代码中不需要操作操作`User`对象的`ts`属性，但是每次修改操作ts属性都会变成服务器的当前时间。组件的**sql增强功能**会自动在增加或修改的时候，在`sql`上增加`ts`字段，使得应用更加专注于业务相关的逻辑。
 
-组件提供分页API，应用只需要传入查询条件sql，不必关心分页逻辑，组件自动帮您完成分页。详见`BaseDAO`的API `queryPage()`
+##主子表示例##
+
+**主表实体**
+
+    @Entity
+    @Table(name = "iuap_parent")
+    public class Parent extends BaseEntity{
+    
+    	private static final long serialVersionUID = -4725617307982134263L;
+    
+    	@Id
+    	@Column(name = "id")
+    	private String id;
+    	
+    	@Column(name = "id")
+    	private String name;	
+    	
+    	@Column(name = "ts")
+    	private java.util.Date ts;  	
+    	
+    	public String getId() {
+    		return id;
+    	}
+    	public void setId(String id) {
+    		this.id = id;
+    	}
+    	public String getName() {
+    		return name;
+    	}
+    	public void setName(String name) {
+    		this.name = name;
+    	}
+    	public Date getTs() {
+    		return ts;
+    	}
+    	public void setTs(Date ts) {
+    		this.ts = ts;
+    	}
+    	  	
+    	@Override
+    	public String getMetaDefinedName() {
+    		return "iuap_parent";
+    	}
+    
+   		@Override
+    	public String getNamespace() {
+    		return "iuap_parent";
+    	}
+    	
+    }
+
+**子表实体**
+    
+    @Entity
+    @Table(name = "iuap_child")
+    public class Child extends BaseEntity{
+    
+    	/**
+    	 * 
+    	 */
+    	private static final long serialVersionUID = -6415805183878684588L;
+    	
+    	@Id
+    	@Column(name = "id")
+    	private String id;
+    	
+    	//通过外键注解与主表建立关联referenceTableName为主表表名，referencedColumnName为主表主键
+    	@FK(referenceTableName="iuap_parent",referencedColumnName="id", name = "")  
+    	@Column(name = "parentid")
+    	private String parentid;
+    	
+    	@Column(name = "name")
+    	private String name;	
+    	
+    	@Column(name = "ts")
+    	private java.util.Date ts;
+    
+    	public String getId() {
+    		return id;
+    	}
+    
+    	public void setId(String id) {
+    		this.id = id;
+    	}
+    
+    	public String getParentid() {
+    		return parentid;
+    	}
+    
+    	public void setParentid(String parentid) {
+    		this.parentid = parentid;
+    	}
+    
+    	public String getName() {
+    		return name;
+    	}
+    
+    	public void setName(String name) {
+    		this.name = name;
+    	}
+    
+    	public java.util.Date getTs() {
+    		return ts;
+    	}
+    
+    	public void setTs(java.util.Date ts) {
+    		this.ts = ts;
+    	}
+    
+    	@Override
+    	public String getMetaDefinedName() {
+    		return "iuap_child";
+    	}
+    
+    	@Override
+    	public String getNamespace() {
+    		return "iuap_child";
+    	}
+    }
+
+
+
+**主子联合实体**
+    
+    public class CombineVO {
+    	
+    	private Parent parent;
+    	
+    	private List<Child> childs;
+    
+    	public Parent getParent() {
+    		return parent;
+    	}
+    
+    	public void setParent(Parent order) {
+    		this.parent = order;
+    	}
+    
+    	public List<Child> getChilds() {
+    		return childs;
+    	}
+    
+    	public void setChilds(List<Child> childs) {
+    		this.childs = childs;
+    	}
+    	
+    	
+    
+    }
+        
+
+**主表dao**
+    
+    public class ParentDao {
+    	
+    	@Autowired
+    	private BaseDAO dao;
+    	
+    	
+    	public Parent queryByPK(String pk) throws DAOException {
+    		
+    		return dao.queryByPK(Parent.class, pk);
+    	}
+    	
+    	public Page<Parent> queryPage(Map<String, Object> searchParams, PageRequest pageRequest) throws DAOException {
+    		StringBuffer sqlBuffer = new StringBuffer("select * from iuap_parent where 1=1 ");
+    		SQLParameter sqlParameter = new SQLParameter();
+    		buildSql(searchParams, sqlBuffer, sqlParameter);
+    		String sql = sqlBuffer.toString();
+    		return dao.queryPage(sql, sqlParameter, pageRequest, Parent.class);
+    	}
+    
+    	public void save(Parent vo) throws DAOException {
+    		dao.save(vo);
+    	}
+    	
+    	public void save(Parent vo, Child[] details) throws DAOException {
+    		dao.save(vo, details);
+    	}
+    
+    	public void remove(Parent vo) throws DAOException {
+    		dao.remove(vo);
+    	}
+    
+    	public void remove(List<Parent> vos) throws DAOException {
+    		
+    		for (Iterator<Parent> iterator = vos.iterator(); iterator.hasNext();) {
+    			Parent testorderJdbc = (Parent) iterator.next();
+    			remove(testorderJdbc);
+    		}
+    		
+    		//为什么不用批量删除，待核实
+    		//dao.remove(vos);
+    	}
+    
+    	//业务开发根据自己的需求，修改查询条件的拼接方式
+    	private void buildSql(Map<String, Object> searchParams, StringBuffer sqlBuffer, SQLParameter sqlParameter) {
+    		
+    		int index = 0;
+    		StringBuffer sb = new StringBuffer();
+    		for (Map.Entry<String, Object> entry : searchParams.entrySet()) {
+    			String[] keySplit = entry.getKey().split("__");//xzn
+    			if (keySplit.length == 2) {
+    				String columnName = keySplit[1];
+    				String compartor = keySplit[0];
+    				Object value = entry.getValue();
+    				if (value != null && StringUtils.isNotBlank(value.toString())) {
+    					
+    					sb.append(columnName).append(" ").append(compartor).append(" ? ");
+    					// 处理模糊查询
+    					value = "like".equalsIgnoreCase(compartor) ? "%" + value + "%" : value;
+    					sqlParameter.addParam(value);
+    					index ++;
+    					
+    					if(index != searchParams.keySet().size()){
+    						sb.append(" or ");
+    					}
+    				}
+    			}
+    		}
+    		
+    		String conditionSql = sb.toString();
+    		if(StringUtils.isNoneBlank(conditionSql)){
+    			sqlBuffer.append(" and (" + conditionSql.toString() + ");");
+    		}
+    		
+    	}
+    
+    }
+    
+**子表dao**
+    
+    public class ChildDao {
+    	@Autowired
+    	private BaseDAO dao;
+    	
+    	public Child queryByPK(String pk) throws DAOException {
+    		return dao.queryByPK(Child.class, pk);
+    	}
+    
+    	public List<Child> queryChildByParentId(String parentId) throws DAOException {
+    		String sql = "select * from iuap_child where parentid = ? ";
+    		SQLParameter sqlParameter = new SQLParameter();
+    		sqlParameter.addParam(parentId);
+    		return dao.queryByClause(Child.class, sql,sqlParameter);
+     	}
+    	
+    	public void save(Child vo) throws DAOException {
+    		dao.save(vo);
+    	}
+    	public void update(List<Child>  vo) throws DAOException {
+    		dao.updateOptional(vo);
+    	}
+    
+    	public void remove(Child vo) throws DAOException {
+    		dao.remove(vo);
+    	}
+    	
+    	public void remove(List<Child> vos) throws DAOException {
+    		dao.remove(vos);
+    	}
+    	
+    	//业务开发根据自己的需求，修改查询条件的拼接方式
+    	private void buildSql(Map<String, Object> searchParams, StringBuffer sqlBuffer, SQLParameter sqlParameter) {
+    		
+    		int index = 0;
+    		StringBuffer sb = new StringBuffer();
+    		for (Map.Entry<String, Object> entry : searchParams.entrySet()) {
+    			String[] keySplit = entry.getKey().split("__");//xzn
+    			if (keySplit.length == 2) {
+    				String columnName = keySplit[1];
+    				String compartor = keySplit[0];
+    				Object value = entry.getValue();
+    				if (value != null && StringUtils.isNotBlank(value.toString())) {
+    					
+    					sb.append(columnName).append(" ").append(compartor).append(" ? ");
+    					// 处理模糊查询
+    					value = "like".equalsIgnoreCase(compartor) ? "%" + value + "%" : value;
+    					sqlParameter.addParam(value);
+    					index ++;
+    					
+    					if(index != searchParams.keySet().size()){
+    						sb.append(" or ");
+    					}
+    				}
+    			}
+    		}
+    		
+    		String conditionSql = sb.toString();
+    		if(StringUtils.isNoneBlank(conditionSql)){
+    			sqlBuffer.append(" and (" + conditionSql.toString() + ");");
+    		}
+    		
+    	}
+    
+    }
+    
+**主表service**
+    
+    @Service
+    public class ParentService {
+    	
+    	@Autowired
+    	private ParentDao dao;
+    	
+    	@Autowired
+    	private ChildDao childDao;
+    	
+    
+    	public Parent getTestorderById(String id) throws DAOException {
+    		return dao.queryByPK(id);
+    	}
+    
+    	@Transactional
+    	public void deleteById(String id) throws DAOException {
+    		Parent parent = new Parent();
+    		parent.setId(id);
+    		dao.remove(parent);
+    	}
+    	
+    	@Transactional
+    	public void batchDelete(List<String> ids) throws DAOException {
+    		List<Parent> deleteVos = new ArrayList<Parent>();
+    		for (int i = 0; i < ids.size(); i++) {
+    			Parent parent = new Parent();
+    			parent.setId(ids.get(i));
+    			deleteVos.add(parent);
+    		}
+    		if (deleteVos.size() > 0) {
+    			dao.remove(deleteVos);
+    		}
+    	}
+    	
+    	@Transactional
+    	public Parent saveEntity(Parent entity) throws DAOException {
+    		dao.save(entity);
+    		return entity;
+    	}
+    	
+    	@Transactional
+    	public void saveAll(CombineVO vo) throws DAOException {
+    		Parent parent = vo.getParent();
+    		if(parent.getId()!=null){
+    			parent.setStatus(VOStatus.UPDATED);
+    		} else {
+    			parent.setStatus(VOStatus.NEW);
+    		}
+    		
+    		List<Child> childs = vo.getChilds();
+    		for (int i = 0; i < childs.size(); i++) {
+    			Child Child = childs.get(i);
+    			if(StringUtils.isBlank(Child.getId())){
+    				Child.setStatus(VOStatus.NEW);
+    			} else {
+    				Child.setStatus(VOStatus.UPDATED);
+    			}
+    		}
+    		Child[] children = childs.toArray(new Child[0]);
+    		
+    		dao.save(parent, children);
+    	}
+    
+    	public Page<Parent> getPage(Map<String, Object> searchParams, PageRequest pageRequest) throws DAOException {
+    		return dao.queryPage(searchParams, pageRequest);
+    	}
+    
+    
+    }
+    
+
+**子表service**
+
+    
+    @Service
+    public class ChildService {
+    	
+    	@Autowired
+    	private ChildDao dao;
+    	
+    	public Child getTestorderDetailById(String id) throws DAOException {
+    		return dao.queryByPK(id);
+    	}
+    
+    	@Transactional
+    	public void deleteById(String id) throws DAOException {
+    		Child child = new Child();
+    		child.setId(id);
+    		dao.remove(child);
+    	}
+    	
+    	@Transactional
+    	public void batchDelete(List<String> ids) throws DAOException {
+    		List<Child> deleteVos = new ArrayList<Child>();
+    		for (int i = 0; i < ids.size(); i++) {
+    			Child child = new Child();
+    			child.setId(ids.get(i));
+    			deleteVos.add(child);
+    		}
+    		if (deleteVos.size() > 0) {
+    			dao.remove(deleteVos);
+    		}
+    	}
+    	
+    	@Transactional
+    	public Child saveEntity(Child entity) throws DAOException {
+    		dao.save(entity);
+    		return entity;
+    	}
+    
+    	public List<Child> queryListByParentId(String parentId) throws DAOException {
+    		return dao.queryChildByParentId(parentId);
+    	}
+    
+    }
 
 组件提供主子表组合操作。API对应`BaseDAO`的`save()`,入参为一主多子。
 **注意**
@@ -236,6 +668,224 @@ getMetaDefinedName和getNamespace方法是为了后期的元数据操作时候�
 	<tr><td>1</td><td>本条记录被修改</td></tr>
 	<tr><td>2</td><td>本条记录为新增数据</td></tr>
 	<tr><td>3</td><td>本条记录被删除(主表数据状态不能为删除状态)</td></tr>
+</table>
+
+
+#iuap-jdbc相关API#
+
+- BaseDAO
+
+<table style="border-collapse:collapse">
+	<tr>
+		<th>方法名</th>
+		<th>参数</th>
+		<th>返回值</th>
+		<th>功能说明</th>
+	</tr>
+
+	<tr>
+		<td>queryByPK</td>
+		<td>Class&lt;T&gt; className（查询实体类类型）, ID pk（需要查询的实体类的主键键值）</td>
+		<td> T（查询到的实体类）</td>
+		<td>通过主键查询实体</td>
+	</tr>
+
+	<tr>
+		<td>queryByPK</td>
+		<td>Class&lt;T&gt; className（查询实体类类型）, ID pk（需要查询的实体类的主键键值），String[] selectedFields（指定实体的返回列）</td>
+		<td> T（查询到的实体类）</td>
+		<td>通过主键查询实体（指定实体的返回列）</td>
+	</tr>
+
+	<tr>
+		<td>queryByClause</td>
+		<td>Class&lt;T&gt; className（查询实体类类型）,  String sql（查询的sql语句）</td>
+		<td>List&lt;T&gt;（查询到的实体列表）</td>
+		<td>通过sql语句查询实体</td>
+	</tr>
+
+	<tr>
+		<td>queryByClause</td>
+		<td>Class&lt;T&gt; className（查询实体类类型）,  String sql（查询的sql语句），SQLParameter parameter（sql语句拼接的参数）</td>
+		<td>List&lt;T&gt;（查询到的实体列表）</td>
+		<td>通过sql语句查询实体</td>
+	</tr>
+
+	<tr>
+		<td>queryAll</td>
+		<td>Class&lt;T&gt; className（查询实体类类型）</td>
+		<td>List&lt;T&gt;（查询到的实体列表）</td>
+		<td>查询该实体的所有记录</td>
+	</tr>
+
+	<tr>
+		<td>queryForList</td>
+		<td>String sql(查询sql语句), SQLParameter parameter（sql参数）, ResultSetProcessor processor(查询结果解析器)</td>
+		<td>List&lt;T&gt;（返回结果列表）</td>
+		<td>根据查询结果解析器返回相应的查询结果列表</td>
+	</tr>
+
+	<tr>
+		<td>queryForList</td>
+		<td>String sql(查询sql语句),ResultSetProcessor processor(查询结果解析器)</td>
+		<td>List&lt;T&gt;（返回结果列表）</td>
+		<td>根据查询结果解析器返回相应的查询结果列表</td>
+	</tr>
+
+	<tr>
+		<td>queryForObject</td>
+		<td>String sql(查询sql语句), SQLParameter parameter（sql参数）,ResultSetProcessor processor(查询结果解析器)</td>
+		<td>T（返回结果）</td>
+		<td>根据查询结果解析器返回相应的查询结果</td>
+	</tr>
+	
+	<tr>
+		<td>queryForObject</td>
+		<td>String sql(查询sql语句),ResultSetProcessor processor(查询结果解析器)</td>
+		<td>T（返回结果）</td>
+		<td>根据查询结果解析器返回相应的查询结果</td>
+	</tr>
+
+	<tr>
+		<td>queryPage</td>
+		<td>String sql(查询sql语句), SQLParameter parameter(查询sql参数), PageRequest pageRequest(分页请求参数), Class&lt;T&gt; type（查询实体类类型）</td>
+		<td>Page&lt;T&gt;（返回结果分页）</td>
+		<td>分页查询</td>
+	</tr>
+
+	<tr>
+		<td>insert</td>
+		<td>T t(待插入的实体)</td>
+		<td>ID(插入实体类的主键键值)</td>
+		<td>插入新实体</td>
+	</tr>
+
+	<tr>
+		<td>insert</td>
+		<td>List&lt;T&gt; vos(待插入的实体列表)</td>
+		<td>ID[](插入实体类的主键键值列表)</td>
+		<td>插入多个新实体</td>
+	</tr>
+
+	<tr>
+		<td>insertWithPK</td>
+		<td>T vo(待插入的实体)</td>
+		<td>ID(插入实体类的主键键值)</td>
+		<td>插入新实体（自带主键键值）</td>
+	</tr>
+	
+	<tr>
+		<td>insertWithPK</td>
+		<td>List&lt;T&gt; vos(待插入的实体列表)</td>
+		<td>ID[](插入实体类的主键键值列表)</td>
+		<td>插入多个新实体（自带主键键值）</td>
+	</tr>
+
+	<tr>
+		<td>insertOptional</td>
+		<td>BaseEntity vo（实体）</td>
+		<td>ID（实体主键）</td>
+		<td>存储实体数据（选择性保存字段）</td>
+	</tr>
+
+	<tr>
+		<td>insertOptional</td>
+		<td>List<? extends BaseEntity> list（实体列表）</td>
+		<td>ID[]（实体主键列表）</td>
+		<td>存储实体数据（选择性保存字段）</td>
+	</tr>
+
+	<tr>
+		<td>insertOptionalWithPK</td>
+		<td>BaseEntity vo（实体）</td>
+		<td>ID（实体主键）</td>
+		<td>存储实体数据自带主键键值（选择性保存字段）</td>
+	</tr>
+
+	<tr>
+		<td>insertOptionalWithPK</td>
+		<td>List<? extends BaseEntity> list（实体列表）</td>
+		<td>ID[]（实体主键列表）</td>
+		<td>存储实体数据自带主键键值（选择性保存字段）</td>
+	</tr>
+
+	<tr>
+		<td>update</td>
+		<td>T vo(更新实体)</td>
+		<td>int (更新的行数)</td>
+		<td>更新数据</td>
+	</tr>
+
+	<tr>
+		<td>update</td>
+		<td>List&lt;T&gt; vos(更新实体列表)</td>
+		<td>int (更新的行数)</td>
+		<td>更新数据</td>
+	</tr>
+
+	<tr>
+		<td>update</td>
+		<td>T vo(更新实体)，String... fieldNames（需要更新的实体字段）</td>
+		<td>int (更新的行数)</td>
+		<td>更新数据的特定字段</td>
+	</tr>
+
+	<tr>
+		<td>update</td>
+		<td>List&lt;T&gt; vos(更新实体列表)，String... fieldNames（需要更新的实体字段）</td>
+		<td>int (更新的行数)</td>
+		<td>更新多个数据的特定字段</td>
+	</tr>
+
+	<tr>
+		<td>update</td>
+		<td>String sql（sql语句）</td>
+		<td>int (更新的行数)</td>
+		<td>通过sql进行更新</td>
+	</tr>
+
+	<tr>
+		<td>update</td>
+		<td>String sql（sql语句）, SQLParameter parameter（sql函数）</td>
+		<td>int (更新的行数)</td>
+		<td>通过sql进行更新</td>
+	</tr>
+
+	<tr>
+		<td>updateOptional</td>
+		<td>BaseEntity vo(待更新实体类)</td>
+		<td>int (更新的行数)</td>
+		<td>更新实体数据（选择性保存字段）</td>
+	</tr>
+	
+	<tr>
+		<td>updateOptional</td>
+		<td>List<? extends BaseEntity> list（实体列表）</td>
+		<td>int (更新的行数)</td>
+		<td>更新多个实体数据（选择性保存字段）</td>
+	</tr>
+
+	<tr>
+		<td>remove</td>
+		<td>T vo(待删除的实体)</td>
+		<td>void</td>
+		<td>删除数据</td>
+	</tr>
+	
+	<tr>
+		<td>remove</td>
+		<td>List&lt;T&gt; vos(待删除的实体列表)</td>
+		<td>void</td>
+		<td>批量删除数据</td>
+	</tr>
+
+	<tr>
+		<td>save</td>
+		<td>BaseEntity parent(主实体), BaseEntity... children（子实体）</td>
+		<td>void</td>
+		<td>存储主子实体</td>
+	</tr>
+
 </table>
 
   
@@ -686,220 +1336,3 @@ getMetaDefinedName和getNamespace方法是为了后期的元数据操作时候�
 
 **更多详细的使用方法，请参考示例工程(DevTool/examples/example-iuap-jdbc)**
 
-
-#iuap-jdbc相关API#
-
-- BaseDAO
-
-<table style="border-collapse:collapse">
-	<tr>
-		<th>方法名</th>
-		<th>参数</th>
-		<th>返回值</th>
-		<th>功能说明</th>
-	</tr>
-
-	<tr>
-		<td>queryByPK</td>
-		<td>Class&lt;T&gt; className（查询实体类类型）, ID pk（需要查询的实体类的主键键值）</td>
-		<td> T（查询到的实体类）</td>
-		<td>通过主键查询实体</td>
-	</tr>
-
-	<tr>
-		<td>queryByPK</td>
-		<td>Class&lt;T&gt; className（查询实体类类型）, ID pk（需要查询的实体类的主键键值），String[] selectedFields（指定实体的返回列）</td>
-		<td> T（查询到的实体类）</td>
-		<td>通过主键查询实体（指定实体的返回列）</td>
-	</tr>
-
-	<tr>
-		<td>queryByClause</td>
-		<td>Class&lt;T&gt; className（查询实体类类型）,  String sql（查询的sql语句）</td>
-		<td>List&lt;T&gt;（查询到的实体列表）</td>
-		<td>通过sql语句查询实体</td>
-	</tr>
-
-	<tr>
-		<td>queryByClause</td>
-		<td>Class&lt;T&gt; className（查询实体类类型）,  String sql（查询的sql语句），SQLParameter parameter（sql语句拼接的参数）</td>
-		<td>List&lt;T&gt;（查询到的实体列表）</td>
-		<td>通过sql语句查询实体</td>
-	</tr>
-
-	<tr>
-		<td>queryAll</td>
-		<td>Class&lt;T&gt; className（查询实体类类型）</td>
-		<td>List&lt;T&gt;（查询到的实体列表）</td>
-		<td>查询该实体的所有记录</td>
-	</tr>
-
-	<tr>
-		<td>queryForList</td>
-		<td>String sql(查询sql语句), SQLParameter parameter（sql参数）, ResultSetProcessor processor(查询结果解析器)</td>
-		<td>List&lt;T&gt;（返回结果列表）</td>
-		<td>根据查询结果解析器返回相应的查询结果列表</td>
-	</tr>
-
-	<tr>
-		<td>queryForList</td>
-		<td>String sql(查询sql语句),ResultSetProcessor processor(查询结果解析器)</td>
-		<td>List&lt;T&gt;（返回结果列表）</td>
-		<td>根据查询结果解析器返回相应的查询结果列表</td>
-	</tr>
-
-	<tr>
-		<td>queryForObject</td>
-		<td>String sql(查询sql语句), SQLParameter parameter（sql参数）,ResultSetProcessor processor(查询结果解析器)</td>
-		<td>T（返回结果）</td>
-		<td>根据查询结果解析器返回相应的查询结果</td>
-	</tr>
-	
-	<tr>
-		<td>queryForObject</td>
-		<td>String sql(查询sql语句),ResultSetProcessor processor(查询结果解析器)</td>
-		<td>T（返回结果）</td>
-		<td>根据查询结果解析器返回相应的查询结果</td>
-	</tr>
-
-	<tr>
-		<td>queryPage</td>
-		<td>String sql(查询sql语句), SQLParameter parameter(查询sql参数), PageRequest pageRequest(分页请求参数), Class&lt;T&gt; type（查询实体类类型）</td>
-		<td>Page&lt;T&gt;（返回结果分页）</td>
-		<td>分页查询</td>
-	</tr>
-
-	<tr>
-		<td>insert</td>
-		<td>T t(待插入的实体)</td>
-		<td>ID(插入实体类的主键键值)</td>
-		<td>插入新实体</td>
-	</tr>
-
-	<tr>
-		<td>insert</td>
-		<td>List&lt;T&gt; vos(待插入的实体列表)</td>
-		<td>ID[](插入实体类的主键键值列表)</td>
-		<td>插入多个新实体</td>
-	</tr>
-
-	<tr>
-		<td>insertWithPK</td>
-		<td>T vo(待插入的实体)</td>
-		<td>ID(插入实体类的主键键值)</td>
-		<td>插入新实体（自带主键键值）</td>
-	</tr>
-	
-	<tr>
-		<td>insertWithPK</td>
-		<td>List&lt;T&gt; vos(待插入的实体列表)</td>
-		<td>ID[](插入实体类的主键键值列表)</td>
-		<td>插入多个新实体（自带主键键值）</td>
-	</tr>
-
-	<tr>
-		<td>insertOptional</td>
-		<td>BaseEntity vo（实体）</td>
-		<td>ID（实体主键）</td>
-		<td>存储实体数据（选择性保存字段）</td>
-	</tr>
-
-	<tr>
-		<td>insertOptional</td>
-		<td>List<? extends BaseEntity> list（实体列表）</td>
-		<td>ID[]（实体主键列表）</td>
-		<td>存储实体数据（选择性保存字段）</td>
-	</tr>
-
-	<tr>
-		<td>insertOptionalWithPK</td>
-		<td>BaseEntity vo（实体）</td>
-		<td>ID（实体主键）</td>
-		<td>存储实体数据自带主键键值（选择性保存字段）</td>
-	</tr>
-
-	<tr>
-		<td>insertOptionalWithPK</td>
-		<td>List<? extends BaseEntity> list（实体列表）</td>
-		<td>ID[]（实体主键列表）</td>
-		<td>存储实体数据自带主键键值（选择性保存字段）</td>
-	</tr>
-
-	<tr>
-		<td>update</td>
-		<td>T vo(更新实体)</td>
-		<td>int (更新的行数)</td>
-		<td>更新数据</td>
-	</tr>
-
-	<tr>
-		<td>update</td>
-		<td>List&lt;T&gt; vos(更新实体列表)</td>
-		<td>int (更新的行数)</td>
-		<td>更新数据</td>
-	</tr>
-
-	<tr>
-		<td>update</td>
-		<td>T vo(更新实体)，String... fieldNames（需要更新的实体字段）</td>
-		<td>int (更新的行数)</td>
-		<td>更新数据的特定字段</td>
-	</tr>
-
-	<tr>
-		<td>update</td>
-		<td>List&lt;T&gt; vos(更新实体列表)，String... fieldNames（需要更新的实体字段）</td>
-		<td>int (更新的行数)</td>
-		<td>更新多个数据的特定字段</td>
-	</tr>
-
-	<tr>
-		<td>update</td>
-		<td>String sql（sql语句）</td>
-		<td>int (更新的行数)</td>
-		<td>通过sql进行更新</td>
-	</tr>
-
-	<tr>
-		<td>update</td>
-		<td>String sql（sql语句）, SQLParameter parameter（sql函数）</td>
-		<td>int (更新的行数)</td>
-		<td>通过sql进行更新</td>
-	</tr>
-
-	<tr>
-		<td>updateOptional</td>
-		<td>BaseEntity vo(待更新实体类)</td>
-		<td>int (更新的行数)</td>
-		<td>更新实体数据（选择性保存字段）</td>
-	</tr>
-	
-	<tr>
-		<td>updateOptional</td>
-		<td>List<? extends BaseEntity> list（实体列表）</td>
-		<td>int (更新的行数)</td>
-		<td>更新多个实体数据（选择性保存字段）</td>
-	</tr>
-
-	<tr>
-		<td>remove</td>
-		<td>T vo(待删除的实体)</td>
-		<td>void</td>
-		<td>删除数据</td>
-	</tr>
-	
-	<tr>
-		<td>remove</td>
-		<td>List&lt;T&gt; vos(待删除的实体列表)</td>
-		<td>void</td>
-		<td>批量删除数据</td>
-	</tr>
-
-	<tr>
-		<td>save</td>
-		<td>BaseEntity parent(主实体), BaseEntity... children（子实体）</td>
-		<td>void</td>
-		<td>存储主子实体</td>
-	</tr>
-
-</table>
