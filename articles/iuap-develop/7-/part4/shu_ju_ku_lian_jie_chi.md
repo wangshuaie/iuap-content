@@ -6,7 +6,7 @@ Tomcat jdbc连接池兼容dbcp，性能更高。以异步方式获取连接tomca
 
 ## 4.2.2 数据库连接池配置
 
-Tomcat数据库连接池需要引入maven依赖如下，如果引入iuap-persistence会简介引入：
+Tomcat数据库连接池需要引入maven依赖如下，如果引入iuap-persistence会间接引入：
 
  ![](../image/image82.png)
 
