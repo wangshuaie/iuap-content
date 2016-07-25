@@ -338,5 +338,20 @@ iUAP平台组件和示例工程均采用Maven来构建、管理，推荐使用Ma
 如果项目或者开发组上需要对整个工程按照模块拆分，请按照maven多模块的方式来组织工程结构，此示例为小型单个工程的示例。
 多模块拆分有利于分布式服务的搭建，特别是工程较大的时候，多模块拆分和微服务的搭建便于针对不同的服务进行扩容和调整。
 
+# 编程规范
+
+
+## JAVA编程规范
+
+
+建议遵循 Google Java 编程风格，详细规则请参考以下链接：
+[http://www.hawstein.com/posts/google-java-style.html]()
+
+
+## 前端编程规范
+
+
+建议遵从Google JavaScript 编码规范，详细贵族请参考以下地址：
+[http://alloyteam.github.io/JX/doc/specification/google-javascript.xml](http://alloyteam.github.io/JX/doc/specification/google-javascript.xml)
 
 
