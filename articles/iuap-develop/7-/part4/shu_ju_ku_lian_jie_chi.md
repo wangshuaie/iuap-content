@@ -1,6 +1,6 @@
 # 数据库连接池
 
-iuap平台默认使用Tomcat Jdbc作为数据库连接池，如果不使用动态数据源的场景，推荐使用Druid连接池。
+iuap平台默认使用Tomcat Jdbc作为数据库连接池。
 
 Tomcat jdbc连接池兼容dbcp，性能更高。以异步方式获取连接tomcat jdbc pool 是 tomcat 的一个模块，基于 tomcat JULI，使用 Tomcat 的日志框架。支持高并发应用环境，应用简单方便支持 JMX、支持 XA Connection。
 
