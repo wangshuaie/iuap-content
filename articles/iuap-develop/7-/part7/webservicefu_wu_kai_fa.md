@@ -3,7 +3,7 @@
 ## 7.2.1 WebService简介
 
 Apache CXF 是一个开源的 Services 框架，CXF 利用 Frontend 编程 API 来构建和开发 Services ，像 JAX-WS 。这些 Services 可以支持多种协议，比如：SOAP、XML/HTTP、RESTful HTTP 或者 CORBA ，并且可以在多种传输协议上运行，比如：HTTP、JMS 或者 JBI，CXF 大大简化了 Services 的创建，同时它继承了XFire传统，可以和 Spring 进行无缝集成。
-	iUAP平台采用cxf支持对WebService的开发，使可以方便的定义和发布soap 协议的webservice，也可以发布类似RestFul服务方式的webservice。
+	iuap平台采用cxf支持对WebService的开发，使可以方便的定义和发布soap 协议的webservice，也可以发布类似RestFul服务方式的webservice。
 
 ## 7.2.2 WebService配置
 
