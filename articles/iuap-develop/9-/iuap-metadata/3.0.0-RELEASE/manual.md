@@ -301,6 +301,7 @@ iUAP平台提供元数据服务以实现元数据的查询、发布、删除和�
 
 - MetadataService
 
+<table style="border-collapse:collapse">
 <tr>
 <th class="colFirst" scope="col">限定符和类型</th>
 <th class="colLast" scope="col">方法和说明</th>
