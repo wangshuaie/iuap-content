@@ -118,9 +118,10 @@ idtype为需要使用的ID生成类型，目前包括UUID、redis自增、snowfl
 		private static final long serialVersionUID = -3773469861533388458L;
 	
 		@Id
-	    @Column(name = "productid")
-	    @GeneratedValue(strategy=Stragegy.UAPOID,moudle="example_demo")
-	    private String productid;
+	    	@Column(name = "productid")
+	    	//注意，strategy应配置为UAPOID，module一般为8位的字符串（在多租户方案中，moudle对应需要存储的8位schema名称）
+	    	@GeneratedValue(strategy=Stragegy.UAPOID,moudle="gooddemo")
+	    	private String productid;
 	
 		... ...
 	}
