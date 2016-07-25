@@ -119,7 +119,7 @@ idtype为需要使用的ID生成类型，目前包括UUID、redis自增、snowfl
 	
 		@Id
 	    @Column(name = "productid")
-	    @GeneratedValue(strategy=Stragegy.UUID,moudle="example_demo")
+	    @GeneratedValue(strategy=Stragegy.UAPOID,moudle="example_demo")
 	    private String productid;
 	
 		... ...
