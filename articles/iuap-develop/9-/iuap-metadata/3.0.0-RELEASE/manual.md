@@ -221,7 +221,7 @@ iuap平台提供元数据服务以实现元数据的查询、发布、删除和�
 
 <img src="/images/metadata_example.jpg"/>
 
-开发工具包DevTool中携带了对元数据服务的示例工程，位置位于DevTool/examples/example\_iuap\_metadata下，在IUAP_STUDIO中导入已有的Maven工程，可以将示例工程导入到工作区。示例工程中有较为完整的对iuap-mdpersistence和mdspi组件的使用示例代码。
+开发工具包DevTool中携带了对元数据服务的示例工程，位置位于DevTool/examples/example\_iuap\_metadata下，在iuap Studio中导入已有的Maven工程，可以将示例工程导入到工作区。示例工程中有较为完整的对iuap-mdpersistence和mdspi组件的使用示例代码。
 
 ## 开发步骤 ##
 
