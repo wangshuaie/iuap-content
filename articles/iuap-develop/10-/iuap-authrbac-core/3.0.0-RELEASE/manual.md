@@ -150,6 +150,7 @@ subject().checkPermissions("user:view");
 
 
  - 单个实例单个权限  
+
 通过如下代码判断  
 
 		1.	subject().checkPermissions("user:view:1");  
