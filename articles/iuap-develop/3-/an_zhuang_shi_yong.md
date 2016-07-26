@@ -29,4 +29,4 @@
 
 产品默认6个月的试用期，可以通过商业授权来申请商业license,这样产品就成为商业版本，不受试用期限制
 
-具体license的安装请参考 ## [license服务器安装指南](../../9-/licenseserver/3.0.0-RELEASE/manual.md) ## 
+具体license的安装请参考 ## [license服务器安装指南](#/platform3/articles/iuap-develop/9-/licenseserver/3.0.0-RELEASE/manual.html) ## 
