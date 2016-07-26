@@ -29,7 +29,7 @@
 ![](image/image34.png)
 ![](image/image35.png)
  
-也可以切换到iUAP开发视图，在webapp下的pages目录右键，选择新建下的iUAP页面
+也可以切换到iuap开发视图，在webapp下的pages目录右键，选择新建下的iuap页面
 
 ![](image/image36.png)
 
