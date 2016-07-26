@@ -118,7 +118,7 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version,需�
 
 <img src="/images/auth_example.jpg"/>
 
-开发工具包DevTool中携带了对认证组件的示例工程，位置位于DevTool/examples/example\_iuap\_auth下，在IUAP_STUDIO中导入已有的Maven工程，可以将示例工程导入到工作区。示例工程中有较为完整的对iuap-auth组件的使用示例代码。
+开发工具包DevTool中携带了对认证组件的示例工程，位置位于DevTool/examples/example\_iuap\_auth下，在iuap Studio中导入已有的Maven工程，可以将示例工程导入到工作区。示例工程中有较为完整的对iuap-auth组件的使用示例代码。
 
 ## 开发步骤 ##
 
