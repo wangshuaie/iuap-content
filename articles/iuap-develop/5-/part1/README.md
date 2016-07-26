@@ -341,6 +341,12 @@ Studio提供新插件的安装以及Studio的自动更新功能。 点击主菜�
 
 点击主菜单->帮助->帮助内容，可以查看Studio相关帮助信息。
 
+### 20.欢迎界面
+
+初次运行iuap Studio或者点击主菜单->帮助->欢迎，可进入开发工具欢迎界面。 点击相应按钮可进入开发工具说明及使用手册，也可以直接点击新建按钮进入新建iuap工程向导。
+
+
+
 # 开发工具使用
 
 # 1.iuap Studio 开发工具
@@ -369,6 +375,22 @@ iuap_quickstart工程是iuap开发平台的实例工程，该工程基于iuap开
 
 ![](./image/Mavensetting.png)
 
+### 2.1.3 授权管理
+
+iuap Studio初次使用可以免费使用6个月。在6个月免费期内无需注册即可享受全部功能。 6个月后，若不进行授权，则无法使用部分功能。
+
+获取授权需要启动license server，具体过程请参考license服务器使用说明文档。
+
+服务器获取授权后，保持联机状态，点击主菜单栏->帮助->授权管理， 进入授权管理窗口。 在文本框中输入license服务器的ip和端口，点击“ping”按钮，确认license server已联机。
+
+根据需要，勾选工具产品后，点授权按钮。客户端将向License Server 发出注册申请。一旦服务端授权成功，客户端会弹出提示框获取授权。
+
+![](./image/license.png)
+
+已经获取授权的客户端允许在离线时限（30天）内，不用每次使用时都联接License Server进行认证。
+
+超过有效期的客户端不能继续使用，此时在License Server端可以注销该用户。
+
 ## 2.2 工程初始化
 
 ### 2.2.1 新建iuap项目
@@ -376,6 +398,8 @@ iuap_quickstart工程是iuap开发平台的实例工程，该工程基于iuap开
 在IDE菜单栏中选择新建->iuap项目，点击下一步，进入新项目的配置页面。 输入项目名称建立新项目 如图所示：  
 
 ![](./image/iwebproject.png)
+
+![](./image/studio_8.png)
 
 点击完成，稍等片刻，IDE在完成maven库的更新下载以及工程编译的进度读条后，这时工作空间中会建立一个新的iuap工程。
 
@@ -578,11 +602,11 @@ iuap开发工具可使用**三种方式**快速生成javabean实体类。
 
 ![](./image/bind4.png)   
 
-### 2.6 示例工程运行调试
+### 2.6 工程运行调试
 
-webexample是平台基本开发功能的演示示例。 在调试运行工程之前，先运行DevTool\bin目录下的startpgsql.bat、startredis.bat、startzookeeper.bat启动PostgreSQL、Redis和Zookeeper
+在调试运行工程之前，先运行DevTool\bin目录下的startpgsql.bat、startredis.bat、startzookeeper.bat启动PostgreSQL、Redis和Zookeeper
 
-示例工程通过jetty的方式进行运行调试，在webexample工程项目的\src\test\java\uap\web\XXX文件夹下有对应的QuickStartXXX类，运行该类就能启动项目进行调试。webexample项目调试效果如下图：  
+工程可以通过maven运行jetty的方式启动，右键工程选择运行方式->Maven build，在Goals文本框中输入“jetty:run”,点击运行，即可启动工程。 在浏览器中输入localhost:8080/XXX(XXX为artifactId)，可打开工程首页，界面如下：
 
 ![](./image/run.png)   
 
