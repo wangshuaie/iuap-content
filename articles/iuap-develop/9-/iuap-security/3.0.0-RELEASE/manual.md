@@ -145,10 +145,6 @@ DemoServerVirifyFactory为开发者实现的类，需要实现获取证书的方
 
 **参数说明**
 
-
-| appid  | true |  字符串   | appid |
-| sign  | true |  字符串   | 请求验证的签名 |
-
 <table style="border-collapse:collapse">
 	<thead>
 		<tr>
