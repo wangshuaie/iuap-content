@@ -83,8 +83,6 @@ mainDataTable: new u.DataTable({
 ```
 以上根据具体的业务需求完成了dataTable字段类型的定义。
 
-以上根据具体的业务需求完成了dataTable字段类型的定义。
-
 2）定义事件方法，如查询、添加、返回等，例如删除方法：
 
 ```
