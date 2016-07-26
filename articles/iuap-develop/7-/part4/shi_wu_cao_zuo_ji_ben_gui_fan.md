@@ -3,7 +3,7 @@
 ## 4.1.1 事务简介
 
 在持久化操作时，如果是更新操作或者涉及到多表操作，一般需要进行事务控制来保证数据的完整性和一致性。控制事务的方式有多种，可以采取编程式事务，或者配置型事务。在iuap持久层框架的基础上，推荐使用Spring的事务控制，采用注解配置的方式进行事务控制。
-IUAP平台提供的持久化方式有多种，如果单独使用Spring jdbc或者Mybatis，可以采用DataSourceTransactionManager进行事务管理，如果和Spring Data Jpa混合使用，需要配置为JpaTransactionManager，建议业务开发前期进行选型，尽量避免持久层的混合使用。
+iuap平台提供的持久化方式有多种，如果单独使用Spring jdbc或者Mybatis，可以采用DataSourceTransactionManager进行事务管理，如果和Spring Data Jpa混合使用，需要配置为JpaTransactionManager，建议业务开发前期进行选型，尽量避免持久层的混合使用。
 
 ## 4.1.2 事务传播机制
 
