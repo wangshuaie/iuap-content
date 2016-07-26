@@ -234,4 +234,5 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
     <td>String[]</td>
     <td>需要批量解锁资源的唯一标识数组</td>
   </tr>
-</tbody></table>
+</tbody>
+</table>

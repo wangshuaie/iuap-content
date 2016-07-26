@@ -37,7 +37,7 @@ iuap JDBC是基于JDBC的持久层框架，遵循基本的JPA规范，提供对�
 
  ![](../image/image67.png)
 
-iuap-jdbc为了预留对元数据的扩展，要求必须实现getMetaDefinedName和getNamespace方法，利iuap_STUDIO可以自动生成，如果手动编写，请注意返回值。
+iuap-jdbc为了预留对元数据的扩展，要求必须实现getMetaDefinedName和getNamespace方法，利iuap Studio可以自动生成，如果手动编写，请注意返回值。
 
  ![](../image/image68.png)
 

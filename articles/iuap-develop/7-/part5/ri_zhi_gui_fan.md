@@ -9,7 +9,7 @@ SLF4J 只提供 log 接口，具体的实现是在打包应用程序时所放入
 
 ## 5.2.1 日志配置
 
-iUap平台提供统一的日志组件，采用maven方式构建，maven的依赖配置如下图，其中版本号iuap.modules.version为指定的日志组件的版本，可以从maven仓库总获取适当的版本，例如2.0.1-SNAPSHOT。
+iuap平台提供统一的日志组件，采用maven方式构建，maven的依赖配置如下图，其中版本号iuap.modules.version为指定的日志组件的版本，可以从maven仓库总获取适当的版本，例如2.0.1-SNAPSHOT。
 
  ![](../image/image91.png)
 
