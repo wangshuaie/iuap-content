@@ -206,13 +206,28 @@ Mybatis对应的映射文件编写时候使用的是针对某种数据库的语�
 
 （1）数据源配置如下：
 
- ![](../image/image61.png)
+    <bean id="crossDBDataSource" class="com.yonyou.iuap.persistence.bs.framework.ds.CrossdbDataSource" lazy-init="false">
+        <constructor-arg name="dataSource" ref="dataSource"/>
+    </bean>
 
-（2）配置Spring事务
+（2）配置事务
 
- ![](../image/image62.png)
+    <!-- spring 事务配置 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="crossDBDataSource"/>
+    </bean>
+
+    <!-- 使用annotation定义事务 -->
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
 
 （3）配置BaseDAO
 
- ![](../image/image63.png)
+    <bean id="baseDAO" class="com.yonyou.iuap.persistence.bs.dao.BaseDAO">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+        <property name="dbMetaHelper" ref="dbMetaInfo"/>
+    </bean>
+
+    <bean id="dbMetaInfo" class="com.yonyou.iuap.persistence.bs.util.DBMetaHelper">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
 
