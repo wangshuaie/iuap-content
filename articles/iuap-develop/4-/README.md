@@ -1,6 +1,6 @@
 # iuap快速开发
 
-通过阅读快速入门文档，开发者可以用setp by step的方式掌握如何使用 iuap Studio 开发出一个具有简单增改删查功能的单据，同时达到以下目标：
+通过阅读快速入门文档，开发者可以用setp by step的方式掌握如何使用iuap Studio开发出产品实现如下目标：
 
 - 掌握DevTool和 iuap Studio 的初始化和基本配置
 - 掌握通过 iuap Studio 创建新的 iuap 工程
