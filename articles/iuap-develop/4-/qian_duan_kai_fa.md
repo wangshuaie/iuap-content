@@ -81,6 +81,7 @@ mainDataTable: new u.DataTable({
 	pageSize: 10
 })
 ```
+以上根据具体的业务需求完成了dataTable字段类型的定义。
 
 以上根据具体的业务需求完成了dataTable字段类型的定义。
 
