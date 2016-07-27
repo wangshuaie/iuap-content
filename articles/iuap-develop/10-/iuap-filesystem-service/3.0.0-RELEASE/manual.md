@@ -95,27 +95,10 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 	jdbc.maxWait=60000
 ```
 
-4.pub_filesystem.sql：建表sql语句，需要在数据库里执行的sql。
+4.执行数据库脚本
 
-```
-	 CREATE TABLE `pub_filesystem` (
-	  `id` varchar(36) NOT NULL ,
-	  `pkfile` varchar(100) NOT NULL,
-	  `filename` varchar(100) NOT NULL,
-	  `filepath` varchar(100) NOT NULL,
-	  `filesize` varchar(100) NOT NULL,
-	  `groupname` varchar(100) NOT NULL,
-	   `permission` varchar(20) NOT NULL,
-	  `uploader` varchar(36),
-	  `uploadtime` varchar(100),
-	  `sysid` varchar(100),
-	  `tenant` varchar(100),
-	  `modular` varchar(100),
-	   `url` varchar(1000),
-	  PRIMARY KEY (`id`)
-	  ) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
+依次执行examples项目下sql目录中的dll.sql、index.sql、dml.sql建立数据库并初始化数据。
 
-```
 
 ## 示例工程说明：##
 
