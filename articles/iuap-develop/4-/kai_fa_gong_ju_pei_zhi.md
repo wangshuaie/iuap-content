@@ -2,7 +2,7 @@
 
 ## 获取并解压开发工具安装盘
 
->  安装使用请看“[安装页面](#/platform3/articles/iuap-develop/2-/mian_fei_shi_yong.html)”
+>  安装使用请看“[安装页面](#/platform3/articles/iuap-develop/3-/an_zhuang_shi_yong.html)”
 
 1）将获取到的DevTool开发工具包解压到D盘的根目录，解压后目录结构如下：
 
