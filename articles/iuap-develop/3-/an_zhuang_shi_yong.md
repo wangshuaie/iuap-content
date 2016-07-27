@@ -3,6 +3,38 @@
 > 参考介质说明解压安装盘，本节说明安装盘的初始化使用
 
 
+# 安装向导
+
+## 安装过程
+###	获取安装盘
+
+下载地址:http://iuap.yonyou.com/webpage/developer/ieop/views/download-center.html
+ 
+### 解压安装盘
+
+将下载下来的安装盘解压(建议解压到D盘根目录).
+## 启动DevTool
+### 工具初始化
+
+首次运行，需要执行\DevTool\initDevTool.bat
+
+### 启动DevTool
+
+运行DevTool\startDevTool.bat
+
+### 升级
+
+工具本身不支持升级
+支持iuap2.01的项目工程直接导入到工具中即可.
+
+# 产品卸载
+
+## DevTool工具卸载
+
+1.	备份workspace.
+2.	直接将DevTool文件夹删除即可.
+
+注意:删除之前请注意备份好workspace.
 
 
 # 注意事项 #
