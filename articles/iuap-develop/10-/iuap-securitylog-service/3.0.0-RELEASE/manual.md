@@ -44,7 +44,7 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 
 # 使用说明 #
 
-## 服务端部署说明 ## 
+## 服务端部署说明 ##
 
 服务端部署，部署一个war包
 
@@ -83,4 +83,6 @@ MQ服务器配置securitylogMQConfig.properties，需要放在classpath目录下
     mq.password=admin
 ```
 
-4. 建库脚本参考iuap-securitylog-server包下的resources下的mysql
+4. 执行数据库脚本
+
+依次执行examples项目下sql目录中的dll.sql、index.sql、dml.sql建立数据库并初始化数据。
