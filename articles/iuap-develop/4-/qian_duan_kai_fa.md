@@ -1,5 +1,7 @@
 # 前端开发
 
+在进行前端开始时，需要先新建数据模型，使用工具生成对应的html、js页面。再根据具体的业务逻辑修改页面内容。
+
 ## 新建数据模型
 
 1）切换到iuap开发视图，工程上右键选择新建下的新建数据模型
@@ -47,29 +49,31 @@
 
 ## 调整模块的js文件
 
-1）定义js前端的datatable数据模型，修完成改后如下
+调整模块的js主要根据业务完善dataTable的定义、添加依赖的js以及添加具体的事件处理。深入理解dataTable请点击[这里](http://localhost:8000/dist/pages/kero/dataTableUse.html)
+
+1）	定义js前端的datatable数据模型，修完成改后如下
 
 ```
 mainDataTable: new u.DataTable({
 	meta: {
 		'productid':{
 			type:'string'
-		},
+		},//productid类型为 string
 		'productname': {
 			type: 'string'
 		},
 		'productnum': {
 			type: 'integer'
-		},
+		},//productnum类型为整形
 		'price': {
 			type: 'float'
-		},
+		},//price类型为浮点型
 		'supplier': {
 			type: 'string'
 		}, //供应商
 		'prodate': {
 			type: 'date'
-		}, //生成日期
+		}, //prodate类型为时间
 		'orgin': {
 			type: 'string'
 		} //原产地
@@ -77,12 +81,16 @@ mainDataTable: new u.DataTable({
 	pageSize: 10
 })
 ```
+以上根据具体的业务需求完成了dataTable字段类型的定义。
 
 2）定义事件方法，如查询、添加、返回等，例如删除方法：
 
 ```
+//删除某行
 delRow: function() {
+	//获取选中的行号
 	var selectArray = viewModel.mainDataTable.selectedIndices();
+	//用户未选择行时，return
 	if (selectArray.length < 1) {
 		u.messageDialog({
 			msg: "请选择要删除的行!",
@@ -91,6 +99,7 @@ delRow: function() {
 		});
 		return;
 	}
+	//选中的行数大于0时，弹出框用户点击确认进行删除
 	u.confirmDialog({
 	    msg: "是否确认删除？",
 	    title: "测试确认",
@@ -112,18 +121,18 @@ delRow: function() {
 }
 ```
 
-3）对应html片段，绑定事件，完整示例product.js代码如下：
+3）完整示例product.js代码如下：
 
 ```
 define(['jquery', 'knockout', 'text!pages/product/product.html', 'uui'], function($, ko, template) {
-
+//添加依赖的模块（jquery、knockout、uui等），具体使用方法参考requireJs
 	var ctrlBathPath = ctx+'/product';
 	var app, viewModel, datas;
 	var viewModel = {
 		md: document.querySelector('#demo-mdlayout'),
 		editoradd: '',
 		searchText: ko.observable(''),
-		mainDataTable: new u.DataTable({
+		mainDataTable: new u.DataTable({//定义主体的dataTable
 			meta: {
 				'productid':{
 					type:'string'
@@ -149,7 +158,7 @@ define(['jquery', 'knockout', 'text!pages/product/product.html', 'uui'], functio
 			},
 			pageSize: 10
 		}),
-		infodata: new u.DataTable({
+		infodata: new u.DataTable({//infodata在修改和添加时会使用
 			meta: {
 				'productid':{
 					type:'string'
@@ -181,7 +190,7 @@ define(['jquery', 'knockout', 'text!pages/product/product.html', 'uui'], functio
 				} 
 			}
 		}),
-		
+		//添加的主要事件
 		events: {
 			//查询主数据
 			queryMain: function(){
@@ -200,6 +209,7 @@ define(['jquery', 'knockout', 'text!pages/product/product.html', 'uui'], functio
 					success : function(result) {
 						var data = result.data;
 						if(data!=null){
+							//对mainDataTable进行赋值
 							viewModel.mainDataTable.setSimpleData(data.content);
 							viewModel.mainDataTable.totalPages(data.totalPages);
 						} else {
@@ -212,6 +222,7 @@ define(['jquery', 'knockout', 'text!pages/product/product.html', 'uui'], functio
 			search: function(){
 				this.events.queryMain();
 			},
+			//键盘事件
 			searchKeyUp: function(model,event){
 				if (event.keyCode == '13'){
 					if(u.isIE){
@@ -224,17 +235,21 @@ define(['jquery', 'knockout', 'text!pages/product/product.html', 'uui'], functio
 				}
 				return true;
 			},
+			//新生成的每行，进行控件渲染
 			afterAdd:function(element, index, data){
 	            if (element.nodeType === 1) {
 	                u.compMgr.updateComp(element);
 	            }
 	        },
+			//回到上一个页面
 			goBack: function() {
 				viewModel.md['u.MDLayout'].dBack();
 			},
+			//跳转到pathStr对应的dom内容
 			goPage: function(pathStr) {
 				viewModel.md['u.MDLayout'].dGo(pathStr);
 			},
+			//添加之前清空infodata内容，并跳转到id位addPage对应的Dom元素
 			beforeAdd: function() {
 				viewModel.editoradd = 'add';
 				viewModel.infodata.clear();
@@ -242,6 +257,7 @@ define(['jquery', 'knockout', 'text!pages/product/product.html', 'uui'], functio
 				viewModel.infodata.setRowSelect(0);
 				viewModel.md['u.MDLayout'].dGo('addPage');
 			},
+			//添加或修改
 			addOrEditRow: function() {
 				var self = this;
 				var _meta = this.mainDataTable.meta;
@@ -262,16 +278,22 @@ define(['jquery', 'knockout', 'text!pages/product/product.html', 'uui'], functio
 					data:postData,
 					success:function(res){
 						if (res.flag == 'success'){
+							//添加
 							if (self.editoradd === 'add'){
+								//mainDataTable添加一行数据
 								self.mainDataTable.addSimpleData(res.data);
 							}else{
+								//获取当前行
 								var curRow = viewModel.mainDataTable.getCurrentRow();
+								//对mainDataTable当前行进行赋值
 								curRow.setSimpleData(viewModel.infodata.getCurrentRow().getSimpleData(), 'upd');
 
 							}
+							//回到上层并提示保存成功
 							viewModel.md['u.MDLayout'].dBack();
 							u.showMessage('保存成功！');								
 						}else{
+							//弹出失败信息
 							u.showMessageDialog(res.msg);
 						}
 					},
@@ -290,9 +312,11 @@ define(['jquery', 'knockout', 'text!pages/product/product.html', 'uui'], functio
 				viewModel.editoradd = 'edit';
 				viewModel.md['u.MDLayout'].dGo('addPage');
 			},
-			
+			//删除某行
 			delRow: function() {
+				//获取选中的行号
 				var selectArray = viewModel.mainDataTable.selectedIndices();
+				//用户未选择行时，return
 				if (selectArray.length < 1) {
 					u.messageDialog({
 						msg: "请选择要删除的行!",
@@ -327,10 +351,12 @@ define(['jquery', 'knockout', 'text!pages/product/product.html', 'uui'], functio
 					viewModel.md['u.MDLayout'].dGo('showPage');
 				}
 			},
+			//分页的当前页修改时触发
 			pageChangeFunc: function(index){
 				viewModel.mainDataTable.pageIndex(index);
 				viewModel.events.queryMain();		
 			},
+			//每页显示的个数变化时触发
 			sizeChangeFunc: function(size){
 				viewModel.mainDataTable.pageSize(size);
 				viewModel.events.queryMain();
@@ -339,6 +365,7 @@ define(['jquery', 'knockout', 'text!pages/product/product.html', 'uui'], functio
 	};
 
 	var init = function(params) {
+		//创建app，需要绑定的dom元素和数据模型viewModel
 		var app = u.createApp({
 			el: '#content',
 			model: viewModel
@@ -357,7 +384,17 @@ define(['jquery', 'knockout', 'text!pages/product/product.html', 'uui'], functio
 
 ## 调整模块的html片段
 
-1）调整html片段，调整表格和表单的html片段，示例如下：
+用户可以根据需求先搭建整个页面的布局，然后使用工具拖拽生成所需的控件，生成的控件代码需要微调
+
+
+1）	调整html片段，下面以表格为例进行说明
+
+* 去掉无用的内容
+	* 工具会根据后端对应的所有字段生成td元素，用户需要根据具体的业务场景进行删减。
+
+* 给相关dom元素添加事件，这里利用[knockout](http://knockoutjs.com/)语法，进行相关的事件绑定。
+
+具体的代码调整如下：
 
 ```
 <div class="u-widget-body">
@@ -391,32 +428,15 @@ define(['jquery', 'knockout', 'text!pages/product/product.html', 'uui'], functio
 			</tr>
 		</tbody>
 	</table>
+	<!--分页代码  -->
 	<div id='pagination' class='u-pagination pagination' u-meta='{"type":"pagination","data":"mainDataTable","pageChange":"events.pageChangeFunc","sizeChange":"events.sizeChangeFunc"}'></div>
 
 </div>
 ```
 
-2）使用ko语法绑定事件和数据模型
+2）	完整的示例代码如下：
 
-```
-<tr data-bind="css: { 'is-selected' : row.selected() } ,attr:{'id': $index()}">
-	<td class="checkbox1"><label class="u-checkbox only-style u-checkbox-floatl" data-bind="click: row.multiSelect, css:{'is-checked': row.selected()}">
-		<input type="checkbox" class="u-checkbox-input">
-		<span class="u-checkbox-label"></span> </label>
-	</td>
-	<td data-bind="text: row.ref('productname')"></td>
-	<td data-bind="text: row.ref('productnum')"></td>
-	<td data-bind="text: row.ref('price')"></td>
-	<td data-bind="text: row.ref('supplier')"></td>
-	<td data-bind="text: u.dateRender(row.ref('prodate'))"></td>
-	<td data-bind="text: row.ref('orgin')"></td>
-	<td><a href="javascript:;" class="m-r-sm" data-bind="click:$parent.events.beforeEdit.bind($data,  $index())">修改</a><a href="javascript:;" data-bind="click:$parent.events.viewRow.bind($data, $index())">查看</a></td>
-</tr>
-
-```
-
-3）完整的示例代码如下：
-
+以下页面是使用[栅格布局](http://design.yyuap.com/dist/pages/global-style/layout.html)进行排版的
 ```
 <!-- 页面内容区(HTML片段，不能放置HTML 及 BODY 标签 )-->
 <div class="u-mdlayout" id="demo-mdlayout">
@@ -631,4 +651,4 @@ define(['jquery', 'knockout', 'text!pages/product/product.html', 'uui'], functio
 </div>
 ```
 
-4）请注意，js的数据模型中的字段定义务必和html中的数据绑定处的字段名称一致
+3）请注意，js的数据模型中的字段定义务必和html中的数据绑定处的字段名称一致
