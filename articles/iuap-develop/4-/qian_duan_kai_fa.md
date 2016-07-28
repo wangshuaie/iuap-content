@@ -137,7 +137,6 @@ delRow: function() {
 打开生成的html页面，选择左侧的控件元素并拖拽到代码中。下图拖拽了一个基本的按钮
 ![](image/image52.png)
 
-
 简单的拖拽就可以实现一个基本的dom元素，用户还可以增加一些样式，丰富动态效果。具体的控件样式参考[neoui](http://design.yyuap.com/dist/pages/neoui/index.html)文档说明。
 ### 调整拖拽后的代码
 
@@ -180,8 +179,6 @@ delRow: function() {
 
 可以看到生产的表格`td`、`th`中`serialVersionUID`、`productid`、`ts`这些是不希望显示出来的，所以需要开发者自己删除。
 
-
-
 #### 绑定事件
 
 给相关dom元素添加事件，绑定事件的方法是使用[knockout](http://design.yyuap.com/dist/pages/kero/knockout.html)绑定的,也可以通过普通的js、jquery设置。这里利用knockout语法，进行相关的事件绑定。
@@ -190,10 +187,8 @@ delRow: function() {
 
 ```
 	<a href="javascript:;" class="m-r-sm" data-bind="click:delRow.bind()">删除</a>
-
 ```
 
 [查看完整html代码](../../res/qian_duan_kai_fa_html.html)
-
 
 	注意：js的数据模型中的字段定义务必和html中的数据绑定处的字段名称一致
