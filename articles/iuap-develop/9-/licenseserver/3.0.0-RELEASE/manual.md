@@ -49,3 +49,4 @@ License Server导入授权文件后应该显示授权产品名称，授权产品
 当客户端注册成功后，License Server将显示License信息表和License信息分配表。License信息表主要显示当前产品的可分配已分配和失效时间；License信息分配表显示正在使用当前产品的客户端明细。
 
 ![](./images/displayclient.jpg)
+#### 另外，授权服务器和客户端时区和时间请务必保持一致，对于不一致情况导致的授权失败问题，后果自负 ####
