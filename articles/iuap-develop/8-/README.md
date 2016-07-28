@@ -111,4 +111,4 @@ router.init();
 
 ##总结
 
-以上概述了一个前端工程构建的基本流程，从单页面编写、后端数据交互交互、到多页面的关联。平时开发者还可以积累一些项目脚手架，来提高开发效率。[iuap design](https://github.com/iuap-design)提供了一些脚手架例如[cloud-starter-kit](https://github.com/iuap-design/cloud-starter-kit).开发者以此为参考，快速构建项目。
+以上概述了一个前端工程构建的基本流程，从单页面编写、后端数据交互交互、到多页面的关联。平时开发者还可以积累一些项目脚手架，来提高开发效率。[iuap design](http://design.yyuap.com/)提供了一些脚手架例如[cloud-starter-kit](https://github.com/iuap-design/cloud-starter-kit).开发者以此为参考，快速构建项目。
