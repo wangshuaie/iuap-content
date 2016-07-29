@@ -4,7 +4,7 @@
 
 ## 功能架构
 
-![iuap 功能架构图](../image/image.png)
+![iuap 功能架构图](../image/gong_neng_jia_gou.png)
 
 iuap 平台为应用提供以下关键组件，应用可以按需选择，灵活组装。
 
