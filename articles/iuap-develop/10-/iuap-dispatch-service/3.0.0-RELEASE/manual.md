@@ -38,8 +38,7 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 
 ## 功能结构 ##
 
-<img src="images/service.jpg"/>
-
+![](./images/service.jpg)
 
 ## 功能说明 ##
 
